@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $url='home';
+    return View::make('welcome')->with('url', $url);
+});
+
+Route::get('/{url}', function ($url) {
+    return View::make('welcome')->with('url', $url);
 });
 
 Auth::routes();

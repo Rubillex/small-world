@@ -23,9 +23,21 @@
     </head>
     <body class="antialiased">
    <div id="app" class="app">
-       <example-component> </example-component>
-       <template-component></template-component>
-       писка
+       <div>Шапка</div>
+        <hr>
+
+       @if($url == 'home')
+           <template-component></template-component>
+       @else
+        <h2>{{$url}}</h2>
+           <br>
+        <h3>welcome.blade.php</h3>
+       @endif
    </div>
+
+    <div>
+        <hr>
+        <p>ПОДВАЛ</p>
+    </div>
     </body>
 </html>
