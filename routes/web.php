@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AbbiturientController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,16 +14,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $url='home';
-    return View::make('welcome')->with('url', $url);
-});
-
-Route::get('/{url}', function ($url) {
-    return View::make('welcome')->with('url', $url);
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/абитуриентам/', [AbbiturientController::class, 'index']);
