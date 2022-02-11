@@ -30,12 +30,12 @@
 
 
         <div>
-        <index-component></index-component>
+
         </div>
 
 
         <div>
-        <abiturient-component></abiturient-component>
+
         </div>
 
         <footer class="site-footer"></footer>
@@ -43,10 +43,9 @@
 </template>
 
 <script>
-import AbbiturientComponent from "./AbiturientComponent";
 export default {
     name: "TemplateComponent",
-    components: {AbbiturientComponent},
+    components: {},
     props: {
         data: Object,
     },

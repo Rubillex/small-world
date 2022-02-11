@@ -16,9 +16,9 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('template-component', require('./components/TemplateComponent.vue').default);
-Vue.component('abiturient-component', require('./components/AbiturientComponent.vue').default);
-Vue.component('index-component', require('./components/IndexComponent.vue').default);
+ Vue.component('template-component', require('./components/TemplateComponent.vue').default);
+// Vue.component('abiturient-component', require('./components/AbiturientComponent.vue').default);
+//Vue.component('index-component', require('./components/IndexComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
