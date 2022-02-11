@@ -9,6 +9,7 @@
                 </a>
             </div>
 
+
             <div class="btn-outline-primary">ОБ ИНСТИТУТЕ</div>
             <div class="btn-outline-primary"><a href="http://phys.asu/абитуриентам/">АБИТУРИЕНТАМ</a></div>
             <div class="btn-outline-primary">СТУДЕНТАМ</div>
