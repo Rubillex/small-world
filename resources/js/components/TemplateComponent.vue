@@ -1,44 +1,13 @@
 <template>
     <div>
         <div class="container-header">
-            <div id="logo">
-                <a href="/" title="Институт цифровых технологий, электроники и физики АлтГУ"
-                   rel="home">
-                    <h1 class="site-title">ИЦТЭФ</h1>
-
-                </a>
-            </div>
-
-
-            <div class="btn-outline-primary">ОБ ИНСТИТУТЕ</div>
-            <div class="btn-outline-primary"><a href="http://phys.asu/абитуриентам/">АБИТУРИЕНТАМ</a></div>
-            <div class="btn-outline-primary">СТУДЕНТАМ</div>
-            <div class="btn-outline-primary">НАУКА</div>
-            <div class="btn-outline-primary">ПАРТНЕРЫ</div>
-            <div class="btn-outline-primary">ДПО</div>
-
-            <form role="search" method="get" class="search-form" action="http://phys.asu.ru/">
-                <label>
-                    <span class="screen-reader-text">Найти:</span>
-                    <input type="search" class="search-field" placeholder="Поиск…" value="" name="s"
-                           control-id="ControlID-1">
-                </label>
-                <input type="submit" class="search-submit" value="Поиск" control-id="ControlID-2">
+            Привет! Как тебя зовут?
+            <form ref="nameForm" @submit.prevent="sendForm()">
+                <input type="text" v-model="userName" name="name">
+                <input type="hidden" name="_token" :value="csrf">
+                <button type="submit" class="send js-send"></button>
             </form>
         </div>
-        <hr/>
-
-
-        <div>
-
-        </div>
-
-
-        <div>
-
-        </div>
-
-        <footer class="site-footer"></footer>
     </div>
 </template>
 
@@ -51,15 +20,34 @@ export default {
     },
     data: () => {
         return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             pageData: 0,
+            userName: '',
         }
     },
     mounted() {
         console.log(this.data)
     },
-
+    methods: {
+        async sendForm() {
+            console.log(this.csrf);
+            if (!this.$refs.nameForm.name.value) {
+                alert('Введите имя!');
+                return;
+            }
+            window.axios.defaults.headers.common['X-CSRF-TOKEN'] = this.csrf;
+            try {
+                const response = await axios.post('/api/start-session', {name: this.userName});
+            } catch (e) {
+                console.log(e);
+            }
+        },
+    }
 }
+
 </script>
+
+
 <style lang="scss">
 .container-header {
     display: flex;
