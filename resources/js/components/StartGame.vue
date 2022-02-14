@@ -1,7 +1,7 @@
 <template>
-<div>
-AAAAA
-</div>
+    <div>
+        AAAAA
+    </div>
 </template>
 
 <script>

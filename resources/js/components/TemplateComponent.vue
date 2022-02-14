@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="template-page">
         <div class="container-header">
             Привет! Как тебя зовут?
             <form ref="nameForm" @submit.prevent="sendForm()">
                 <input type="text" v-model="userName" name="name">
                 <input type="hidden" name="_token" :value="csrf">
-                <button type="submit" class="send js-send"></button>
+                <button type="submit" class="send js-send">отправить</button>
             </form>
         </div>
     </div>
@@ -30,56 +30,20 @@ export default {
     },
     methods: {
         async sendForm() {
-            console.log(this.csrf);
-            window.axios.defaults.headers.common['X-CSRF-TOKEN'] = this.csrf;
-
-            const sendPostRequest = async () => {
-                try {
-                    let response = await axios.post('/api/start-session', {name: this.userName});
-
-                    console.log(response.data);
-                } catch (e) {
-                    console.log(e.response.data);
-                }
-            };
-
-            if(this.$refs.nameForm.name.value == null){
-                alert('Введите имя!');
+            if (this.userName !== undefined) {
+                let sessionId = null;
+                    await axios.post('/api/start-session', {name: this.userName})
+                        .then(response => (sessionId = response.data.id))
+                        .catch(err => console.log(err));
+                await this.$router.push({path: '/game/' + sessionId });
             } else {
-                sendPostRequest();
-                console.log("!!!!!");
-                this.$router.push({name: 'start-game'});
+                alert('Введите имя!');
             }
-        },
+            // Проверка обязана быть с тремя равно, потому что иначе приведет к таким результатам
+            // Нихуя ты чего придумал, только это нужно было в отдельный метод выносить это отдельная функция
+            //sendPostRequest();
+            // Тут был забыт await, тебе компилятор об этом сказал, но ты проигнорил
+        }
     }
 }
-
 </script>
-
-
-<style lang="scss">
-.container-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    div {
-        padding: 20px 40px;
-    }
-}
-
-.container-header + hr {
-    width: 100%;
-    align: center;
-}
-
-.site-footer {
-    background-color: #26272b;
-    padding: 45px 0 10px;
-    font-size: 15px;
-    line-height: 24px;
-    color: #737373;
-}
-</style>
-

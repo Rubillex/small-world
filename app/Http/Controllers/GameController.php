@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
 use \App\Models\User;
 use Illuminate\Support\Facades\Redirect;
@@ -13,27 +14,26 @@ class GameController extends Controller {
      * @param Request $request
      */
     public function startSession(Request $request) {
-
+        //  todo Получить юзера, запихнуть его в юзер1, остальных заполнять на инвайтах
+        // и вообще утащить это нафиг в модель
         try {
-            $user = User::where('name', $request->name)->firstOrFail();
-            echo "Такой юзер уже существует!\n" . $user->name . " " . $user->email . " " . $user->password;
+            //todo написать доку для $game
+            $game = Game::create();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            $newUser = User::create([
-                'name'     => $request->name,
-                'email'    => $request->name . '@qwe.q',
-                'password' => '12345678',
-            ]);
-            echo "Регистрация прошла успешно!";
-
-
+            echo '<pre>';print_r($e);echo '</pre>';die();
         }
-        return;
-        // todo php artisan migrate + изменил в файлике env адрес, нужно доразобраться
 
+        return json_encode(['id' => $game->id]);
     }
 
-    //
-    public function startGame(Request  $request) {
+    /**
+     * Создает лобби, а также минимально отрисовывает его, тут же выдает idшник для подлючения
+     * @param Request $request
+     * @param string $id
+     */
+    public function connectToGame(Request $request, $id) {
+        echo '<pre>';print_r($id);echo '</pre>';die();
+        //todo протащить это во вью :) а на сегодня всё
         return view('index')->with('data', ['page' => 'index']);
     }
 
