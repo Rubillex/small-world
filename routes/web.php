@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AbbiturientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomeController::class, 'index']);
-//Route::get('/абитуриентам/', [AbbiturientController::class, 'index']);
+Route::get('/start-game', [GameController::class, 'startGame']);
 
 Route::post('/api/start-session', [GameController::class, 'startSession']);
+
+Route::get('/phpInfo', function() {
+    return response()->json([
+        'stuff' => phpinfo()
+    ]);
+});

@@ -31,15 +31,24 @@ export default {
     methods: {
         async sendForm() {
             console.log(this.csrf);
-            if (!this.$refs.nameForm.name.value) {
-                alert('Введите имя!');
-                return;
-            }
             window.axios.defaults.headers.common['X-CSRF-TOKEN'] = this.csrf;
-            try {
-                const response = await axios.post('/api/start-session', {name: this.userName});
-            } catch (e) {
-                console.log(e);
+
+            const sendPostRequest = async () => {
+                try {
+                    let response = await axios.post('/api/start-session', {name: this.userName});
+
+                    console.log(response.data);
+                } catch (e) {
+                    console.log(e.response.data);
+                }
+            };
+
+            if(this.$refs.nameForm.name.value == null){
+                alert('Введите имя!');
+            } else {
+                sendPostRequest();
+                console.log("!!!!!");
+                this.$router.push({name: 'start-game'});
             }
         },
     }
