@@ -24,7 +24,7 @@
 </head>
 <body>
 <main id="app">
-{{--    <main-page></main-page>--}}
+{{--    <template-component :data='@json($data)'></template-component>--}}
     <auth-component></auth-component>
 </main>
 </body>
@@ -34,8 +34,8 @@
 </html>
 
 <script>
-    import MainPage from "../js/components/MainPage";
+    import AuthComponent from "../js/components/AuthComponent";
     export default {
-        components: {MainPage}
+        components: {AuthComponent, MainPage}
     }
 </script>

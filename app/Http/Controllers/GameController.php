@@ -19,6 +19,7 @@ class GameController extends Controller {
         try {
             //todo написать доку для $game
             $game = Game::create();
+
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             echo '<pre>';print_r($e);echo '</pre>';die();
         }

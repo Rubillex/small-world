@@ -15,7 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [HomeController::class, 'index']);
+//Аутенфикация
+
+Route::get('/login', [HomeController::class, 'login']);
+Route::get('/register', [HomeController::class, 'register']);
+
+
+
+
+Route::get('/game', [HomeController::class, 'homePage']);
 Route::get('/game/{id}', [GameController::class, 'connectToGame']);
+
+
 
 Route::post('/api/start-session', [GameController::class, 'startSession']);
 
@@ -24,3 +35,7 @@ Route::get('/phpInfo', function() {
         'stuff' => phpinfo()
     ]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

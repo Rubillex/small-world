@@ -6,8 +6,3 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-@import 'example';
-
-// Тут мы создаем и добавляем файлы для того чтобы их собирало в app.css, не в vue
-@import 'template-component.scss';
