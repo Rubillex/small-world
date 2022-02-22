@@ -24,7 +24,6 @@ class HomeController extends Controller {
     public function index(Request $request) {
 //        Auth::logout();
         if (Auth::check()) {
-//            Redirect::to('/game');
             return view('game')->with('data', ['page' => 'game']);
         } else {
             return view('index')->with('data', ['page' => 'index']);

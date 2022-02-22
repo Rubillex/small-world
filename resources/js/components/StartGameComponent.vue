@@ -1,12 +1,12 @@
 <template>
     <div>
-        AAAAA
+
     </div>
 </template>
 
 <script>
 export default {
-    name: "StartGame",
+    name: "StartGameComponent",
     components: {},
     props: {
         data: Object,
@@ -15,10 +15,13 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             pageData: 0,
-            userName: '',
+            text: '',
         }
     },
     beforeCreate(){
+
+    },
+    methods: {
 
     }
 }

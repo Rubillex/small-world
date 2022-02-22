@@ -1,17 +1,33 @@
 <template>
     <div class="template-page">
+<!--        <div class="container-header">-->
+<!--            Привет! Как тебя зовут?-->
+<!--            <form ref="nameForm" @submit.prevent="sendForm()">-->
+<!--                <input type="text" v-model="userName" name="name">-->
+<!--                <input type="hidden" name="_token" :value="csrf">-->
+<!--                <button type="submit" class="send js-send">отправить</button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+        <button v-on:click="newGame()">Новая игра</button>
+        <br>
         <div class="container-header">
-            Привет! Как тебя зовут?
-            <form ref="nameForm" @submit.prevent="sendForm()">
-                <input type="text" v-model="userName" name="name">
+            Подключиться по ID игры
+            <form ref="nameForm" @submit.prevent="ConnectToGame()">
+                <input type="text" v-model="gameId" name="gameId">
                 <input type="hidden" name="_token" :value="csrf">
-                <button type="submit" class="send js-send">отправить</button>
+                <button type="submit" class="send js-send">Подключиться к игре</button>
             </form>
         </div>
+<!--        <button v-on:click="ConnectToGame()">Подключиться к игре</button>-->
+        <br>
+        <button v-on:click="LogOut()">Выйти</button>
     </div>
 </template>
 
 <script>
+import router from "../router";
+
 export default {
     name: "TemplateComponent",
     components: {},
@@ -23,27 +39,59 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             pageData: 0,
             userName: '',
+            gameId: ''
         }
     },
     mounted() {
         console.log(this.data)
     },
     methods: {
-        async sendForm() {
-            if (this.userName !== undefined) {
+
+        async newGame() {
+            let sessionId = null;
+            await axios.post('/api/start-session')
+                .then(response => (sessionId = response.data.id))
+                .catch(err => console.log(err));
+            await this.$router.push({path: '/game/' + sessionId});
+            router.go(0);
+        },
+
+        async ConnectToGame() {
+            if (this.gameId !== undefined) {
                 let sessionId = null;
-                    await axios.post('/api/start-session', {name: this.userName})
-                        .then(response => (sessionId = response.data.id))
-                        .catch(err => console.log(err));
-                await this.$router.push({path: '/game/' + sessionId });
+                // console.log(this.gameId);
+                await axios.post('/api/add-user-to-lobby/' + this.gameId)
+                    .then(response => (sessionId = response.data.id))
+                    .catch(err => console.log(err));
+                await this.$router.push({path: '/game/' + sessionId});
+                router.go(0);
             } else {
-                alert('Введите имя!');
+                alert('Введи ID игры!');
             }
-            // Проверка обязана быть с тремя равно, потому что иначе приведет к таким результатам
-            // Нихуя ты чего придумал, только это нужно было в отдельный метод выносить это отдельная функция
-            //sendPostRequest();
-            // Тут был забыт await, тебе компилятор об этом сказал, но ты проигнорил
+        },
+
+        async LogOut(){
+            await axios.post('/api/logout')
+                .then()
+                .catch(err => console.log(err));
+            await this.$router.push({path: '/'});
+            router.go(0);
         }
+        // async sendForm() {
+        //     if (this.userName !== undefined) {
+        //         let sessionId = null;
+        //             await axios.post('/api/start-session', {name: this.userName})
+        //                 .then(response => (sessionId = response.data.id))
+        //                 .catch(err => console.log(err));
+        //         await this.$router.push({path: '/game/' + sessionId });
+        //     } else {
+        //         alert('Введите имя!');
+        //     }
+        //     // Проверка обязана быть с тремя равно, потому что иначе приведет к таким результатам
+        //     // Нихуя ты чего придумал, только это нужно было в отдельный метод выносить это отдельная функция
+        //     //sendPostRequest();
+        //     // Тут был забыт await, тебе компилятор об этом сказал, но ты проигнорил
+        // }
     }
 }
 </script>

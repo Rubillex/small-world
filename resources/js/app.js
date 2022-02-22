@@ -20,9 +20,8 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('template-component', require('./components/TemplateComponent.vue').default);
-Vue.component('main-page', require('./components/MainPage').default);
 Vue.component('auth-component', require('./components/AuthComponent').default);
-
+Vue.component('start-game-component', require('./components/StartGameComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
