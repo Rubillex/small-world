@@ -11,7 +11,7 @@
             </form>
         </div>
         <br>
-        <button v-on:click="LogOut()">Выйти</button>
+        <button v-on:click="new LogOut()">Выйти</button>
     </div>
 </template>
 

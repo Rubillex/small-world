@@ -29128,7 +29128,7 @@ var render = function() {
       {
         on: {
           click: function($event) {
-            return _vm.LogOut()
+            new _vm.LogOut()
           }
         }
       },
