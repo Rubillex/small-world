@@ -1,14 +1,5 @@
 <template>
     <div class="template-page">
-<!--        <div class="container-header">-->
-<!--            Привет! Как тебя зовут?-->
-<!--            <form ref="nameForm" @submit.prevent="sendForm()">-->
-<!--                <input type="text" v-model="userName" name="name">-->
-<!--                <input type="hidden" name="_token" :value="csrf">-->
-<!--                <button type="submit" class="send js-send">отправить</button>-->
-<!--            </form>-->
-<!--        </div>-->
-
         <button v-on:click="newGame()">Новая игра</button>
         <br>
         <div class="container-header">
@@ -19,7 +10,6 @@
                 <button type="submit" class="send js-send">Подключиться к игре</button>
             </form>
         </div>
-<!--        <button v-on:click="ConnectToGame()">Подключиться к игре</button>-->
         <br>
         <button v-on:click="LogOut()">Выйти</button>
     </div>
@@ -59,7 +49,6 @@ export default {
         async ConnectToGame() {
             if (this.gameId !== undefined) {
                 let sessionId = null;
-                // console.log(this.gameId);
                 await axios.post('/api/add-user-to-lobby/' + this.gameId)
                     .then(response => (sessionId = response.data.id))
                     .catch(err => console.log(err));
@@ -77,21 +66,6 @@ export default {
             await this.$router.push({path: '/'});
             router.go(0);
         }
-        // async sendForm() {
-        //     if (this.userName !== undefined) {
-        //         let sessionId = null;
-        //             await axios.post('/api/start-session', {name: this.userName})
-        //                 .then(response => (sessionId = response.data.id))
-        //                 .catch(err => console.log(err));
-        //         await this.$router.push({path: '/game/' + sessionId });
-        //     } else {
-        //         alert('Введите имя!');
-        //     }
-        //     // Проверка обязана быть с тремя равно, потому что иначе приведет к таким результатам
-        //     // Нихуя ты чего придумал, только это нужно было в отдельный метод выносить это отдельная функция
-        //     //sendPostRequest();
-        //     // Тут был забыт await, тебе компилятор об этом сказал, но ты проигнорил
-        // }
     }
 }
 </script>

@@ -7,7 +7,7 @@ import VueRouter from 'vue-router';
 
 import Vue from 'vue';
 import TemplateComponent from "./components/TemplateComponent";
-import StartGame from "./components/StartGame";
+import StartGame from "./components/StartGameComponent";
 
 Vue.use(VueRouter);
 

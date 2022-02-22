@@ -18,8 +18,6 @@ class GameController extends Controller {
         //  todo Получить юзера, запихнуть его в юзер1, остальных заполнять на инвайтах
         // и вообще утащить это нафиг в модель
 
-        // добавил получение юзера и убил таблицу games. В таблице не было таких же записей, как и в модельке
-
         if (!Auth::check()) {
             return view('index')->with('data', ['page' => 'index']);
         }
@@ -31,7 +29,6 @@ class GameController extends Controller {
             $game = Game::create();
             $game->user1 = $userId;
             $game->save();
-//            echo '<pre>';print_r($game->id);echo '</pre>';die();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             echo '<pre>';print_r($e);echo '</pre>';die();
         }
@@ -51,7 +48,7 @@ class GameController extends Controller {
     public function connectToGame(Request $request, $id) {
 //        echo '<pre>';print_r($id);echo '</pre>';die();
         //todo протащить это во вью :) а на сегодня всё
-        return view('lobby')->with('data', ['page' => 'lobby']);
+        return view('lobby')->with('data', ['page' => $id]);
     }
 
     /*
