@@ -17,12 +17,12 @@ class HomeController extends Controller {
     }
 
     /**
-     * Show the application dashboard.
+     * Возвращает индекс для неавторизованных иначе страницу с началом игры
      *
-     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(Request $request) {
-//        Auth::logout();
+    public function index() {
         if (Auth::check()) {
             return view('game')->with('data', ['page' => 'game']);
         } else {
@@ -30,15 +30,30 @@ class HomeController extends Controller {
         }
     }
 
-    public function homePage(Request $request){
+    /**
+     * Возвращает страницу с началом игры
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function homePage(): \Illuminate\Contracts\View\View {
         return view('game')->with('data', ['page' => 'game']);
     }
 
-    public function login(Request  $request) {
+    /**
+     * Возвращает страницу логина
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function login() {
         return view('login')->with('data', ['page' => 'login']);
     }
 
-    public function register(Request $request) {
+    /**
+     * Возвращает страницу логина
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function register() {
         return view('register')->with('data', ['page' => 'register']);
     }
 }

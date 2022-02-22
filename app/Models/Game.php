@@ -15,10 +15,7 @@ class Game extends Model
      * @var array
      */
     protected $fillable = [
-        'user1',
-        'user2',
-        'user3',
-        'user4'
+        'users',
     ];
 
     /**
@@ -27,10 +24,7 @@ class Game extends Model
      * @var array
      */
     protected $attributes = [
-        'user1' => "",
-        'user2' => "",
-        'user3' => "",
-        'user4' => ""
+        'users' => "[]"
     ];
 
 }

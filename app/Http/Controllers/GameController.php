@@ -18,19 +18,18 @@ class GameController extends Controller {
         //  todo Получить юзера, запихнуть его в юзер1, остальных заполнять на инвайтах
         // и вообще утащить это нафиг в модель
 
-        if (!Auth::check()) {
-            return view('index')->with('data', ['page' => 'index']);
+        if (Auth::check() === false) {
+            return json_encode(['error' => 'Вы не авторизированы.']);
         }
         $userId = Auth::id();
-        $user = User::where('id', $userId)->firstOrFail();
 
         try {
             //todo написать доку для $game
             $game = Game::create();
-            $game->user1 = $userId;
+            $game->users = json_encode([$userId]);
             $game->save();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            echo '<pre>';print_r($e);echo '</pre>';die();
+            return json_encode(['error' => $e]);
         }
 
         return json_encode(['id' => $game->id]);
@@ -46,7 +45,6 @@ class GameController extends Controller {
      * @param string $id
      */
     public function connectToGame(Request $request, $id) {
-//        echo '<pre>';print_r($id);echo '</pre>';die();
         //todo протащить это во вью :) а на сегодня всё
         return view('lobby')->with('data', ['page' => $id]);
     }
@@ -54,27 +52,21 @@ class GameController extends Controller {
     /*
      * Подключает юзера к лобби по GameID
      */
-    public function addUserToLobby(Request $request, $id) {
+    public function addUserToLobby($id) {
         try{
             $lobby = Game::where('id', $id)->firstOrFail();
             $userId = Auth::id();
-            if ($lobby->user1 === $userId){
-                return json_encode(['id' => $lobby->id]);
-            } else
-            if ($lobby->user2 === "" && $lobby->user2 !== $userId) {
-                $lobby->user2 = $userId;
-                $lobby->save();
-                return json_encode(['id' => $lobby->id]);
-            } else if($lobby->user3 === "" && $lobby->user3 !== $userId) {
-                $lobby->user3 = $userId;
-                $lobby->save();
-                return json_encode(['id' => $lobby->id]);
-            } else if($lobby->user4 === "" && $lobby->user4 !== $userId) {
-                $lobby->user4 = $userId;
-                $lobby->save();
-                return json_encode(['id' => $lobby->id]);
-            } else return json_encode(['error' => 'lobby is full']);
+            $users = json_decode($lobby->users);
+            if (count($users) > 4) return json_encode(['error' => 'lobby has fulled']);
+            foreach ($users as $user) {
+                if ($user === $userId) return json_encode(['id' => $lobby->id]);
+            }
 
+            $users[] = $userId;
+            $lobby->users = json_encode($users);
+            $lobby->save();
+
+            return json_encode(['id' => $lobby->id]);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return json_encode(['error' => 'lobby not found']);
         }
