@@ -49,7 +49,7 @@ class GameController extends Controller {
         return view('lobby')->with('data', ['page' => $id]);
     }
 
-    /*
+    /**
      * Подключает юзера к лобби по GameID
      */
     public function addUserToLobby($id) {

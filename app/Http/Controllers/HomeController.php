@@ -49,7 +49,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * Возвращает страницу логина
+     * Возвращает страницу регистрации
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
