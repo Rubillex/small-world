@@ -13,7 +13,7 @@ class TemplateComponent extends Component
      */
     public function __construct()
     {
-        //
+
     }
 
     /**

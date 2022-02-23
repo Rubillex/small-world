@@ -44,7 +44,7 @@ export default {
                     if (!response.data.error) {
                         sessionId = response.data.id
                     } else {
-                        alert(response.data.error);
+                        console.log('response')   ;
                     }
                 })
                 .catch(err => console.log(err));
