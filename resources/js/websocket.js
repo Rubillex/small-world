@@ -12,7 +12,6 @@ wsServer.on('connection', onConnect);
 
 
 function onConnect(wsClient) {
-    //todo вырезат
     console.log('Новый пользователь');
 
 
