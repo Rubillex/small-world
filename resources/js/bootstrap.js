@@ -1,5 +1,4 @@
 window._ = require('lodash');
-window.io = require('socket.io-client');
 
 try {
     require('bootstrap');
