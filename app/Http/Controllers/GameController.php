@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use \App\Models\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+//use Redis;
+
 
 class GameController extends Controller {
     /**
@@ -15,14 +18,15 @@ class GameController extends Controller {
      * @param Request $request
      */
     public function startSession(Request $request) {
-        //  todo Получить юзера, запихнуть его в юзер1, остальных заполнять на инвайтах
-        // и вообще утащить это нафиг в модель
+//        $redis = new Redis();
+//        $redis->connect('194.58.97.130', 6379);
+//
+//        $this->createChat();
 
         if (Auth::check() === false) {
             return json_encode(['error' => 'Вы не авторизированы.']);
         }
         $userId = Auth::id();
-
         try {
             //todo написать доку для $game
             $game = Game::create();
@@ -31,7 +35,6 @@ class GameController extends Controller {
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return json_encode(['error' => $e]);
         }
-
         return json_encode(['id' => $game->id]);
     }
 
