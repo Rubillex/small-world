@@ -27,7 +27,7 @@ function onConnect(wsClient) {
                 case 'MSG':
                     wsServer.clients.forEach(client => {
                         if(users.get(sender).lobbyId === users.get(client).lobbyId) {
-                            client.send({ msg: jsonMessage.data, sender: users.get(sender).userName });
+                            client.send(JSON.stringify({ msg: jsonMessage.data, sender: users.get(sender).userName }));
                         }
                     });
                     break;
