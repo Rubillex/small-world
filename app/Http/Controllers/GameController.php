@@ -44,12 +44,15 @@ class GameController extends Controller {
 
     /**
      * Создает лобби, а также минимально отрисовывает его, тут же выдает idшник для подлючения
-     * @param Request $request
      * @param string $id
      */
-    public function connectToGame(Request $request, $id) {
+    public function connectToGame($id) {
         //todo протащить это во вью :) а на сегодня всё
-        return view('lobby')->with('data', ['page' => $id]);
+        if (!Auth::check()){
+            return view('index')->with('data', ['page' => 'index']);
+        }
+
+        return view('lobby')->with('data', ['chatData' => ['lobbyId' => $id, 'userData' => Auth::user()]]);
     }
 
     /**

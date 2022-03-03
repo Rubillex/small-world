@@ -1,8 +1,3 @@
-/**
- * User: Rubillex
- * Date: 22.02.2022 18:18
- */
-
 const users = new Map();
 
 const WebSocket = require('ws');
@@ -13,36 +8,27 @@ wsServer.on('connection', onConnect);
 
 function onConnect(wsClient) {
     console.log('Новый пользователь');
-
-
+    let sender = wsClient;
     wsClient.on('close', function() {
         console.log('Пользователь отключился');
         users.delete(wsClient);
-        console.log('Список пользователей');
-        for (let pair of users.entries()) {
-            // pair - это массив [key, values]
-            console.log(`Ключ = ${pair[0]}, значение = ${pair[1]}`);
-        }
     });
 
     wsClient.on('message', function(message) {
-        console.log(JSON.parse(message));
         try {
             const jsonMessage = JSON.parse(message);
             switch (jsonMessage.action) {
-                case 'CONNECT':
-                    users.set(wsClient, jsonMessage.lobby_id); // USERNAME, LobbyID
-                    console.log(jsonMessage.lobby_id);
-                    console.log('Список пользователей');
-                    for (let pair of users.entries()) {
-                        // pair - это массив [key, values]
-                        console.log(`Ключ = ${pair[0]}, значение = ${pair[1]}`);
-                    }
+                case 'connectToLobby':
+                    users.set(wsClient, {
+                        userName: jsonMessage.data.userName,
+                        lobbyId:  jsonMessage.data.lobbyId,
+                    });
                     break;
                 case 'MSG':
                     wsServer.clients.forEach(client => {
-                        if(client != wsClient && users.get(wsClient) == users.get(client))
-                        client.send(jsonMessage.data);
+                        if(users.get(sender).lobbyId === users.get(client).lobbyId) {
+                            client.send({ msg: jsonMessage.data, sender: users.get(sender).userName });
+                        }
                     });
                     break;
                 default:
