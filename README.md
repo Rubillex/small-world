@@ -6,6 +6,11 @@
 - 4 часа
 - 5 часов на работу с моделями
 
+ЕСЛИ ОТВАЛИЛСЯ NODE JS НА ПРОДЕ: 
+1. source ~/.bashrc
+2. nvm install v14.8.0
+
+
 <br/><br/><br/><br/><br/><br/>
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
