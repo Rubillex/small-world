@@ -55,6 +55,29 @@ class UserListLayout extends Table
                     return $user->updated_at->toDateTimeString();
                 }),
 
+            TD::make('complexity', __('Сложность'))
+                ->sort()
+                ->render(function (User $user) {
+                    switch ($user->complexity) {
+                        case 0: return 'Лёгкий';
+                        case 1: return 'Средний';
+                        case 2: return 'Сложный';
+                        default: return 'Не определён';
+                    }
+                }),
+
+            TD::make('progress', __('Прогресс'))
+                ->sort()
+                ->render(function (User $user) {
+                    return $user->progress;
+                }),
+
+            TD::make('points', __('Очки'))
+                ->sort()
+                ->render(function (User $user) {
+                    return $user->points;
+                }),
+
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
