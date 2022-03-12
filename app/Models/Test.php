@@ -19,7 +19,8 @@ class Test extends Model
         'name',
         'brefing',
         'question',
-        'answers',
+        'incorrect_answers',
+        'correct_answers',
         'points',
         'needHelp',
     ];
@@ -39,10 +40,11 @@ class Test extends Model
      * @var array
      */
     protected $casts = [
-        'permissions'   => 'array',
-        'brefing'       => 'array',
-        'answers'       => 'array',
-        'needHelp'      => 'bool',
+        'permissions'             => 'array',
+        'brefing'                 => 'array',
+        'incorrect_answers'       => 'array',
+        'correct_answers'         => 'array',
+        'needHelp'                => 'bool',
     ];
 
     /**
@@ -69,7 +71,8 @@ class Test extends Model
         'name',
         'brefing',
         'question',
-        'answers',
+        'correct_answers',
+        'incorrect_answers',
         'points',
         'needHelp',
     ];

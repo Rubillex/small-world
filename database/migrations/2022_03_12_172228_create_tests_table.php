@@ -18,7 +18,8 @@ class CreateTestsTable extends Migration
             $table->string('name');
             $table->jsonb('brefing');
             $table->string('question');
-            $table->jsonb('answers');
+            $table->jsonb('incorrect_answers');
+            $table->jsonb('correct_answers');
             $table->string('points');
             $table->boolean('needHelp')->default(false);
             $table->timestamps();

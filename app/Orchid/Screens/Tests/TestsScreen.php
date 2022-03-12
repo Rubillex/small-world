@@ -5,13 +5,17 @@ namespace App\Orchid\Screens\Tests;
 use App\Models\Test;
 use Illuminate\Support\Str;
 use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
+use Illuminate\Http\Request;
 
 class TestsScreen extends Screen
 {
@@ -45,11 +49,37 @@ class TestsScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            ModalToggle::make('Новый тест')->modal('createTest')->icon('brush')
-
+            ModalToggle::make('Новый тест')
+                ->modal('createTest')
+                ->icon('brush')
+                ->method('createTest')
         ];
     }
 
+    /**
+     * Сохранение теста в БД
+     */
+    public function createTest(Request $request): void
+    {
+        $matrix = $request->matrix; //матрица ответов
+        $correct[] = array();
+        $incorrect[] = array();
+        foreach ($matrix as $answer){//проверяем, если правильный, то в массив с правильными
+            if ($answer['correct'] === '1')
+                 $correct[] = $answer['answers'];
+            else $incorrect[] = $answer['answers'];
+        }
+        $help = $request->needHelp === '1';//пыха даёт 1, вместо true, поэтому такая вот штука теперь живёт здесь
+        Test::create([
+            'name' => $request->name,
+            'brefing' => $request->brefing,
+            'question' => $request->question,
+            'incorrect_answers' => json_encode($incorrect),
+            'correct_answers' => json_encode($correct),
+            'points' => $request->points,
+            'needHelp' => $help,
+        ]);//отправляем тест в БД
+    }
     /**
      * Views.
      *
@@ -63,8 +93,19 @@ class TestsScreen extends Screen
                 Quill::make('brefing')
                     ->title('Брифинг')
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
-                Input::make('answers')->required()->title('Ответы'),
+                Quill::make('question')
+                    ->title('Вопрос'),
+                Matrix::make('matrix')
+                    ->columns([
+                        'Ответ' => 'answers',
+                        'Правильный' => 'correct',
+                    ])
+                    ->fields([
+                        'answers' => Input::make(),
+                        'correct' =>  CheckBox::make()->sendTrueOrFalse(),
+                    ]),
                 Input::make('points')->required()->title('Количество очков за тест'),
+                CheckBox::make('needHelp')->title('Требует проверки преподователя')->sendTrueOrFalse(),
             ]))->title('Создаем тест')
                 ->applyButton('Создать')
                 ->closeButton('Закрыть')
@@ -72,18 +113,16 @@ class TestsScreen extends Screen
 
             Layout::table('tests', [
                 TD::make('id', 'ID'),
-
                 TD::make('name', 'Название')
-                    ->width('450')
-                    ->render(function (Repository $model) {
-                        return Str::limit($model->get('name'), 200);
-                    }),
-
+                    ->width('450'),
                 TD::make('points', 'Количество очков за тест')
-                    ->width('350')
-                    ->render(function (Repository $model) {
-                        return Str::limit($model->get('name'), 200);
-                    }),
+                    ->width('350'),
+                TD::make('needHelp', 'Ручная проверка')->render(function (Test $test) {
+                    return match ($test->needHelp) {
+                        1 => '✔',
+                        default => '✖',
+                    };
+                }),
 
                 TD::make('created_at', 'Когда создан'),
             ]),
