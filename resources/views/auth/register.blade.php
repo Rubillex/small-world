@@ -26,6 +26,34 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="fio" class="col-md-4 col-form-label text-md-end">{{ __('ФИО') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="fio" type="text" class="form-control @error('fio') is-invalid @enderror" name="fio" value="{{ old('fio') }}" required autocomplete="fio" autofocus>
+
+                                @error('fio')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="group" class="col-md-4 col-form-label text-md-end">{{ __('Группа') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="group" type="text" class="form-control @error('group') is-invalid @enderror" name="group" value="{{ old('group') }}" required autocomplete="group" autofocus>
+
+                                @error('group')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">

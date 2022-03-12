@@ -21,6 +21,8 @@ class User extends Authenticatable
         'complexity',
         'progress',
         'points',
+        'fio',
+        'group',
     ];
 
     /**
