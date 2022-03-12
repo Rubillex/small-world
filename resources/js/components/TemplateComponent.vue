@@ -1,16 +1,13 @@
 <template>
     <div class="template-page">
-        <button v-on:click="newGame()">Новая игра</button>
-        <br>
-        <div class="container-header">
-            Подключиться по ID игры
-            <form ref="nameForm" @submit.prevent="connectToGame()">
-                <input type="text" v-model="gameId" name="gameId">
-                <input type="hidden" name="_token" :value="csrf">
-                <button type="submit" class="send js-send">Подключиться к игре</button>
-            </form>
+        <div v-if="data.userDifficult === '-1'" class="choose-difficult">
+            <h1>Привет! Выбери уровень сложности:</h1>
+                <ul>
+                    <li><button v-on:click="changeDifficult(0)">Я новичек</button></li>
+                    <li><button v-on:click="changeDifficult(1)">Я смешарик</button></li>
+                    <li><button v-on:click="changeDifficult(2)">Бывалый.</button></li>
+                </ul>
         </div>
-        <br>
         <button v-on:click="logOut()">Выйти</button>
     </div>
 </template>
@@ -29,7 +26,9 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             pageData: 0,
             userName: '',
-            gameId: ''
+            gameId: '',
+            userDifficult: '',
+
         }
     },
     mounted() {
@@ -78,12 +77,19 @@ export default {
                 }
         },
 
-        async logOut(){
+        async logOut() {
             await axios.post('/api/logout')
                 .then()
                 .catch(err => console.log(err));
             await this.$router.push({path: '/'});
             router.go(0);
+        },
+
+        async changeDifficult(value) {
+            console.log(222222222);
+            await axios.post('/api/change-difficult/' + value)
+                .then()
+                .catch(err => console.log(err));
         }
     }
 }

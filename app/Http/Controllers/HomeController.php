@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 
 class HomeController extends Controller {
     /**
@@ -36,7 +37,9 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\View\View
      */
     public function homePage(): \Illuminate\Contracts\View\View {
-        return view('game')->with('data', ['page' => 'game']);
+        $user = Auth::user();
+        //поправить исправления
+        return view('game', ['data' => ['userDifficult' => $user->complexity]]);
     }
 
     /**

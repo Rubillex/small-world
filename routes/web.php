@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/game/{id}', [GameController::class, 'connectToGame']);
 Route::post('/api/start-session', [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
 Route::post('/api/logout', [GameController::class, 'logOut']);
+Route::post('/api/change-difficult/{complexity}', [UserController::class, 'changeComplexity']);
 
 Route::get('/phpInfo', function() {
     return response()->json([
