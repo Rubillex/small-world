@@ -17,6 +17,7 @@ class CreateTestsTable extends Migration
             $table->id();
             $table->string('name');
             $table->jsonb('brefing');
+            $table->string('question');
             $table->jsonb('answers');
             $table->string('points');
             $table->boolean('needHelp')->default(false);

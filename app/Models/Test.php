@@ -18,6 +18,7 @@ class Test extends Model
     protected $fillable = [
         'name',
         'brefing',
+        'question',
         'answers',
         'points',
         'needHelp',
@@ -52,6 +53,7 @@ class Test extends Model
     protected $allowedFilters = [
         'id',
         'name',
+        'question',
         'email',
         'needHelp',
         'permissions',
@@ -66,6 +68,7 @@ class Test extends Model
     protected $allowedSorts = [
         'name',
         'brefing',
+        'question',
         'answers',
         'points',
         'needHelp',
