@@ -118,5 +118,5 @@ Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.exam
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-
-Route::screen('idea', 'Idea::class','platform.screens.idea');
+//
+//Route::screen('idea', 'Idea::class','platform.screens.idea');
