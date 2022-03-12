@@ -18,11 +18,6 @@ class GameController extends Controller {
      * @param Request $request
      */
     public function startSession(Request $request) {
-//        $redis = new Redis();
-//        $redis->connect('194.58.97.130', 6379);
-//
-//        $this->createChat();
-
         if (Auth::check() === false) {
             return json_encode(['error' => 'Вы не авторизированы.']);
         }

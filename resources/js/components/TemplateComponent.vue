@@ -8,6 +8,11 @@
                     <li><button v-on:click="changeDifficult(2)">Бывалый.</button></li>
                 </ul>
         </div>
+        <div v-else class="go-to-game">
+            <h2>Страртовая</h2>
+            <button>Пошли играть!</button>
+        </div>
+
         <button v-on:click="logOut()">Выйти</button>
     </div>
 </template>
@@ -82,14 +87,14 @@ export default {
                 .then()
                 .catch(err => console.log(err));
             await this.$router.push({path: '/'});
-            router.go(0);
         },
 
         async changeDifficult(value) {
-            console.log(222222222);
             await axios.post('/api/change-difficult/' + value)
                 .then()
                 .catch(err => console.log(err));
+            this.data.userDifficult = value;
+            alert('Cложность выбрана!');
         }
     }
 }
