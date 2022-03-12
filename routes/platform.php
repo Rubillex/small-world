@@ -36,6 +36,9 @@ Route::screen('/main', PlatformScreen::class)
 Route::screen('/userss', \App\Orchid\Screens\UsersTable::class)
     ->name('platform.userss');
 
+Route::screen('/tests', \App\Orchid\Screens\Tests\TestsScreen::class)
+    ->name('platform.tests');
+
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
@@ -116,4 +119,4 @@ Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platfor
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
-//Route::screen('idea', 'Idea::class','platform.screens.idea');
+Route::screen('idea', 'Idea::class','platform.screens.idea');

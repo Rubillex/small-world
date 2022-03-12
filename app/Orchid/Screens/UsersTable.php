@@ -51,7 +51,8 @@ class UsersTable extends Screen
      */
     public function layout(): iterable
     {
-        return [Layout::rows([
+        return [
+            Layout::rows([
             TextArea::make()
             ->name('AAAAAA')
             ->title('Название')
