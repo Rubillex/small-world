@@ -62,8 +62,6 @@ class TestsScreen extends Screen
     public function createTest(Request $request): void
     {
         $matrix = $request->matrix; //матрица ответов
-        $correct[] = array();
-        $incorrect[] = array();
         foreach ($matrix as $answer){//проверяем, если правильный, то в массив с правильными
             if ($answer['correct'] === '1')
                  $correct[] = $answer['answers'];

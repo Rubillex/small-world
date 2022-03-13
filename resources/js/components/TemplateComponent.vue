@@ -3,9 +3,9 @@
         <div v-if="data.userDifficult === '-1'" class="choose-difficult">
             <h1>Привет! Выбери уровень сложности:</h1>
                 <ul>
-                    <li><button v-on:click="changeDifficult(0)">Я новичек</button></li>
-                    <li><button v-on:click="changeDifficult(1)">Я смешарик</button></li>
-                    <li><button v-on:click="changeDifficult(2)">Бывалый.</button></li>
+                    <li><button v-on:click="changeDifficult(0)">Начинающий</button></li>
+                    <li><button v-on:click="changeDifficult(1)">Продвинутый</button></li>
+                    <li><button v-on:click="changeDifficult(2)">Эксперт</button></li>
                 </ul>
         </div>
         <div v-else class="go-to-game">

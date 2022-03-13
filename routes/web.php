@@ -21,13 +21,15 @@ Route::get('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register']);
 Route::get('/game', [HomeController::class, 'homePage']);
 Route::get('/game/{id}', [GameController::class, 'connectToGame']);
-
-
+Route::get('/levels', [HomeController::class, 'levels']);
+Route::get('/level/{number}', [HomeController::class, 'goToLevel']);
 
 Route::post('/api/start-session', [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
 Route::post('/api/logout', [GameController::class, 'logOut']);
 Route::post('/api/change-difficult/{complexity}', [UserController::class, 'changeComplexity']);
+Route::post('/api/getlevels', [UserController::class, 'getlevels']);
+Route::post('/api/getlevelData/{levelId}', [UserController::class, 'getLevelData']);
 
 Route::get('/phpInfo', function() {
     return response()->json([
