@@ -36,6 +36,45 @@ class TestsController extends Controller
         $answer['points'] = $test->points;
         $help = ($test->needHelp === true)? 1 : 0;
         $answer['needHelp'] = $help;
-        return json_encode(['answer' => json_encode($answer)]);
+
+        return $answer;
+    }
+
+    /**
+     * Возвращает страницу с выбранным уровнем
+     *
+     * @param $levelId
+     */
+    public function goToLevel($levelId){
+        $test = $this->getLevelData($levelId);
+
+        return view('level', ['data' => [
+            'levelId'  =>  $levelId,
+            'name'     =>  $test['name'],
+            'brefing'  =>  $test['brefing'],
+            'needHelp' =>  $test['needHelp'],
+            'points'   =>  $test['points']
+        ]]);
+    }
+
+    /**
+     * Возвращает страницу с ответом на выбранный выбранным уровнем
+     *
+     * @param $levelId
+     */
+    public function goToLevelAnswers($levelId){
+        $test = $this->getLevelData($levelId);
+        $incorrect_answers = json_decode($test['incorrect_answers'], 1);
+        $correct_answers   = json_decode($test['correct_answers'], 1);
+        $anwers            = array_merge($incorrect_answers, $correct_answers);
+        shuffle($anwers);
+
+        return view('levelAnswers', ['data' => [
+            'name'               =>  $test['name'],
+            'question'           =>  $test['question'],
+            'answers'            =>  $anwers,
+            'incorrect_answers'  =>  json_decode($test['incorrect_answers'], 1),
+            'correct_answers'    =>  json_decode($test['correct_answers'], 1),
+        ]]);
     }
 }

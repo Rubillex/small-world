@@ -77,12 +77,5 @@ class HomeController extends Controller {
         }
     }
 
-    /**
-     * Возвращает страницу с выбранным уровнем
-     *
-     * @param $levelId
-     */
-    public function goToLevel($levelId){
-        return view('level')->with('data', ['levelId' => $levelId]);
-    }
+
 }

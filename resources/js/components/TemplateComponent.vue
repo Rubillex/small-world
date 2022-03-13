@@ -10,7 +10,7 @@
         </div>
         <div v-else class="go-to-game">
             <h2>Страртовая</h2>
-            <button v-on:click="newGame">Пошли играть!</button>
+            <button v-on:click="newGame()">Пошли играть!</button>
         </div>
 
         <button v-on:click="logOut()">Выйти</button>

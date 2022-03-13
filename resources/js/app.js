@@ -23,7 +23,8 @@ Vue.component('template-component', require('./components/TemplateComponent.vue'
 Vue.component('auth-component', require('./components/AuthComponent').default);
 Vue.component('start-game-component', require('./components/StartGameComponent').default);
 Vue.component('list-of-levels-component', require('./components/ListOfLevelsComponent').default);
-Vue.component('level-component', require('./components/LevelComponent').default);
+Vue.component('level-component', require('./components/Level/LevelComponent').default);
+Vue.component('question-component', require('./components/Level/QuestionsComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
