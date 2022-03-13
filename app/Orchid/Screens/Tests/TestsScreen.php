@@ -3,7 +3,12 @@
 namespace App\Orchid\Screens\Tests;
 
 use App\Models\Test;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Orchid\Platform\Models\User;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
@@ -78,6 +83,25 @@ class TestsScreen extends Screen
             'needHelp' => $help,
         ]);//отправляем тест в БД
     }
+
+
+    /**
+     * Удаление теста
+     * @param $id
+     */
+    public function deleteTest($id): void
+    {
+        $test = Test::find($id);
+        $test->delete();
+    }
+
+    public function changeTest($id): iterable
+    {
+        return [
+//            Layout::modal('editTest', EditTestScreen::class)
+        ];
+    }
+
     /**
      * Views.
      *
@@ -92,7 +116,8 @@ class TestsScreen extends Screen
                     ->title('Брифинг')
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
                 Quill::make('question')
-                    ->title('Вопрос'),
+                    ->title('Вопрос')
+                    ->toolbar(["text", "color", "header", "list", "format", "media"]),
                 Matrix::make('matrix')
                     ->columns([
                         'Ответ' => 'answers',
@@ -116,13 +141,34 @@ class TestsScreen extends Screen
                 TD::make('points', 'Количество очков за тест')
                     ->width('350'),
                 TD::make('needHelp', 'Ручная проверка')->render(function (Test $test) {
-                    return match ($test->needHelp) {
-                        1 => '✔',
-                        default => '✖',
-                    };
+                    if ($test->needHelp) return '✔';
+                    else return '✖';
                 }),
 
-                TD::make('created_at', 'Когда создан'),
+                TD::make(__('Actions'))
+                    ->align(TD::ALIGN_CENTER)
+                    ->width('100px')
+                    ->render(function (Test $test) {
+                        return DropDown::make()
+                            ->icon('options-vertical')
+                            ->list([
+                                Button::make(__('Edit'))
+                                    ->icon('pencil')
+                                    ->method('changeTest', [
+                                        'id' => $test->id,
+                                    ]),
+//                                    ->route('platform.tests.edit', $test->id),
+
+                                Button::make('Удалить')
+                                    ->icon('trash')
+                                    ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                                    ->method('deleteTest', [
+                                        'id' => $test->id,
+                                    ]),
+                            ]);
+                    }),
+
+//                TD::make('created_at', 'Когда создан'),
             ]),
         ];
     }
