@@ -6,10 +6,12 @@
                 <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
                 <br>
         </div>
+        <button v-on:click="goToLevel()">Назад к уровням</button>
     </div>
 </template>
 
 <script>
+import router from "../../router";
 const {marked} = require("marked");
 export default {
     name: "QuestionsComponent",
@@ -43,6 +45,11 @@ export default {
             console.log(what);
             return marked(what);
         },
+
+        async goToLevel(levelId){
+            await this.$router.push({path: '/level/' + levelId});
+            router.go(0);
+        }
     }
 }
 </script>
