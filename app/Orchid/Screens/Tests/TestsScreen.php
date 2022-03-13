@@ -9,6 +9,7 @@ use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
@@ -88,16 +89,18 @@ class TestsScreen extends Screen
         return [
             Layout::modal('createTest', Layout::rows([
                 Input::make('name')->required()->title('Название'),
-                Quill::make('brefing')
+                SimpleMDE::make('brefing')
                     ->title('Брифинг')
+                    ->toolbar(["text", "color", "header", "list", "format", "media"])
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
-                Quill::make('question')
+                SimpleMDE::make('question')
                     ->title('Вопрос'),
                 Matrix::make('matrix')
                     ->columns([
                         'Ответ' => 'answers',
                         'Правильный' => 'correct',
                     ])
+                    ->required()
                     ->fields([
                         'answers' => Input::make(),
                         'correct' => CheckBox::make()->sendTrueOrFalse(),

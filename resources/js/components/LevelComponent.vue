@@ -2,8 +2,8 @@
     <div>
         <h1>{{ name }}</h1>
         <br>
-        <span  v-html="brefing"></span >
-        <span v-html="question"></span>
+        <div  v-html="markDown(brefing)"></div>
+        <span v-html="markDown(question)"></span>
         <template v-for="answer in answers">
             <div>
                 <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+const {marked} = require("marked");
 export default {
     name: "Level",
     components: {},
@@ -38,8 +39,9 @@ export default {
     created() {
         this.getData();
     },
+
     methods: {
-        async getData(){
+        async getData() {
             await axios.post('/api/getlevelData/' + this.data.levelId)
                 .then(response => {
                     if (!response.data.error) {
@@ -72,17 +74,19 @@ export default {
 
             return array;
         },
-        clickAnswer(answer){
+
+        clickAnswer(answer) {
             if(this.correct_answers.includes(answer)){
                 alert('Правильно!');
             } else {
                 alert('Не правильно :(');
             }
-        }
+        },
+
+        markDown(what) {
+            console.log(what);
+            return marked(what);
+        },
     }
 }
 </script>
-
-<style scoped>
-
-</style>
