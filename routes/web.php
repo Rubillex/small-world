@@ -35,11 +35,11 @@ Route::get('/level/{number}/answer',       [TestsController::class, 'goToLevelAn
 Route::get('/game/{id}', [GameController::class, 'connectToGame']);
 
 Route::post('/api/change-difficult/{complexity}', [UserController::class, 'changeComplexity']);
-Route::post('/api/change-lifes/{lifes}',          [UserController::class, 'changeLifes']);
+Route::post('/api/change-lifes/{lifes}', [UserController::class, 'changeLifes']);
 
 Route::post('/api/getlevels',                [TestsController::class, 'getlevels']);
 Route::post('/api/getlevelData/{levelId}',   [TestsController::class, 'getLevelData']);
-Route::post('/api/test-comlpited/{levelId}', [TestsController::class, 'addUserToTestComplited']);
+Route::post('/api/test-complited/{levelId}/{points}', [TestsController::class, 'addUserToTestComplited']);
 
 
 

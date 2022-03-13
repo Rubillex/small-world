@@ -30,6 +30,7 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             levelId: '',
             name: '',
+            points: '',
             correct_answers: [],
             incorrect_answers: [],
             answers: [],
@@ -46,7 +47,8 @@ export default {
     methods: {
         async clickAnswer(answer) {
             if (this.data.correct_answers.includes(answer)) {
-                await axios.post('/api/test-comlpited/' + this.data.levelId)
+                // todo вообще всю логику переделать жесть какая
+                await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
                     .then()
                     .catch(err => console.log(err));
                 if (this.data.correct_answers.length > 1) {
