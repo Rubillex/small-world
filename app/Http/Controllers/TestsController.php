@@ -27,15 +27,15 @@ class TestsController extends Controller
         $test = Test::where('id', $levelId)->first();
         if (!$test) return json_encode(['error' => 'Level not found']);
 
-        $answer['id'] = $test->id;
-        $answer['name'] = $test->name;
-        $answer['brefing'] = $test->brefing;
-        $answer['question'] = $test->question;
+        $answer['id']                = $test->id;
+        $answer['name']              = $test->name;
+        $answer['brefing']           = $test->brefing;
+        $answer['question']          = $test->question;
         $answer['incorrect_answers'] = $test->incorrect_answers;
-        $answer['correct_answers'] = $test->correct_answers;
-        $answer['points'] = $test->points;
-        $help = ($test->needHelp === true)? 1 : 0;
-        $answer['needHelp'] = $help;
+        $answer['correct_answers']   = $test->correct_answers;
+        $answer['points']            = $test->points;
+        $help                        = ($test->needHelp === true) ? 1 : 0;
+        $answer['needHelp']          = $help;
 
         return $answer;
     }
@@ -48,13 +48,15 @@ class TestsController extends Controller
     public function goToLevel($levelId){
         $test = $this->getLevelData($levelId);
 
-        return view('level', ['data' => [
-            'levelId'  =>  $levelId,
-            'name'     =>  $test['name'],
-            'brefing'  =>  $test['brefing'],
-            'needHelp' =>  $test['needHelp'],
-            'points'   =>  $test['points']
-        ]]);
+        return view('level', [
+            'data' => [
+                'levelId'  => $levelId,
+                'name'     => $test['name'],
+                'brefing'  => $test['brefing'],
+                'needHelp' => $test['needHelp'],
+                'points'   => $test['points'],
+            ],
+        ]);
     }
 
     /**
@@ -62,19 +64,21 @@ class TestsController extends Controller
      *
      * @param $levelId
      */
-    public function goToLevelAnswers($levelId){
-        $test = $this->getLevelData($levelId);
+    public function goToLevelAnswers($levelId) {
+        $test              = $this->getLevelData($levelId);
         $incorrect_answers = json_decode($test['incorrect_answers'], 1);
         $correct_answers   = json_decode($test['correct_answers'], 1);
         $anwers            = array_merge($incorrect_answers, $correct_answers);
         shuffle($anwers);
 
-        return view('levelAnswers', ['data' => [
-            'name'               =>  $test['name'],
-            'question'           =>  $test['question'],
-            'answers'            =>  $anwers,
-            'incorrect_answers'  =>  json_decode($test['incorrect_answers'], 1),
-            'correct_answers'    =>  json_decode($test['correct_answers'], 1),
-        ]]);
+        return view('levelAnswers', [
+            'data' => [
+                'name'              => $test['name'],
+                'question'          => $test['question'],
+                'answers'           => $anwers,
+                'incorrect_answers' => json_decode($test['incorrect_answers'], 1),
+                'correct_answers'   => json_decode($test['correct_answers'], 1),
+            ],
+        ]);
     }
 }
