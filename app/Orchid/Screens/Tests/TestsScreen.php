@@ -158,7 +158,6 @@ class TestsScreen extends Screen
                                     ->method('changeTest', [
                                         'id' => $test->id,
                                     ]),
-//                                    ->route('platform.tests.edit', $test->id),
 
                                 Button::make('Удалить')
                                     ->icon('trash')
