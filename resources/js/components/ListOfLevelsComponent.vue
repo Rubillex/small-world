@@ -2,12 +2,13 @@
 <div>
     Выбор уровня
     <br>
-    <template v-for="(item, index) in levelData">
+    <div v-for="(item, index) in levelData">
         <div>
             <button v-on:click="goToLevel(index)">{{ item }}</button>
             <br>
         </div>
-    </template>
+    </div>
+    <button v-on:click="goToProfile()"></button>
 </div>
 </template>
 
@@ -41,8 +42,14 @@ export default {
                 })
                 .catch(err => console.log(err));
         },
+
         async goToLevel(levelId){
             await this.$router.push({path: '/level/' + levelId});
+            router.go(0);
+        },
+
+        async goToProfile() {
+            await this.$router.push({path: '/'});
             router.go(0);
         }
     }
