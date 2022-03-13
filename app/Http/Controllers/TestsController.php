@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Auth;
 class TestsController extends Controller
 {
     /**
-     * Получить список уровней
+     * Возвращает страницу со списком уровней
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function getlevels(){
+    public function getlevels() {
+        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
         $tests = Test::all()->pluck('name', 'id');
 
-        return json_encode(['answer' => json_encode($tests)]);
+        return view('listOfLevels', ['data' => ['levelData' => $tests]]);
     }
 
     /**

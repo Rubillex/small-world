@@ -23,12 +23,12 @@ Route::get('/home',                  [HomeController::class, 'index'])->name('ho
 Route::get('/login',                 [HomeController::class, 'login']);
 Route::get('/register',              [HomeController::class, 'register']);
 Route::get('/game',                  [HomeController::class, 'homePage']);
-Route::get('/levels',                [HomeController::class, 'levels']);
 
 Route::post('/api/start-session',          [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
 Route::post('/api/logout',                 [GameController::class, 'logOut']);
 
+Route::get('/levels',                [TestsController::class, 'getLevels']);
 Route::get('/level/{number}',        [TestsController::class, 'goToLevel']);
 Route::get('/level/{number}/answer', [TestsController::class, 'goToLevelAnswers']);
 

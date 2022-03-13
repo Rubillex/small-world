@@ -62,16 +62,5 @@ class HomeController extends Controller {
         return view('register')->with('data', ['page' => 'register']);
     }
 
-    /**
-     * Возвращает страницу со списком уровней
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function levels() {
-        if (Auth::check()) {
-            return view('listOfLevels')->with('data', ['page' => 'levels']);
-        } else {
-            return view('index')->with('data', ['page' => 'index']);
-        }
-    }
+
 }
