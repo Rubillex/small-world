@@ -40,6 +40,7 @@ class HomeController extends Controller {
      */
     public function homePage(): \Illuminate\Contracts\View\View {
         $user = User::find(Auth::id());
+        if (!$user) return view('index')->with('data', ['page' => 'index']);
 
         return view('game', ['data' => ['userDifficult' => $user->complexity]]);
     }
