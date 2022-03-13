@@ -2,9 +2,9 @@
 <div>
     Выбор уровня
     <br>
-    <template v-for="item in levelData">
+    <template v-for="(item, index) in levelData">
         <div>
-            <button v-on:click="goToLevel(item)">{{ item }}</button>
+            <button v-on:click="goToLevel(index)">{{ item }}</button>
             <br>
         </div>
     </template>
@@ -49,7 +49,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

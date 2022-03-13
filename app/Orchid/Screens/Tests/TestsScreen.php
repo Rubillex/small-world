@@ -100,7 +100,7 @@ class TestsScreen extends Screen
                     ])
                     ->fields([
                         'answers' => Input::make(),
-                        'correct' =>  CheckBox::make()->sendTrueOrFalse(),
+                        'correct' => CheckBox::make()->sendTrueOrFalse(),
                     ]),
                 Input::make('points')->required()->title('Количество очков за тест'),
                 CheckBox::make('needHelp')->title('Требует проверки преподователя')->sendTrueOrFalse(),

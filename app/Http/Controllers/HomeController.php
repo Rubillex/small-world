@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 
+/**
+ * Отвечает за переходы по страницам.
+ */
 class HomeController extends Controller {
     /**
      * Create a new controller instance.
