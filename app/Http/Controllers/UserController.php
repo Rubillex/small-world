@@ -20,6 +20,18 @@ class UserController extends Controller
     public function changeComplexity($complexity) {
         $user             = User::find(Auth::id());
         $user->complexity = $complexity;
+        $user->lifes      = $complexity;
+        $user->save();
+
+        return ['success' => true];
+    }
+
+    /**
+     * Устанавливаем жизни пользователю
+     */
+    public function changeLifes($lifes) {
+        $user             = User::find(Auth::id());
+        $user->lifes      = $lifes;
         $user->save();
 
         return ['success' => true];

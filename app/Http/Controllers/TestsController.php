@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Test;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Отвечает за работу с тестами.
@@ -71,11 +73,14 @@ class TestsController extends Controller
         $anwers            = array_merge($incorrect_answers, $correct_answers);
         shuffle($anwers);
 
+        $userLifes = User::find(Auth::id())->lifes;
+
         return view('levelAnswers', [
             'data' => [
                 'name'              => $test['name'],
                 'question'          => $test['question'],
                 'answers'           => $anwers,
+                'userLifes'         => $userLifes,
                 'incorrect_answers' => json_decode($test['incorrect_answers'], 1),
                 'correct_answers'   => json_decode($test['correct_answers'], 1),
             ],
