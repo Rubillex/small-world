@@ -44,6 +44,10 @@ class HomeController extends Controller {
         return view('game', ['data' => ['userDifficult' => $user->complexity]]);
     }
 
+    public function mainMenu() {
+        return view('mainMenu')->with('data', ['page' => 'mainMenu']);
+    }
+
     /**
      * Возвращает страницу логина
      *

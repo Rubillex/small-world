@@ -11,9 +11,10 @@ $page-gutter: 120px;
 $primary-background-color: #4C3375;
 
 body {
-    background-image: url("../img/pattern.svg");
+    background-image: url("../img/frame.svg");
     background-size: 2%;
     background-color: $primary-background-color;
+    box-sizing: border-box;
 }
 
 .page-content {
