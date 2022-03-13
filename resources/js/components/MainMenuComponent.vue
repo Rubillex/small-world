@@ -17,7 +17,7 @@
                         вход
                     </button>
                 </div>
-                <img src="resources/img/main_cat.svg" alt="а котека то нет">
+                <img src="../../../public/images/main_cat.svg" alt="а котека то нет">
             </div>
         </div>
     </div>

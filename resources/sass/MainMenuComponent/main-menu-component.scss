@@ -1,2 +1,40 @@
 @import "resources/sass/_variables.scss";
 
+
+.content {
+    max-width: 1200px;
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        max-height: 450px;
+
+        &__img {
+            width: 300px;
+        }
+    }
+
+    &__mid {
+        background-color: #f0f0f0;
+        height: 800px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        &__title {
+            font-size: 76px;
+            line-height: 80px;
+            color: #4C3375;
+        }
+
+        &__description {
+            margin-top: 20px;
+            margin-left: 160px;
+            margin-right: 160px;
+            font-size: 34px;
+            line-height: 43px;
+        }
+    }
+}

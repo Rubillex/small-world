@@ -2,19 +2,45 @@
     <div class="content">
         <div class="content__top">
             <div class="container">
-                <p class="game__name__title">
+                <p class="content__top__title">
                     название игры
                 </p>
-                <p class="game__name__description">
+                <p class="content__top__description">
                     Помогите котенку стать инженером-энергетиком!
                 </p>
-                <div class="button__container">
-                    <button class="go" v-on:click="login()">Войти</button>
+                <div class="content__button">
+                    <button class="content__button__login" v-on:click="login()">Войти</button>
                     <br>
-                    <button v-on:click="register()">Зарегистрироваться</button>
+                    <button class="content__button__register" v-on:click="register()">Зарегистрироваться</button>
                 </div>
-                <img src="" alt="а котека то нет">
+                <img class="content__top__img" src="/images/main_cat.svg" alt="а котека то нет">
             </div>
+        </div>
+        <div class="content__mid">
+            <h2 class="content__mid__title">
+                Привет, студент!
+            </h2>
+            <p class="content__mid__description">
+                Если ты здесь, значит из тебя в будущем может получится отличный инженер энергетик. Возможно, ты ещё
+                не так много знаешь об этой науке, но наши котята-инженеры хотят немного поднять твой уровень.
+            </p>
+            <p class="content__mid__description">
+                Сейчас ты получишь доступ к секретной системе обучения студентов-энергетиков. Эта система воспитала
+                уже не одно поколение настоящих профессионалов. А чтобы тебе не было скучно, мы дадим тебе пушистого
+                товарища.
+            </p>
+            <p class="content__mid__description">
+                Вместе веселее!
+            </p>
+        </div>
+        <div class="content__bottom">
+
+        </div>
+        <div class="content__bottom">
+
+        </div>
+        <div class="content__bottom">
+
         </div>
     </div>
 </template>
@@ -50,18 +76,6 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-.container {
-    max-width: 1660px;
-}
+<style scoped>
 
-.content__top {
-    height: 840px;
-    /*background-image: url("../assets/Frame.png");*/
-    background-color: #4C3375;
-}
-
-.content {
-
-}
 </style>
