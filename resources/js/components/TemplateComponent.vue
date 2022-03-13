@@ -11,7 +11,7 @@
                 </div>
                 <div class="difficult">
                     <div class="difficult-wrapper">
-                        <button v-on:click="changeDifficult(0)" class="difficult__button start">
+                        <button v-on:click="changeDifficult(1)" class="difficult__button start">
                             <span class="difficult__button-content">
                                 <span class="difficult__button-header">Начинающий</span>
                                 <span class="difficult__button-text">Этот котик только начинает свой путь в энергетике, поэтому у него есть целых три попытки!</span>
@@ -22,8 +22,8 @@
                             </span>
 
                         </button>
-                        <button v-on:click="changeDifficult(1)" class="difficult__button medium">Продвинутый</button>
-                        <button v-on:click="changeDifficult(2)" class="difficult__button hard">Эксперт</button>
+                        <button v-on:click="changeDifficult(2)" class="difficult__button medium">Продвинутый</button>
+                        <button v-on:click="changeDifficult(3)" class="difficult__button hard">Эксперт</button>
                     </div>
                 </div>
             </div>

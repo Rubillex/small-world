@@ -98,6 +98,10 @@ class TestsController extends Controller
         $test = Test::where('id', $levelId)->first();
         $userId = Auth::id();
 
+        $user = User::find(Auth::id());
+        $user->points = $user->points + $user->complexity * 1;
+        $user->save();
+
         $usersComplited = json_decode($test->userComplited, 1);
         if ($usersComplited === null) {
             $test->userComplited = json_encode([$userId]);
