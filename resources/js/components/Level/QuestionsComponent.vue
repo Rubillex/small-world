@@ -19,7 +19,6 @@
 
 <script>
 import router from "../../router";
-import Vue from "vue";
 const {marked} = require("marked");
 export default {
     name: "QuestionsComponent",
@@ -29,6 +28,7 @@ export default {
     data: () => {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            levelId: '',
             name: '',
             correct_answers: [],
             incorrect_answers: [],
@@ -45,6 +45,9 @@ export default {
     methods: {
         async clickAnswer(answer) {
             if (this.data.correct_answers.includes(answer)) {
+                await axios.post('/api/test-comlpited/' + this.data.levelId)
+                    .then()
+                    .catch(err => console.log(err));
                 alert('Правильно!');
             } else {
                 this.userLifes = this.userLifes - 1;

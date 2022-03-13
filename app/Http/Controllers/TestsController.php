@@ -80,6 +80,7 @@ class TestsController extends Controller
 
         return view('levelAnswers', [
             'data' => [
+                'levelId'           => $levelId,
                 'name'              => $test['name'],
                 'question'          => $test['question'],
                 'answers'           => $anwers,
@@ -88,5 +89,24 @@ class TestsController extends Controller
                 'correct_answers'   => json_decode($test['correct_answers'], 1),
             ],
         ]);
+    }
+
+    /**
+     * Присваивает тесту юзера который его выполнил
+     */
+    public function addUserToTestComplited($levelId) {
+        $test = Test::where('id', $levelId)->first();
+        $userId = Auth::id();
+
+        $usersComplited = json_decode($test->userComplited, 1);
+        if ($usersComplited === null) {
+            $test->userComplited = json_encode([$userId]);
+        } else {
+            $usersComplited[] = $userId;
+            $test->userComplited = json_encode($usersComplited);
+        }
+        $test->save();
+
+        return true;
     }
 }

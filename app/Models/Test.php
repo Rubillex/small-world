@@ -23,6 +23,7 @@ class Test extends Model
         'correct_answers',
         'points',
         'needHelp',
+        'usersComplited',
     ];
 
     /**
@@ -45,6 +46,7 @@ class Test extends Model
         'incorrect_answers'       => 'array',
         'correct_answers'         => 'array',
         'needHelp'                => 'bool',
+        'usersComplited'          => 'array',
     ];
 
     /**
@@ -75,5 +77,6 @@ class Test extends Model
         'incorrect_answers',
         'points',
         'needHelp',
+        'usersComplited',
     ];
 }

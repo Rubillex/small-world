@@ -28,17 +28,18 @@ Route::post('/api/start-session',          [GameController::class, 'startSession
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
 Route::post('/api/logout',                 [GameController::class, 'logOut']);
 
-Route::get('/levels',                [TestsController::class, 'getLevels']);
-Route::get('/level/{number}',        [TestsController::class, 'goToLevel']);
-Route::get('/level/{number}/answer', [TestsController::class, 'goToLevelAnswers']);
+Route::get('/levels',                      [TestsController::class, 'getLevels']);
+Route::get('/level/{number}',              [TestsController::class, 'goToLevel']);
+Route::get('/level/{number}/answer',       [TestsController::class, 'goToLevelAnswers']);
 
 Route::get('/game/{id}', [GameController::class, 'connectToGame']);
 
 Route::post('/api/change-difficult/{complexity}', [UserController::class, 'changeComplexity']);
 Route::post('/api/change-lifes/{lifes}',          [UserController::class, 'changeLifes']);
 
-Route::post('/api/getlevels',              [TestsController::class, 'getlevels']);
-Route::post('/api/getlevelData/{levelId}', [TestsController::class, 'getLevelData']);
+Route::post('/api/getlevels',                [TestsController::class, 'getlevels']);
+Route::post('/api/getlevelData/{levelId}',   [TestsController::class, 'getLevelData']);
+Route::post('/api/test-comlpited/{levelId}', [TestsController::class, 'addUserToTestComplited']);
 
 
 
