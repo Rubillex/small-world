@@ -4,11 +4,11 @@
         <p v-for="n in userLifes">Я жизнь</p>
         <h1>Тема : {{data.name}}</h1>
         <span v-html="markDown(data.question)"></span>
-        <div v-for="answer in data.answers">
+        <div v-for="answer in answers">
                 <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
                 <br>
         </div>
-        <button v-on:click="goToLevels()">Назад к уровням</button>
+            <button v-on:click="goToLevels()">Назад к уровням</button>
         </div>
         <div  v-else class="no-lifes">
             GG
@@ -39,6 +39,7 @@ export default {
     },
     created() {
         this.userLifes = this.data.userLifes;
+        this.answers = this.data.answers;
         console.log(this.data);
     },
 
@@ -48,6 +49,11 @@ export default {
                 await axios.post('/api/test-comlpited/' + this.data.levelId)
                     .then()
                     .catch(err => console.log(err));
+                if (this.data.correct_answers.length > 1) {
+                    this.data.correct_answers.splice(this.data.correct_answers.indexOf(answer), 1);
+                }
+                this.answers.splice(this.answers.indexOf(answer), 1, 'правильно');
+
                 alert('Правильно!');
             } else {
                 this.userLifes = this.userLifes - 1;
@@ -75,3 +81,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.active {
+    border: 1px solid red;
+}
+</style>
