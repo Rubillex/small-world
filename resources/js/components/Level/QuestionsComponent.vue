@@ -47,7 +47,7 @@ export default {
         },
 
         async goToLevel(levelId){
-            await this.$router.push({path: '/level/' + levelId});
+            await this.$router.push({path: '/levels/'});
             router.go(0);
         }
     }
