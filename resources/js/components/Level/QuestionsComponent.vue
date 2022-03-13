@@ -81,9 +81,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.active {
-    border: 1px solid red;
-}
-</style>
