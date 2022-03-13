@@ -8,8 +8,8 @@ class ChatController extends Controller
 {
     public function createChat() {
         $chatMessage = [
-            'name' => 'piska',
-            'message' => 'huy',
+            'name' => 'dmitry',
+            'message' => 'privet',
         ];
         event(new \App\Events\LoadChat($chatMessage));
     }

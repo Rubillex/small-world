@@ -29,6 +29,7 @@
   "dependencies": {
     "express": "^4.17.3",
     "ioredis": "^4.28.5",
+    "marked": "^4.0.12",
     "socket.io": "^4.4.1",
     "vue-router": "^3.5.3",
     "ws": "^8.5.0"

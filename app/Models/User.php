@@ -21,6 +21,7 @@ class User extends Authenticatable
         'complexity',
         'progress',
         'points',
+        'lifes',
         'fio',
         'group',
     ];
@@ -55,6 +56,7 @@ class User extends Authenticatable
         'id',
         'name',
         'email',
+        'lifes',
         'permissions',
     ];
 
@@ -78,22 +80,8 @@ class User extends Authenticatable
         'id',
         'name',
         'email',
+        'lifes',
         'updated_at',
         'created_at',
     ];
-
-    protected function getComplexityAttribute($value) {
-        return $value;
-    }
-
-    /**
-     * Присвоить пользователю уровень сложности.
-     *
-     * @param double $value
-     * @return void
-     */
-    public function setComplexityAttribute(float $value)
-    {
-        $this->attributes['complexity'] = $value;
-    }
 }

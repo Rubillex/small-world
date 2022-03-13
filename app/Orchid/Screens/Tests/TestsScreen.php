@@ -14,6 +14,7 @@ use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
@@ -115,17 +116,17 @@ class TestsScreen extends Screen
                 Quill::make('brefing')
                     ->title('Брифинг')
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
-                Quill::make('question')
-                    ->title('Вопрос')
-                    ->toolbar(["text", "color", "header", "list", "format", "media"]),
+                SimpleMDE::make('question')
+                    ->title('Вопрос'),
                 Matrix::make('matrix')
                     ->columns([
                         'Ответ' => 'answers',
                         'Правильный' => 'correct',
                     ])
+                    ->required()
                     ->fields([
                         'answers' => Input::make(),
-                        'correct' =>  CheckBox::make()->sendTrueOrFalse(),
+                        'correct' => CheckBox::make()->sendTrueOrFalse(),
                     ]),
                 Input::make('points')->required()->title('Количество очков за тест'),
                 CheckBox::make('needHelp')->title('Требует проверки преподователя')->sendTrueOrFalse(),
