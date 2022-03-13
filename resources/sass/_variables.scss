@@ -5,3 +5,18 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$page-gutter: 120px;
+
+$primary-background-color: #4C3375;
+
+body {
+    background-image: url("../img/pattern.svg");
+    background-size: 2%;
+    background-color: $primary-background-color;
+}
+
+.page-content {
+    margin-left:  $page-gutter;
+    margin-right: $page-gutter;
+}
