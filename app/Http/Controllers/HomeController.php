@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 
 /**
@@ -40,8 +39,8 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\View\View
      */
     public function homePage(): \Illuminate\Contracts\View\View {
-        $user = Auth::user();
-        //поправить исправления
+        $user = User::find(Auth::id());
+
         return view('game', ['data' => ['userDifficult' => $user->complexity]]);
     }
 
@@ -63,26 +62,5 @@ class HomeController extends Controller {
         return view('register')->with('data', ['page' => 'register']);
     }
 
-    /**
-     * Возвращает страницу со списком уровней
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
 
-    public function levels() {
-        if (Auth::check()) {
-            return view('listOfLevels')->with('data', ['page' => 'levels']);
-        } else {
-            return view('index')->with('data', ['page' => 'index']);
-        }
-    }
-
-    /**
-     * Возвращает страницу с выбранным уровнем
-     *
-     * @param $levelId
-     */
-    public function goToLevel($levelId){
-        return view('level')->with('data', ['levelId' => $levelId]);
-    }
 }

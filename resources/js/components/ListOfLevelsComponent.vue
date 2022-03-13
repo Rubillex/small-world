@@ -2,18 +2,18 @@
 <div>
     Выбор уровня
     <br>
-    <template v-for="(item, index) in levelData">
+    <div v-for="(item, index) in data.levelData">
         <div>
             <button v-on:click="goToLevel(index)">{{ item }}</button>
             <br>
         </div>
-    </template>
+    </div>
+    <button v-on:click="goToProfile()">Верните меня в профиль</button>
 </div>
 </template>
 
 <script>
 import router from "../router";
-
 export default {
     name: "LevelsComponent",
     components: {},
@@ -26,24 +26,15 @@ export default {
             levelData: [],
         }
     },
-    created() {
-        this.getData();
-    },
+
     methods: {
-        async getData(){
-            await axios.post('/api/getlevels')
-                .then(response => {
-                    if (!response.data.error) {
-                        this.levelData = JSON.parse(response.data.answer);
-                        console.log(this.levelData);
-                    } else {
-                        console.log(response.data.error);
-                    }
-                })
-                .catch(err => console.log(err));
-        },
         async goToLevel(levelId){
             await this.$router.push({path: '/level/' + levelId});
+            router.go(0);
+        },
+
+        async goToProfile() {
+            await this.$router.push({path: '/'});
             router.go(0);
         }
     }

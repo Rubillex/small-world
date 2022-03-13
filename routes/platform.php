@@ -39,6 +39,13 @@ Route::screen('/userss', \App\Orchid\Screens\UsersTable::class)
 Route::screen('/tests', \App\Orchid\Screens\Tests\TestsScreen::class)
     ->name('platform.tests');
 
+//Route::screen('/tests/{id}/edit', \App\Orchid\Screens\Tests\EditTestScreen::class)
+//    ->name('platform.tests.edit')
+//    ->breadcrumbs(function (Trail $trail, $id) {
+//        return $trail
+//            ->parent('platform.tests')
+//            ->push('Tests', route('platform.tests.edit', $id));
+//    });
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

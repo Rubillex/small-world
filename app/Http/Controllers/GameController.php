@@ -24,16 +24,17 @@ class GameController extends Controller {
         $userId = Auth::id();
         try {
             //todo написать доку для $game
-            $game = Game::create();
+            $game        = Game::create();
             $game->users = json_encode([$userId]);
             $game->save();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return json_encode(['error' => $e]);
         }
+
         return json_encode(['id' => $game->id]);
     }
 
-    public function logOut(){
+    public function logOut() {
         Auth::logout();
     }
 
@@ -43,7 +44,7 @@ class GameController extends Controller {
      */
     public function connectToGame($id) {
         //todo протащить это во вью :) а на сегодня всё
-        if (!Auth::check()){
+        if (!Auth::check()) {
             return view('index')->with('data', ['page' => 'index']);
         }
 
@@ -55,15 +56,15 @@ class GameController extends Controller {
      */
     public function addUserToLobby($id) {
         try{
-            $lobby = Game::where('id', $id)->firstOrFail();
+            $lobby  = Game::where('id', $id)->firstOrFail();
             $userId = Auth::id();
-            $users = json_decode($lobby->users);
+            $users  = json_decode($lobby->users);
             if (count($users) > 4) return json_encode(['error' => 'lobby has fulled']);
             foreach ($users as $user) {
                 if ($user === $userId) return json_encode(['id' => $lobby->id]);
             }
 
-            $users[] = $userId;
+            $users[]      = $userId;
             $lobby->users = json_encode($users);
             $lobby->save();
 

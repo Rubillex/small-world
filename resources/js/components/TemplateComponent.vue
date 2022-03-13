@@ -1,16 +1,16 @@
 <template>
     <div class="template-page">
         <div v-if="data.userDifficult === '-1'" class="choose-difficult">
-            <h1>Привет! Выбери уровень сложности:</h1>
-                <ul>
-                    <li><button v-on:click="changeDifficult(0)">Начинающий</button></li>
-                    <li><button v-on:click="changeDifficult(1)">Продвинутый</button></li>
-                    <li><button v-on:click="changeDifficult(2)">Эксперт</button></li>
-                </ul>
+            <h1>Выбери котика-инженера!</h1>
+            <p>Выбирая себе компаньона помни, что от него напрямую зависит сложность прохождения игры. Если нет уверенности в выборе, прочти <a href="/home">правила игры</a>> ещё раз.</p>
+             <div class="page-content"></div>
+            <button v-on:click="changeDifficult(0)">Начинающий</button><
+            <button v-on:click="changeDifficult(1)">Продвинутый</button>
+            <button v-on:click="changeDifficult(2)">Эксперт</button><
         </div>
         <div v-else class="go-to-game">
             <h2>Страртовая</h2>
-            <button v-on:click="newGame">Пошли играть!</button>
+            <button v-on:click="newGame()">Пошли играть!</button>
         </div>
 
         <button v-on:click="logOut()">Выйти</button>

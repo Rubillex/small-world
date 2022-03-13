@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\TestsController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,24 +18,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',               [HomeController::class, 'index']);
-Route::get('/home',           [HomeController::class, 'index'])->name('home');
-Route::get('/login',          [HomeController::class, 'login']);
-Route::get('/register',       [HomeController::class, 'register']);
-Route::get('/game',           [HomeController::class, 'homePage']);
-Route::get('/levels',         [HomeController::class, 'levels']);
-Route::get('/level/{number}', [HomeController::class, 'goToLevel']);
+Route::get('/',                      [HomeController::class, 'index']);
+Route::get('/home',                  [HomeController::class, 'index'])->name('home');
+Route::get('/login',                 [HomeController::class, 'login']);
+Route::get('/register',              [HomeController::class, 'register']);
+Route::get('/game',                  [HomeController::class, 'homePage']);
 
 Route::post('/api/start-session',          [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
 Route::post('/api/logout',                 [GameController::class, 'logOut']);
 
+Route::get('/levels',                      [TestsController::class, 'getLevels']);
+Route::get('/level/{number}',              [TestsController::class, 'goToLevel']);
+Route::get('/level/{number}/answer',       [TestsController::class, 'goToLevelAnswers']);
+
 Route::get('/game/{id}', [GameController::class, 'connectToGame']);
 
 Route::post('/api/change-difficult/{complexity}', [UserController::class, 'changeComplexity']);
+Route::post('/api/change-lifes/{lifes}',          [UserController::class, 'changeLifes']);
 
-Route::post('/api/getlevels',              [TestsController::class, 'getlevels']);
-Route::post('/api/getlevelData/{levelId}', [TestsController::class, 'getLevelData']);
+Route::post('/api/getlevels',                [TestsController::class, 'getlevels']);
+Route::post('/api/getlevelData/{levelId}',   [TestsController::class, 'getLevelData']);
+Route::post('/api/test-comlpited/{levelId}', [TestsController::class, 'addUserToTestComplited']);
 
 
 
