@@ -14,7 +14,7 @@ class AddUsersComplitedToTestsTable extends Migration
     public function up()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->json('userComplited');
+            $table->json('userComplited')->default('null');
         });
     }
 
