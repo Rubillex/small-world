@@ -82,6 +82,7 @@ class TestsController extends Controller
         return view('levelAnswers', [
             'data' => [
                 'levelId'           => $levelId,
+                'points'            => $test['points'],
                 'name'              => $test['name'],
                 'question'          => $test['question'],
                 'answers'           => $anwers,
@@ -96,9 +97,13 @@ class TestsController extends Controller
     /**
      * Присваивает тесту юзера который его выполнил
      */
-    public function addUserToTestComplited($levelId) {
+    public function addUserToTestComplited($levelId, $points) {
         $test = Test::where('id', $levelId)->first();
         $userId = Auth::id();
+
+        $user = User::find(Auth::id());
+        $user->points = $user->points + $user->complexity * $points;
+        $user->save();
 
         $usersComplited = json_decode($test->userComplited, 1);
         if ($usersComplited === null) {

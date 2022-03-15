@@ -2,6 +2,63 @@
 @import 'variables';
 
 .template-page {
+    .choose-difficult {
+        margin-top: 198px;
+
+        .content-header {
+            font-family: $secondary-font-family;
+            font-size: 124px;
+            font-weight: 600;
+            text-align: center;
+
+            &__text-wrapper {
+                margin-left: 300px;
+                margin-right: 300px;
+            }
+            &__text {
+                margin-top: 45px;
+                font-size: 54px;
+                line-height: 75px;
+                font-weight: 400;
+                text-align: center;
+
+                a {
+                    color: $primary-text-color;
+                    text-decoration-color: $primary-text-color;
+                }
+            }
+        }
+
+        .difficult {
+            margin-top: 120px;
+            background-color: red;
+
+            .difficult-wrapper {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__button {
+                margin-left: 140px;
+                margin-right: 140px;
+
+            }
+
+            .start {
+                margin-top: 90px;
+                background-color: #73F4DB;
+            }
+
+            .medium {
+                background-color: #FF91AB;
+            }
+
+            .hard {
+                background-color: #4C3375;
+            }
+        }
+    }
+
     .container-header {
         display: flex;
         flex-direction: row;
