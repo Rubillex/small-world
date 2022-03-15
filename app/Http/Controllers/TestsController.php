@@ -73,6 +73,7 @@ class TestsController extends Controller
         $test              = $this->getLevelData($levelId);
         $incorrect_answers = json_decode($test['incorrect_answers'], 1);
         $correct_answers   = json_decode($test['correct_answers'], 1);
+        $needHelp          = $test['needHelp'];
         $anwers            = array_merge($incorrect_answers, $correct_answers);
         shuffle($anwers);
 
@@ -84,6 +85,7 @@ class TestsController extends Controller
                 'name'              => $test['name'],
                 'question'          => $test['question'],
                 'answers'           => $anwers,
+                'needHelp'          => $needHelp,
                 'userLifes'         => $userLifes,
                 'incorrect_answers' => json_decode($test['incorrect_answers'], 1),
                 'correct_answers'   => json_decode($test['correct_answers'], 1),

@@ -65,24 +65,30 @@ class TestsScreen extends Screen
     /**
      * Сохранение теста в БД
      */
-    public function createTest(Request $request): void
-    {
-        $matrix = $request->matrix; //матрица ответов
-        foreach ($matrix as $answer){//проверяем, если правильный, то в массив с правильными
-            if ($answer['correct'] === '1')
-                 $correct[] = $answer['answers'];
-            else $incorrect[] = $answer['answers'];
-        }
+    public function createTest(Request $request): void {
         $help = $request->needHelp === '1';//пыха даёт 1, вместо true, поэтому такая вот штука теперь живёт здесь
+        if ($help) {
+            // Если ручная проверка, то мы не собираем правильные и неправильные ответы
+            $correct[]   = [];
+            $incorrect[] = [];
+        } else {
+            //матрица ответов
+            $matrix = $request->matrix;
+            //проверяем, если правильный, то в массив с правильными
+            foreach ($matrix as $line) {
+                if ($line['correct'] === '1') $correct[] = $line['answers']; else $incorrect[] = $line['answers'];
+            }
+        }
+        // Отправляем тест в БД
         Test::create([
-            'name' => $request->name,
-            'brefing' => $request->brefing,
-            'question' => $request->question,
+            'name'              => $request->name,
+            'brefing'           => $request->brefing,
+            'question'          => $request->question,
             'incorrect_answers' => json_encode($incorrect),
-            'correct_answers' => json_encode($correct),
-            'points' => $request->points,
-            'needHelp' => $help,
-        ]);//отправляем тест в БД
+            'correct_answers'   => json_encode($correct),
+            'points'            => $request->points,
+            'needHelp'          => $help,
+        ]);
     }
 
 
@@ -94,6 +100,7 @@ class TestsScreen extends Screen
     {
         $test = Test::find($id);
         $test->delete();
+
     }
 
     public function changeTest($id): iterable
@@ -118,6 +125,7 @@ class TestsScreen extends Screen
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
                 SimpleMDE::make('question')
                     ->title('Вопрос'),
+                CheckBox::make('needHelp')->title('Ответ в виде файла')->sendTrueOrFalse(),
                 Matrix::make('matrix')
                     ->columns([
                         'Ответ' => 'answers',
@@ -129,7 +137,6 @@ class TestsScreen extends Screen
                         'correct' => CheckBox::make()->sendTrueOrFalse(),
                     ]),
                 Input::make('points')->required()->title('Количество очков за тест'),
-                CheckBox::make('needHelp')->title('Требует проверки преподователя')->sendTrueOrFalse(),
             ]))->title('Создаем тест')
                 ->applyButton('Создать')
                 ->closeButton('Закрыть')
