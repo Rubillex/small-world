@@ -2,7 +2,6 @@
 
 
 .content {
-    max-width: 1200px;
 
     &__top {
         display: flex;
@@ -15,15 +14,15 @@
 
         &__title {
             color: #FFFFFF;
-            font-size: 144px;
-            line-height: 180px;
+            font-size: 124px;
+            line-height: 150px;
             font-weight: bold;
             font-family: $secondary-font-family;
         }
 
         &__description {
             color: #FFFFFF;
-            font-size: 64px;
+            font-size: 44px;
             line-height: 80px;
             font-family: $primary-font-family;
             font-weight: bold;
@@ -54,7 +53,7 @@
         }
 
         &__img {
-            width: 75%;
+            width: 55%;
             margin-bottom: -300px;
         }
     }
