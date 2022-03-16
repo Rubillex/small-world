@@ -3,15 +3,16 @@
         <div class="content__top">
             <div class="container">
                 <p class="content__top__title">
-                    название игры
+                    ENERGY
+                    CAT GAME
                 </p>
                 <p class="content__top__description">
                     Помогите котенку стать инженером-энергетиком!
                 </p>
-                <div class="content__button">
-                    <button class="content__button__login" v-on:click="login()">Войти</button>
+                <div class="content__top-button">
+                    <button class="content__top-button__register" v-on:click="register()">регистрация</button>
                     <br>
-                    <button class="content__button__register" v-on:click="register()">Зарегистрироваться</button>
+                    <button class="content__top-button__login" v-on:click="login()">вход</button>
                 </div>
                 <img class="content__top__img" src="/images/main_cat.svg" alt="а котека то нет">
             </div>

@@ -8,7 +8,42 @@
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        max-height: 450px;
+        margin-left: 160px;
+        margin-right: 160px;
+
+        &__title {
+            color: #FFFFFF;
+            font-size: 144px;
+            line-height: 180px;
+        }
+
+        &__description {
+            color: #FFFFFF;
+            font-size: 64px;
+            line-height: 80px;
+        }
+
+        &-button {
+            display: flex;
+            flex-direction: row;
+            text-transform: uppercase;
+            font-size: 28px;
+            line-height: 36px;
+            &__register {
+                background-color: #FFD600;
+                height: 100px;
+                width: 330px;
+                border-radius: 19px;
+            }
+
+            &__login {
+                height: 100px;
+                width: 220px;
+                margin-left: 100px;
+                background-color: #FF91AB;
+                border-radius: 19px;
+            }
+        }
 
         &__img {
             width: 300px;
