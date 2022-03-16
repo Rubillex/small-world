@@ -11,16 +11,22 @@
         margin-left: 160px;
         margin-right: 160px;
 
+        max-height: 840px;
+
         &__title {
             color: #FFFFFF;
             font-size: 144px;
             line-height: 180px;
+            font-weight: bold;
+            font-family: $secondary-font-family;
         }
 
         &__description {
             color: #FFFFFF;
             font-size: 64px;
             line-height: 80px;
+            font-family: $primary-font-family;
+            font-weight: bold;
         }
 
         &-button {
@@ -29,6 +35,8 @@
             text-transform: uppercase;
             font-size: 28px;
             line-height: 36px;
+            margin-bottom: -50px;
+
             &__register {
                 background-color: #FFD600;
                 height: 100px;
@@ -46,19 +54,21 @@
         }
 
         &__img {
-            width: 300px;
+            width: 75%;
+            margin-bottom: -300px;
         }
     }
 
     &__mid {
+        width: 100%;
         background-color: #f0f0f0;
-        height: 800px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
 
         &__title {
+            margin-top: 200px;
             font-size: 76px;
             line-height: 80px;
             color: #4C3375;

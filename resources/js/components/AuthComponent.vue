@@ -14,8 +14,8 @@
                     <br>
                     <button class="content__top-button__login" v-on:click="login()">вход</button>
                 </div>
-                <img class="content__top__img" src="/images/main_cat.svg" alt="а котека то нет">
             </div>
+            <img class="content__top__img" src="/images/main_cat.svg" alt="а котека то нет">
         </div>
         <div class="content__mid">
             <h2 class="content__mid__title">
