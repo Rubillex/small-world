@@ -72,6 +72,7 @@ class TestsScreen extends Screen
             $correct[]   = [];
             $incorrect[] = [];
         } else {
+
             //матрица ответов
             $matrix = $request->matrix;
             //проверяем, если правильный, то в массив с правильными

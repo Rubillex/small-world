@@ -21,7 +21,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import router from "../../router";
 const {marked} = require("marked");
