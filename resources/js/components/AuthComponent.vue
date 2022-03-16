@@ -35,13 +35,51 @@
             </p>
         </div>
         <div class="content__bottom">
-
+            <h2 class="content__bottom__title">
+                Познакомься с котятами
+                <br>
+                -инженерами
+            </h2>
+        </div>
+        <div class="content__bottom-level">
+            <div class="content__bottom-level-cart">
+                <img class="content__bottom-level-cart__img" src="/images/lite.svg" alt="#">
+                <h4 class="content__bottom-level-cart__title">
+                    Новичок
+                </h4>
+                <p class="content__bottom-level-cart__description">
+                    Заветной мечтой этого малыша была энергетика. Он всегда хотел открыть собственный источник чистой
+                    энергии. Вот незадача - этот котик совсем новичок! Но он уверен, что вместе вы сможете изучить
+                    что-то новое.
+                </p>
+            </div>
+            <div class="content__bottom-level-cart">
+                <img class="content__bottom-level-cart__img" src="/images/medium.svg" alt="#">
+                <h4 class="content__bottom-level-cart__title">
+                    Продвинутый
+                </h4>
+                <p class="content__bottom-level-cart__description">
+                    У него папа-энергетик, у него мама-энергетик, да он сам у себя энергетик! С этим пушистым шутки
+                    плохи, он настроен серьёзно и готов сотрудничать с тобой только в том случае, если ты сам не
+                    оплошаешь.
+                </p>
+            </div>
+            <div class="content__bottom-level-cart">
+                <img class="content__bottom-level-cart__img" src="/images/hard.svg" alt="#">
+                <h4 class="content__bottom-level-cart__title">
+                    Эксперт
+                </h4>
+                <p class="content__bottom-level-cart__description">
+                    Этот котенок не с нашей планеты . В его родной галактике он познал уже все области энергетики.
+                    Полосатый прибыл на обучение к Землянам на своей собственной ракете! Готов ли ты поделиться с ним
+                    своими знаниями?
+                </p>
+            </div>
         </div>
         <div class="content__bottom">
-
-        </div>
-        <div class="content__bottom">
-
+            <button class="content__bottom__button">
+                Я готов к игре!
+            </button>
         </div>
     </div>
 </template>

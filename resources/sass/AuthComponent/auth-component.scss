@@ -67,18 +67,85 @@
         text-align: center;
 
         &__title {
+            font-family: $secondary-font-family;
             margin-top: 200px;
             font-size: 76px;
             line-height: 80px;
+            font-weight: bold;
             color: #4C3375;
         }
 
         &__description {
+            font-family: $primary-font-family;
             margin-top: 20px;
-            margin-left: 160px;
-            margin-right: 160px;
+            margin-left: 200px;
+            margin-right: 200px;
             font-size: 34px;
             line-height: 43px;
+            font-weight: bold;
         }
     }
+
+    &__bottom {
+        color: #FFFFFF;
+        margin-left: 160px;
+        margin-right: 160px;
+        margin-top: 50px;
+        text-align: center;
+
+        &__title {
+            font-family: $secondary-font-family;
+            font-size: 76px;
+            line-height: 80px;
+            font-weight: bold;
+        }
+
+        &-level {
+            margin-top: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-left: 160px;
+            margin-right: 160px;
+            color: #FFFFFF;
+            font-family: $primary-font-family;
+
+
+            &-cart {
+                max-width: 350px;
+                text-align: center;
+
+                &__title {
+                    margin-top: 10px;
+                    font-size: 50px;
+                    line-height: 62px;
+                }
+
+                &__description {
+                    margin-top: 20px;
+                    font-size: 26px;
+                    line-height: 38px;
+                }
+
+                &__img {
+                    width: 350px;
+                }
+            }
+        }
+        &__button {
+            font-family: $secondary-font-family;
+            font-size: 60px;
+            line-height: 70px;
+            font-weight: bold;
+            background-color: #FFD600;
+            color: black;
+            width: 900px;
+            height: 120px;
+            border-radius: 19px;
+            margin-bottom: 100px;
+            text-align: center;
+        }
+
+    }
 }
+
