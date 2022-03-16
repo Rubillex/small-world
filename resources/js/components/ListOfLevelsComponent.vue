@@ -1,7 +1,11 @@
 <template>
     <div>
-        <div>
+        <div class="test-list">
             <nav-menu/>
+            <div class="test-select">
+                <h2 class="test-select__title">Выбор уровня</h2>
+                <img class="test-select__img" src="/images/main_cat.svg" alt="а котека то нет">
+            </div>
         </div>
         <div>
             Выбор уровня
