@@ -4,10 +4,15 @@
         <p v-for="n in userLifes">Я жизнь</p>
         <h1>Тема : {{data.name}}</h1>
         <span v-html="markDown(data.question)"></span>
-        <div v-for="answer in answers">
-                <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
-                <br>
-        </div>
+            <div v-if="needHelp == false">
+                <div v-for="answer in answers">
+                    <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
+                    <br>
+                </div>
+            </div>
+            <div v-else>
+                Прикрепите файл
+            </div>
             <button v-on:click="goToLevels()">Назад к уровням</button>
         </div>
         <div  v-else class="no-lifes">
@@ -16,7 +21,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import router from "../../router";
 const {marked} = require("marked");
@@ -33,6 +37,7 @@ export default {
             points: '',
             correct_answers: [],
             incorrect_answers: [],
+            needHelp: '',
             answers: [],
             question: '',
             userLifes: '',
@@ -41,7 +46,9 @@ export default {
     created() {
         this.userLifes = this.data.userLifes;
         this.answers = this.data.answers;
+        this.needHelp = this.data.needHelp;
         console.log(this.data);
+        console.log(this.needHelp);
     },
 
     methods: {
