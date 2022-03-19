@@ -25,6 +25,7 @@ Vue.component('start-game-component', require('./components/StartGameComponent')
 Vue.component('list-of-levels-component', require('./components/ListOfLevelsComponent').default);
 Vue.component('level-component', require('./components/Level/LevelComponent').default);
 Vue.component('question-component', require('./components/Level/QuestionsComponent').default);
+Vue.component('leader-board-component', require('./components/LeaderBoardComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -63,5 +63,7 @@ class HomeController extends Controller {
         return view('register')->with('data', ['page' => 'register']);
     }
 
-
+    public function leaderBoard(){
+        return view('leaderboard')->with('data', ['page' => 'leaderboard']);
+    }
 }
