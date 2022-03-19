@@ -5,7 +5,7 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 
 $primary-font-family: Roboto, sans-serif;
-$secondary-font-family: 'Exo 2', sans-serif;
+$secondary-font-family: Roboto, sans-serif;
 
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
@@ -29,4 +29,12 @@ body {
     color: $primary-text-color;
     margin-left:  $page-gutter;
     margin-right: $page-gutter;
+}
+
+.login-page {
+    margin-top: 25%;
+}
+
+.register-page {
+    margin-top: 15%;
 }
