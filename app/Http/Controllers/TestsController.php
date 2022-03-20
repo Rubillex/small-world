@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pictures;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Отвечает за работу с тестами.
@@ -109,11 +111,12 @@ class TestsController extends Controller
     public function addUserToTestComplited($levelId, $points) {
         $test = Test::where('id', $levelId)->first();
         $userId = Auth::id();
-
-        $user = User::find(Auth::id());
-        $user->points = $user->points + $user->complexity * $points;
-        $user->save();
-
+        //Если тест без ручной проверки, то даём баллы
+        if (!$test->needHelp){
+            $user = User::find(Auth::id());
+            $user->points = $user->points + $user->complexity * $points;
+            $user->save();
+        }
         $usersComplited = json_decode($test->userComplited, 1);
         if ($usersComplited === null) {
             $test->userComplited = json_encode([$userId]);
@@ -124,5 +127,16 @@ class TestsController extends Controller
         $test->save();
 
         return true;
+    }
+
+    public function uploadFile(Request $request, $testId){
+
+        $path = $request->file('image')->store('images', 'public');
+        $picture = Pictures::create();
+        $currentUser = User::find(Auth::id());
+        $picture->user_id = $currentUser->id;
+        $picture->path_to_picture = $path;
+        $picture->test_id = $testId;
+        $picture->save();
     }
 }

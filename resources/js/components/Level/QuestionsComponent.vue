@@ -11,13 +11,13 @@
             <div v-if="userLifes > 0" class="life">
                 <div class="life__status">
                     <p>Количество попыток:</p>
-                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes">
+                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes" alt=".">
                 </div>
                 <div class="question-wrapper">
                     <div class="question-wrapper__content">
                         <span v-html="markDown(data.question)"></span>
                         <div class="cat-question" v-if="needHelp == false">
-                            <img class="question-wrapper__content__img" src="/images/question-cat.svg">
+                            <img class="question-wrapper__content__img" src="/images/question-cat.svg" alt=".">
                             <div>
                                 <div class="cat-question__button" v-for="answer in answers">
                                     <button class="question-wrapper__content__button"
@@ -28,8 +28,12 @@
                             </div>
                         </div>
                         <div v-else>
-                            Прикрепите файл
+                            <form @submit.prevent="submitFile">
+                                <input type="file" @change="handleFileUpload()"/>
+                                <button>Submit</button>
+                            </form>
                         </div>
+                        <button v-on:click="nextButton()">Готово</button>
                     </div>
                 </div>
 
@@ -66,6 +70,9 @@ export default {
             answers: [],
             question: '',
             userLifes: '',
+            file: '',
+            wp: false,
+            error: false,
         }
     },
     created() {
@@ -95,13 +102,15 @@ export default {
         },
 
         handleFileUpload() {
-            this.file = this.$refs.file.files[0];
+            this.file = event.target.files[0];
+            console.log(this.file);
         },
         async submitFile() {
-            let formData = new FormData();
-            formData.append('file', this.file);
-            console.log(formData);
-            await axios.post('/api/upload-file/' + formData)
+            let formData = new FormData;
+            console.log(this.file);
+            formData.set('image', this.file);
+            console.log(this.data.levelId);
+            await axios.post('/api/upload-file/' + this.data.levelId, formData)
                 .then()
                 .catch(err => console.log(err));
         },
@@ -112,6 +121,13 @@ export default {
         },
 
         async nextButton() {
+            if(this.needHelp == true){
+                await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
+                    .then()
+                    .catch(err => console.log(err));
+                await this.$router.push({path: '/levels/'});
+                router.go(0);
+            } else
             if (this.wp == true) {
                 if (this.data.correct_answers.length < 1){
                     await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
@@ -131,6 +147,13 @@ export default {
         },
 
         async gameOver() {
+            await axios.post('/api/change-difficult/-1')
+                .catch(err => console.log(err));
+            await this.$router.push({path: '/'});
+            router.go(0);
+        },
+
+        async goToLevels() {
             await this.$router.push({path: '/levels/'});
             router.go(0);
         },
