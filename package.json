@@ -31,6 +31,8 @@
     "ioredis": "^4.28.5",
     "marked": "^4.0.12",
     "socket.io": "^4.4.1",
+    "vue-js-popover": "^1.2.1",
+    "vue-modaltor": "^1.5.4",
     "vue-router": "^3.5.3",
     "ws": "^8.5.0"
   },

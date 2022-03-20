@@ -34,7 +34,7 @@ import NavMenu from "./partials/Navmenu";
 
 export default {
     name: "LevelsComponent",
-    components: {NavMenu},
+    components: { NavMenu },
     props: {
         data: Object,
     },
