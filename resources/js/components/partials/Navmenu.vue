@@ -2,14 +2,14 @@
     <div class="navbar">
         <div class="navbar__left">
             <a class="navbar__left">
-                {{ navBarLinkFirst }}
+                {{ FirstLink }}
             </a>
-            <a class="navbar__left" @click="profile()">
-                {{ navBarLinkSecond }}
+            <a class="navbar__left">
+                {{ SecondLink }}
             </a>
         </div>
-        <a class="navbar__right" @click="logout()">
-            {{ navBarLinkExit }}
+        <a class="navbar__right">
+            {{ ExitLink }}
         </a>
     </div>
 </template>
@@ -20,12 +20,28 @@ import router from "../../router";
 export default {
     name: 'navMenu',
 
+    props: {
+        FirstLink: {
+            type: String,
+            default: 'На главную'
+        },
+        SecondLink: {
+            type: String,
+            default: 'Мой Прогрес'
+        },
+        ExitLink: {
+            type: String,
+            default: 'Выход'
+        },
+    },
+
     data() {
         return {
             navBarLinkFirst: 'На главную',
             navBarLinkSecond: 'Мой прогресс',
             navBarLinkExit: 'Выход'
         }
+
     },
 
     methods: {
@@ -38,8 +54,9 @@ export default {
             await axios.post('/api/logout')
                 .then()
                 .catch(err => console.log(err));
-            await this.$router.push({path: '/'}).catch(()=>{});
+            await this.$router.push({path: '/'}).catch(() => {
+            });
         }
-    }
+    },
 }
 </script>
