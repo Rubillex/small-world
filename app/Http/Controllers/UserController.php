@@ -20,7 +20,24 @@ class UserController extends Controller
     public function changeComplexity($complexity) {
         $user             = User::find(Auth::id());
         $user->complexity = $complexity;
-        $user->lifes      = $complexity;
+        $user->points = 0;
+
+        $lifes = 0;
+        switch ($complexity) {
+            case 1:
+                $lifes = 3;
+                break;
+            case 2:
+                $lifes = 2;
+                break;
+            case 3:
+                $lifes = 1;
+                break;
+            default:
+                $lifes = 0;
+                break;
+        }
+        $user->lifes = $lifes;
         $user->save();
 
         return ['success' => true];
