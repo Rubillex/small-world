@@ -29,7 +29,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('template-component', require('./components/TemplateComponent.vue').default);
+Vue.component('complexity-component', require('./components/ComplexityComponent').default);
 Vue.component('auth-component', require('./components/AuthComponent').default);
 Vue.component('start-game-component', require('./components/StartGameComponent').default);
 Vue.component('list-of-levels-component', require('./components/ListOfLevelsComponent').default);

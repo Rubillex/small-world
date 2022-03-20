@@ -47,12 +47,12 @@ export default {
 
     methods: {
         async goToLevel(levelId) {
-            await this.$router.push({path: '/level/' + levelId});
+            await this.$router.push({path: '/level/' + levelId}).catch(()=>{});
             router.go(0);
         },
 
         async goToProfile() {
-            await this.$router.push({path: '/'});
+            await this.$router.push({path: '/'}).catch(()=>{});
             router.go(0);
         }
     }

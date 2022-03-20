@@ -130,7 +130,7 @@ export default {
     },
     methods: {
         async goToLevels() {
-            await this.$router.push({path: '/levels/'});
+            await this.$router.push({path: '/levels/'}).catch(()=>{});
             router.go(0);
         },
         async openPopup() {
@@ -144,7 +144,7 @@ export default {
             await axios.post('/api/logout')
                 .then()
                 .catch(err => console.log(err));
-            await this.$router.push({path: '/'});
+            await this.$router.push({path: '/'}).catch(()=>{});
             window.location.reload(true);
         }
     },

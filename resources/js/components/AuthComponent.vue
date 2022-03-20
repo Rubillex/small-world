@@ -103,11 +103,11 @@ export default {
     },
     methods: {
         async login() {
-            await this.$router.push({path: '/login'});
+            await this.$router.push({path: '/login'}).catch(()=>{});
             router.go(0);
         },
         async register() {
-            await this.$router.push({path: '/register'});
+            await this.$router.push({path: '/register'}).catch(()=>{});
             router.go(0);
         }
     }

@@ -6,17 +6,11 @@
 import VueRouter from 'vue-router';
 
 import Vue from 'vue';
-import TemplateComponent from "./components/TemplateComponent";
 import StartGame from "./components/StartGameComponent";
 
 Vue.use(VueRouter);
 
 const router =  [
-        {
-            path: '/',
-            name: 'main-page',
-            component: TemplateComponent
-        },
         {
             path: '/start-game',
             name: 'start-game',

@@ -27,7 +27,7 @@ class HomeController extends Controller {
      */
     public function index() {
         if (Auth::check()) {
-            return view('game')->with('data', ['page' => 'game']);
+           return $this->profile();
         } else {
             return view('index')->with('data', ['page' => 'index']);
         }
@@ -41,8 +41,9 @@ class HomeController extends Controller {
     public function homePage(): \Illuminate\Contracts\View\View {
         $user = User::find(Auth::id());
         if (!$user) return view('index')->with('data', ['page' => 'index']);
+        if ($user->complexity === '-1')   return $this->profile();
 
-        return view('game', ['data' => ['userDifficult' => $user->complexity]]);
+        return view('complexity');
     }
 
     /**
@@ -71,6 +72,8 @@ class HomeController extends Controller {
     public function profile(){
         $userList = User::all();
         $currentUser = $userList->firstWhere('id', Auth::id());
+        if ($currentUser->complexity === '-1') return view('complexity');
+
         $currentName = $currentUser->name;
         $currentPoints = $currentUser->points;
         $currentLifes = $currentUser->lifes;

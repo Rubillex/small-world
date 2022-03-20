@@ -33,12 +33,12 @@ export default {
             await this.$router.push({path: '/profile/'});
             router.go(0);
         },
+
         async logout() {
             await axios.post('/api/logout')
                 .then()
                 .catch(err => console.log(err));
-            await this.$router.push({path: '/'});
-            window.location.reload(true);
+            await this.$router.push({path: '/'}).catch(()=>{});
         }
     }
 }
