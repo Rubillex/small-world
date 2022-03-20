@@ -105,10 +105,8 @@
 
 <script>
 import router from "../router";
-import Leaderboard from  "./LeaderboardComponent";
 export default {
     name: "profileComponent",
-    components: { Leaderboard },
     props: {
         data: Object,
     },
