@@ -1,0 +1,74 @@
+@import "resources/sass/_variables.scss";
+
+.question-page {
+    &__container {
+        margin-top: 50px;
+        max-width: 1200px;
+        margin-left: 300px;
+        color: #FFFFFF;
+        font-size: 26px;
+        font-weight: bold;
+        font-family: $primary-font-family;
+    }
+
+    &__button {
+        margin-top: 40px;
+        background-color: #CB9FFF;
+        border-radius: 16px;
+        padding: 6px;
+        color: #FFFFFF;
+        font-family: $primary-font-family;
+        margin-bottom: 50px;
+    }
+
+    &__text {
+        max-width: 900px;
+        margin-left: 70px;
+    }
+}
+
+.question-wrapper {
+    padding: 50px 100px;
+    width: 1200px;
+    background-color: rgba(203, 159, 255, 0.25);
+    border-radius: 27px;
+
+    &__content {
+        color: #FFFFFF;
+        font-family: $secondary-font-family;
+        font-size: 38px;
+        font-weight: bold;
+
+        &__button {
+            font-size: 30px;
+            font-family: $primary-font-family;
+            color: #FFFFFF;
+            background-color: #CB9FFF40;
+            border-radius: 12px;
+        }
+
+        &__img {
+            width: 200px;
+            margin-right: 40px;
+        }
+    }
+}
+
+.life__status {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-family: $primary-font-family;
+    text-transform: uppercase;
+
+    &__img {
+        width: 55px;
+        margin-left: 10px;
+    }
+}
+
+.cat-question {
+display: flex;
+    flex-direction: row;
+
+}
