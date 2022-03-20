@@ -9,9 +9,10 @@
 export default {
     name: 'SelectTitle',
 
-    data() {
-        return {
-            title: "Выбор уровня"
+    props: {
+        title: {
+            type: String,
+            default: 'Выбор уровня'
         }
     }
 }

@@ -1,0 +1,29 @@
+@import "resources/sass/_variables.scss";
+
+.level-content {
+    margin-top: 100px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+        color: #4C3375;
+        font-family: $secondary-font-family;
+        font-size: 38px;
+        line-height: 125%;
+        font-weight: bold;
+        margin-top: 80px;
+    }
+    &__text {
+        margin-top: 30px;
+        font-family: $primary-font-family;
+        font-size: 26px;
+    }
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 1100px;
+    }
+}

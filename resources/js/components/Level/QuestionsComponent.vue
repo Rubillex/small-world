@@ -1,4 +1,4 @@
- <template>
+<template>
     <div class="questions-page">
         <div v-if="userLifes > 0" class="lifes">
         <p v-for="n in userLifes">Я жизнь</p>

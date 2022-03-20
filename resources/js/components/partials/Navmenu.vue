@@ -2,14 +2,14 @@
     <div class="navbar">
         <div class="navbar__left">
             <a class="navbar__left">
-                {{ navBarLinkFirst }}
+                {{ FirstLink }}
             </a>
             <a class="navbar__left">
-                {{ navBarLinkSecond }}
+                {{ SecondLink }}
             </a>
         </div>
         <a class="navbar__right">
-            {{ navBarLinkExit }}
+            {{ ExitLink }}
         </a>
     </div>
 </template>
@@ -18,12 +18,19 @@
 export default {
     name: 'navMenu',
 
-    data() {
-        return {
-            navBarLinkFirst: 'На главную',
-            navBarLinkSecond: 'Мой Прогрес',
-            navBarLinkExit: 'Выход'
+    props: {
+        FirstLink: {
+            type: String,
+            default: 'На главную'
+        },
+        SecondLink: {
+            type: String,
+            default: 'Мой Прогрес'
+        },
+        ExitLink: {
+            type: String,
+            default: 'Выход'
         }
-    }
+    },
 }
 </script>
