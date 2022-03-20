@@ -11,13 +11,13 @@
             <div v-if="userLifes > 0" class="life">
                 <div class="life__status">
                     <p>Количество попыток:</p>
-                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes">
+                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes" alt=".">
                 </div>
                 <div class="question-wrapper">
                     <div class="question-wrapper__content">
                         <span v-html="markDown(data.question)"></span>
                         <div class="cat-question" v-if="needHelp == false">
-                            <img class="question-wrapper__content__img" src="/images/question-cat.svg">
+                            <img class="question-wrapper__content__img" src="/images/question-cat.svg" alt=".">
                             <div>
                                 <div class="cat-question__button" v-for="answer in answers">
                                     <button class="question-wrapper__content__button"
@@ -72,8 +72,6 @@ export default {
         this.userLifes = this.data.userLifes;
         this.answers = this.data.answers;
         this.needHelp = this.data.needHelp;
-        console.log(this.data);
-        console.log(this.needHelp);
     },
 
     methods: {
@@ -131,6 +129,13 @@ export default {
         },
 
         async gameOver() {
+            await axios.post('/api/change-difficult/-1')
+                .catch(err => console.log(err));
+            await this.$router.push({path: '/'});
+            router.go(0);
+        },
+
+        async goToLevels() {
             await this.$router.push({path: '/levels/'});
             router.go(0);
         },
