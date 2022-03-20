@@ -1,10 +1,7 @@
 <template>
     <div class="test-list">
         <nav-menu/>
-        <div class="test-select">
-            <h2 class="test-select__title">Выбор уровня</h2>
-            <img class="test-select__img" src="/images/main_cat.svg" alt="а котека то нет">
-        </div>
+        <SelectTitle/>
         <div class="wrapper-container">
             <div class="test-select-list__wrapper">
                 <template v-for="(item, index) in data.levelData">
@@ -31,10 +28,11 @@
 <script>
 import router from "../router";
 import NavMenu from "./partials/Navmenu";
+import SelectTitle from "./partials/SelectTitle";
 
 export default {
     name: "LevelsComponent",
-    components: {NavMenu},
+    components: {SelectTitle, NavMenu},
     props: {
         data: Object,
     },

@@ -1,4 +1,4 @@
-<template>
+ё<template>
     <div class="page-content">
         <div class="content">
             <div class="content__top">
