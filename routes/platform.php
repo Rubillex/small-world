@@ -39,6 +39,12 @@ Route::screen('/userss', \App\Orchid\Screens\UsersTable::class)
 Route::screen('/tests', \App\Orchid\Screens\Tests\TestsScreen::class)
     ->name('platform.tests');
 
+Route::screen('/answers', \App\Orchid\Screens\Tests\AnswersScreen::class)
+    ->name('platform.answers');
+
+Route::screen('/upload-pictures', \App\Orchid\Screens\Tests\PicturesUploadScreen::class)
+    ->name('platform.uploadPictures');
+
 //Route::screen('/tests/{id}/edit', \App\Orchid\Screens\Tests\EditTestScreen::class)
 //    ->name('platform.tests.edit')
 //    ->breadcrumbs(function (Trail $trail, $id) {

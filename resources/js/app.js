@@ -36,6 +36,7 @@ Vue.component('list-of-levels-component', require('./components/ListOfLevelsComp
 Vue.component('level-component', require('./components/Level/LevelComponent').default);
 Vue.component('question-component', require('./components/Level/QuestionsComponent').default);
 Vue.component('profile-component', require('./components/ProfileComponent').default);
+Vue.component('gameover-component', require('./components/GameOverComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

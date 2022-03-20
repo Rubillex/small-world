@@ -28,8 +28,12 @@
                             </div>
                         </div>
                         <div v-else>
-                            Прикрепите файл
+                            <form @submit.prevent="submitFile">
+                                <input type="file" @change="handleFileUpload()"/>
+                                <button>Submit</button>
+                            </form>
                         </div>
+                        <button v-on:click="nextButton()">Готово</button>
                     </div>
                 </div>
 
@@ -66,12 +70,17 @@ export default {
             answers: [],
             question: '',
             userLifes: '',
+            file: '',
+            wp: false,
+            error: false,
         }
     },
     created() {
         this.userLifes = this.data.userLifes;
         this.answers = this.data.answers;
         this.needHelp = this.data.needHelp;
+        console.log(this.data);
+        console.log(this.needHelp);
     },
 
     methods: {
@@ -93,13 +102,15 @@ export default {
         },
 
         handleFileUpload() {
-            this.file = this.$refs.file.files[0];
+            this.file = event.target.files[0];
+            console.log(this.file);
         },
         async submitFile() {
-            let formData = new FormData();
-            formData.append('file', this.file);
-            console.log(formData);
-            await axios.post('/api/upload-file/' + formData)
+            let formData = new FormData;
+            console.log(this.file);
+            formData.set('image', this.file);
+            console.log(this.data.levelId);
+            await axios.post('/api/upload-file/' + this.data.levelId, formData)
                 .then()
                 .catch(err => console.log(err));
         },
@@ -110,6 +121,13 @@ export default {
         },
 
         async nextButton() {
+            if(this.needHelp == true){
+                await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
+                    .then()
+                    .catch(err => console.log(err));
+                await this.$router.push({path: '/levels/'});
+                router.go(0);
+            } else
             if (this.wp == true) {
                 if (this.data.correct_answers.length < 1){
                     await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
