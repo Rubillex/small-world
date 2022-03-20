@@ -42,8 +42,9 @@
                 <button class="question-page__button" v-on:click="goToLevels()">Назад к уровням</button>
             </div>
             <div v-else class="no-lifes">
-                GG
-                <button v-on:click="gameOver()">Гейм Овер</button>
+<!--                GG-->
+<!--                <button v-on:click="gameOver()">Гейм Овер</button>-->
+                <game-over-component :data="data"></game-over-component>
             </div>
             </div>
 
@@ -55,11 +56,11 @@
 import router from "../../router";
 import NavMenu from "../partials/Navmenu";
 import SelectTitle from "../partials/SelectTitle";
-
+import GameOverComponent from "../GameOverComponent";
 const {marked} = require("marked");
 export default {
     name: "QuestionsComponent",
-    components: {SelectTitle, NavMenu},
+    components: {SelectTitle, NavMenu, GameOverComponent},
     props: {
         data: Object,
     },
@@ -78,6 +79,7 @@ export default {
             file: '',
             wp: false,
             error: false,
+            complexity: '',
         }
     },
     created() {

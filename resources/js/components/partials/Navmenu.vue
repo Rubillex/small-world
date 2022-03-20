@@ -1,14 +1,14 @@
 <template>
     <div class="navbar">
         <div class="navbar__left">
-            <a class="navbar__left">
+            <a class="navbar__left" @click="goToLevel()">
                 {{ FirstLink }}
             </a>
-            <a class="navbar__left">
+            <a class="navbar__left" @click="profile()">
                 {{ SecondLink }}
             </a>
         </div>
-        <a class="navbar__right">
+        <a class="navbar__right" @click="logout()">
             {{ ExitLink }}
         </a>
     </div>
@@ -27,7 +27,7 @@ export default {
         },
         SecondLink: {
             type: String,
-            default: 'Мой Прогрес'
+            default: 'Мой прогресс'
         },
         ExitLink: {
             type: String,
@@ -45,8 +45,15 @@ export default {
     },
 
     methods: {
+        async goToLevel(){
+            await this.$router.push({path: '/levels/'}).catch(() => {
+            });
+            router.go(0);
+        },
+
         async profile() {
-            await this.$router.push({path: '/profile/'});
+            await this.$router.push({path: '/profile/'}).catch(() => {
+            });
             router.go(0);
         },
 
@@ -56,6 +63,7 @@ export default {
                 .catch(err => console.log(err));
             await this.$router.push({path: '/'}).catch(() => {
             });
+            router.go(0);
         }
     },
 }

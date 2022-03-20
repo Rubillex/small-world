@@ -2,8 +2,8 @@
     <div class="page-content">
         <div class="content">
             <div class="content__top">
-                <div class="content__top-button">
-                    На главную
+                <div class="content__top-button" @click="goToLevels()">
+                    К выбору уровней
                 </div>
                 <div class="content__top-button" @click="logout()">
                     Выйти
@@ -127,8 +127,9 @@ export default {
         console.log(this.data);
     },
     methods: {
-        async goToLevels() {
-            await this.$router.push({path: '/levels/'}).catch(()=>{});
+        async goToLevels(){
+            await this.$router.push({path: '/levels/'}).catch(() => {
+            });
             router.go(0);
         },
         async openPopup() {

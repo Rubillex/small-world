@@ -88,10 +88,14 @@ class TestsController extends Controller
         $anwers            = array_merge($incorrect_answers, $correct_answers);
         shuffle($anwers);
 
+        $currentUser = User::find(Auth::id());
+        $currentComplexity = $currentUser->complexity;
+
         $userLifes = User::find(Auth::id())->lifes;
 
         return view('levelAnswers', [
             'data' => [
+                'complexity'        => $currentComplexity,
                 'levelId'           => $levelId,
                 'points'            => $test['points'],
                 'name'              => $test['name'],
