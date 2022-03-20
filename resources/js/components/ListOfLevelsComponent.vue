@@ -8,18 +8,17 @@
         <div class="wrapper-container">
             <div class="test-select-list__wrapper">
                 <template v-for="(item, index) in data.levelData">
-                    <div class="test-select-list__card">
+                    <div v-on:click="testComplited(item.id) ? '' : goToLevel(item.id)" class="test-select-list__card"
+                         :class="testComplited(item.id) ? 'non-complited' : ''">
                         <div class="test-select-list__card-container">
                             <div>
-                                <h3 class="test-select-list__card__title">
-                                    {{ item }}
-                                </h3>
-                                <button class="test-select-list__card__theory" v-on:click="goToLevel(index)">
+                                <h3 class="test-select-list__card__title" v-html="item.name"/>
+                                <p class="test-select-list__card__theory">
                                     Теория
-                                </button>
+                                </p>
                                 <br>
                             </div>
-                            <img class="test-select-list__card__img" src="/images/metka 1.svg" alt="#">
+                            <img class="test-select-list__card__img" :src="testComplited(item.id) ? '/images/metka_complited.svg' : '/images/metka 1.svg'" alt="#">
                         </div>
                     </div>
                 </template>
@@ -42,7 +41,11 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             levelData: [],
+            complited: [],
         }
+    },
+
+    created() {
     },
 
     methods: {
@@ -54,6 +57,10 @@ export default {
         async goToProfile() {
             await this.$router.push({path: '/'}).catch(()=>{});
             router.go(0);
+        },
+
+        testComplited(testId) {
+            return this.data.complited[testId] === 'true';
         }
     }
 }

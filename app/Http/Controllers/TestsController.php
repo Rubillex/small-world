@@ -19,9 +19,17 @@ class TestsController extends Controller
      */
     public function getlevels() {
         if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
-        $tests = Test::all()->pluck('name', 'id');
+        $tests = Test::all();
+        $testsIdName = $tests->pluck('name', 'id');
+        $testsComplited = $tests->mapWithKeys(function ($item, $key) {
+            if (in_array(Auth::id(), json_decode($item->userComplited))) {
+                return [$item['id'] => 'true'];
+            } else {
+                return [$item['id'] => 'false'];
+            }
+        });
 
-        return view('listOfLevels', ['data' => ['levelData' => $tests]]);
+        return view('listOfLevels', ['data' => ['levelData' => $tests, 'complited' => $testsComplited]]);
     }
 
     /**

@@ -46,6 +46,7 @@
             height: 300px;
             display: flex;
             justify-content: center;
+            cursor: pointer;
 
 
             &__title {
@@ -60,7 +61,6 @@
                 margin-top: 80px;
                 color: #23282D;
                 border: none;
-                background-color: #C7CBCE;
                 text-decoration: underline;
                 font-family: $primary-font-family;
                 font-size: 26px;
@@ -84,6 +84,11 @@
             }
         }
     }
+}
+
+.non-complited {
+    background-color: #FFD600;
+    cursor: auto;
 }
 
 .wrapper-container {
