@@ -6,12 +6,14 @@
             <div class="level-content-container">
                 <h1 class="level-content__title">{{ data.name }}</h1>
                 <br>
-                 <img src="/images/Line.svg" alt="#">
+                <img src="/images/Line.svg" alt="#">
                 <div class="level-content__text" v-html="markDown(data.brefing)">
                 </div>
             </div>
         </div>
-        <button v-on:click="goAnswers(data.levelId)">К вопросам</button>
+        <div class="level-content__bottom">
+            <button class="level-content__bottom__button" v-on:click="goAnswers(data.levelId)">Вопросы</button>
+        </div>
     </div>
 </template>
 

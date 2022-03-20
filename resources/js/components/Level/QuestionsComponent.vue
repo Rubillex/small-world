@@ -1,38 +1,56 @@
 <template>
-    <div class="questions-page">
-        <div v-if="userLifes > 0" class="lifes">
-        <p v-for="n in userLifes">Я жизнь</p>
-        <h1>Тема : {{data.name}}</h1>
-        <span v-html="markDown(data.question)"></span>
-            <div v-if="needHelp == false">
-                <div v-for="answer in answers">
-                    <button v-on:click="clickAnswer(answer)">{{ answer }}</button>
-                    <br>
+    <div class="question-page">
+        <nav-menu FirstLink="К выбору уровня"/>
+        <select-title title="тестирование"/>
+        <div class="question-page__container">
+            <p class="question-page__text">
+                Закрепим пройденный материал. За каждый правильный ответ ты получаешь баллы, за неверный - теряешь
+                сердечки.
+                Будь внимателен!
+            </p>
+            <div v-if="userLifes > 0" class="life">
+                <div class="life__status">
+                    <p>Количество попыток:</p>
+                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes">
                 </div>
-            </div>
-            <div v-else>
-                <div>
-
-
-                    <label>
-                        <input type="file" id="file" name="file" ref="file" v-on:change="handleFileUpload()"/>
-                    </label>
-                    <button v-on:click="submitFile()">Submit</button>
+                <div class="question-wrapper">
+                    <div class="question-wrapper__content">
+                        <span v-html="markDown(data.question)"></span>
+                        <div class="cat-question" v-if="needHelp == false">
+                            <img class="question-wrapper__content__img" src="/images/question-cat.svg">
+                            <div>
+                                <div class="cat-question__button" v-for="answer in answers">
+                                    <button class="question-wrapper__content__button"
+                                            v-on:click="clickAnswer(answer)">{{ answer }}
+                                    </button>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            Прикрепите файл
+                        </div>
+                    </div>
                 </div>
+
+                <button class="question-page__button" v-on:click="goToLevels()">Назад к уровням</button>
             </div>
-            <button v-on:click="nextButton()">Готово</button>
-        </div>
-        <div  v-else class="no-lifes">
-            GG
-        <button v-on:click="gameOver()">Гейм Овер</button>
+            <div v-else class="no-lifes">
+                GG
+                <button v-on:click="gameOver()">Гейм Овер</button>
+            </div>
         </div>
     </div>
 </template>
 <script>
 import router from "../../router";
+import NavMenu from "../partials/Navmenu";
+import SelectTitle from "../partials/SelectTitle";
+
 const {marked} = require("marked");
 export default {
     name: "QuestionsComponent",
+    components: {SelectTitle, NavMenu},
     props: {
         data: Object,
     },
@@ -48,9 +66,6 @@ export default {
             answers: [],
             question: '',
             userLifes: '',
-            file: '',
-            wp: false,
-            error: false,
         }
     },
     created() {
@@ -116,9 +131,7 @@ export default {
         },
 
         async gameOver() {
-            await axios.post('/api/change-difficult/-1')
-                .catch(err => console.log(err));
-            await this.$router.push({path: '/'});
+            await this.$router.push({path: '/levels/'});
             router.go(0);
         },
     }
