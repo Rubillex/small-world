@@ -1,14 +1,27 @@
 @import "resources/sass/_variables.scss";
 
 .question-page {
+    .checked {
+        cursor: default;
+        background-color: gray;
+    }
+
+    .ready-button {
+        background: #FF91AB;
+        box-shadow: inset -9px -10px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+    }
+
     &__container {
         margin-top: 50px;
-        max-width: 1200px;
-        margin-left: 300px;
         color: #FFFFFF;
         font-size: 26px;
         font-weight: bold;
         font-family: $primary-font-family;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     &__button {
@@ -22,6 +35,7 @@
     }
 
     &__text {
+        text-align: center;
         max-width: 900px;
         margin-left: 70px;
     }

@@ -2,12 +2,14 @@
     <div class="question-page">
         <nav-menu FirstLink="К выбору уровня"/>
         <select-title title="тестирование"/>
+        <div class="page-content">
         <div class="question-page__container">
             <p class="question-page__text">
-                Закрепим пройденный материал. За каждый правильный ответ ты получаешь баллы, за неверный - теряешь
-                сердечки.
+                Закрепим пройденный материал. За каждый правильно решенный ты получаешь баллы, за ошибку - теряешь
+                сердечко. Причем сразу. <b>Когда считаешь, что выбрал все нужные варианты ответа - нажми кнопку готово!</b>
                 Будь внимателен!
             </p>
+            <div class="life-wrapper">
             <div v-if="userLifes > 0" class="life">
                 <div class="life__status">
                     <p>Количество попыток:</p>
@@ -21,7 +23,7 @@
                             <div>
                                 <div class="cat-question__button" v-for="answer in answers">
                                     <button class="question-wrapper__content__button"
-                                            v-on:click="clickAnswer(answer)">{{ answer }}
+                                            v-on:click="clickAnswer(answer, $event.target)">{{ answer }}
                                     </button>
                                     <br>
                                 </div>
@@ -33,7 +35,7 @@
                                 <button>Submit</button>
                             </form>
                         </div>
-                        <button v-on:click="nextButton()">Готово</button>
+                        <button class="ready-button" v-on:click="nextButton()">Готово</button>
                     </div>
                 </div>
 
@@ -43,6 +45,9 @@
                 GG
                 <button v-on:click="gameOver()">Гейм Овер</button>
             </div>
+            </div>
+
+        </div>
         </div>
     </div>
 </template>
@@ -79,12 +84,13 @@ export default {
         this.userLifes = this.data.userLifes;
         this.answers = this.data.answers;
         this.needHelp = this.data.needHelp;
-        console.log(this.data);
-        console.log(this.needHelp);
     },
 
     methods: {
-        async clickAnswer(answer) {
+        async clickAnswer(answer, event) {
+            if (event.classList.contains('checked')) return;
+
+            event.classList.add('checked');
             if (this.data.correct_answers.includes(answer)) {
                 if (this.data.correct_answers.length >= 1) {
                     this.data.correct_answers.splice(this.data.correct_answers.indexOf(answer), 1);
@@ -98,7 +104,6 @@ export default {
                 this.wp = false;
                 this.error = true;
             }
-            console.log(this.data.correct_answers);
         },
 
         handleFileUpload() {
