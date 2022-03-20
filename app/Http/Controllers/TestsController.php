@@ -22,6 +22,7 @@ class TestsController extends Controller
         $tests = Test::all();
         $testsIdName = $tests->pluck('name', 'id');
         $testsComplited = $tests->mapWithKeys(function ($item, $key) {
+            if (json_decode($item->userComplited) == null) return [$item['id'] => 'false'];
             if (in_array(Auth::id(), json_decode($item->userComplited))) {
                 return [$item['id'] => 'true'];
             } else {
