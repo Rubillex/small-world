@@ -15,3 +15,20 @@
 @import "Navmenu/navmenu";
 @import "LevelComponent/level-component";
 @import "QuestionComponent/question-component";
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222831;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8D9091;
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(#8D9091, 0.8);
+}

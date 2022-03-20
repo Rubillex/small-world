@@ -14,6 +14,7 @@
         <div class="level-content__bottom">
             <button class="level-content__bottom__button" v-on:click="goAnswers(data.levelId)">Вопросы</button>
         </div>
+        <img class="level-content__cat-img" src="/images/theory-cat.svg" alt="а котека то нет">
     </div>
 </template>
 
