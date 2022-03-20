@@ -3,23 +3,21 @@
 
 .template-page {
     .choose-difficult {
-        margin-top: 198px;
-
         .content-header {
             font-family: $secondary-font-family;
-            font-size: 124px;
+            font-size: 60px;
             font-weight: 600;
             text-align: center;
 
             &__text-wrapper {
-                margin-left: 300px;
-                margin-right: 300px;
+                display: block;
             }
+
             &__text {
-                margin-top: 45px;
-                font-size: 54px;
-                line-height: 75px;
-                font-weight: 400;
+                margin-top: 10px;
+                font-size: 28px;
+                line-height: 45px;
+                font-weight: 800;
                 text-align: center;
 
                 a {
@@ -30,31 +28,72 @@
         }
 
         .difficult {
-            margin-top: 120px;
-            background-color: red;
+            margin-top: 110px;
+            margin-bottom: 120px;
 
             .difficult-wrapper {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
+
+                @media (max-width: 1240px) {
+                    flex-direction: column;
+                }
             }
 
             &__button {
-                margin-left: 140px;
-                margin-right: 140px;
+                border-radius: 33px;
+                box-shadow: 15px 13px 4px #4C3375;
+            }
 
+            &__button-content {
+                display: flex;
+                flex-direction: column;
+                padding: 0 55px 20px 55px
+            }
+
+            &__button-header {
+                padding-top: 32px;
+                font-family: $primary-font-family;
+                font-weight: 600;
+                font-size: 48px;
+                line-height: 58px;
+            }
+
+            &__button-text {
+                padding-top: 15px;
+                width: 300px;
+                font-size: 21px;
+                align-self: center;
+                font-weight: 600;
+                line-height: 28px;
+            }
+
+            &__life-block {
+                padding-top: 30px;
+            }
+
+            &__life {
+                width: 75px;
+                margin-left: 10px;
+            }
+
+            &__cat {
+                align-self: center;
+                padding-top: 48px;
+                width: 200px;
             }
 
             .start {
-                margin-top: 90px;
-                background-color: #73F4DB;
+                background-color: $base-color;
             }
 
             .medium {
-                background-color: #FF91AB;
+                background-color: $cool-color;
             }
 
             .hard {
-                background-color: #4C3375;
+                background-color: $cosmo-color;
             }
         }
     }
@@ -79,7 +118,6 @@
 
     .container-header + hr {
         width: 100%;
-        /*//align: center; text-align center??????*/
     }
 
     .site-footer {
@@ -88,5 +126,102 @@
         font-size: 15px;
         line-height: 24px;
         color: #737373;
+    }
+}
+
+.rules {
+    background-color: white;
+    margin-bottom: 200px;
+
+    &__wrapper {
+        margin-left: 120px;
+        margin-right: 120px;
+        padding-top: 210px;
+    }
+
+    &__header {
+        font-family: $secondary-font-family;
+        font-weight: 1000;
+        font-size: 100px;
+        line-height: 115px;
+        color: $primary-background-color;
+    }
+
+    .secondary {
+        font-weight: 800;
+        font-size: 75px;
+    }
+
+    &__text-wrapper {
+        margin-top: 42px;
+        margin-bottom: 60px;
+    }
+
+    &__text {
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 125%;
+
+        + p {
+            margin-top: 35px
+        }
+    }
+
+    &__life-content {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &__life-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__life {
+        margin-left: 10px;
+    }
+
+    &__life-small {
+        width: 75px;
+    }
+
+    &__modificator {
+        font-family: $primary-font-family;
+        font-weight: 500;
+        font-size: 72px;
+        line-height: 86px;
+        text-align: center;
+    }
+
+    &__modificator-label {
+        font-family: $secondary-font-family;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 125%;
+    }
+
+    &__ending {
+        display: block;
+        margin-top: 68px;
+        margin-bottom: 80px;
+        text-align: center;
+        font-family: $primary-font-family;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 125%;
+        color: $primary-background-color;
+    }
+
+    &__ending-button {
+        position: relative;
+        padding: 30px 70px 30px 70px;
+        top: 68px;
+        background: $cool-color;
+        border-radius: 32px;
+        font-weight: 600;
+        font-size: 45px;
+        line-height: 72px;
+        text-align: center;
     }
 }
