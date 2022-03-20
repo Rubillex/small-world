@@ -121,7 +121,7 @@ class TestsScreen extends Screen
         return [
             Layout::modal('createTest', Layout::rows([
                 Input::make('name')->required()->title('Название'),
-                Quill::make('brefing')
+                SimpleMDE::make('brefing')
                     ->title('Брифинг')
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
                 SimpleMDE::make('question')

@@ -11,9 +11,16 @@
                 </div>
             </div>
             <div v-else>
-                Прикрепите файл
+                <div>
+
+
+                    <label>
+                        <input type="file" id="file" name="file" ref="file" v-on:change="handleFileUpload()"/>
+                    </label>
+                    <button v-on:click="submitFile()">Submit</button>
+                </div>
             </div>
-            <button v-on:click="goToLevels()">Назад к уровням</button>
+            <button v-on:click="nextButton()">Готово</button>
         </div>
         <div  v-else class="no-lifes">
             GG
@@ -41,6 +48,9 @@ export default {
             answers: [],
             question: '',
             userLifes: '',
+            file: '',
+            wp: false,
+            error: false,
         }
     },
     created() {
@@ -54,23 +64,31 @@ export default {
     methods: {
         async clickAnswer(answer) {
             if (this.data.correct_answers.includes(answer)) {
-                // todo вообще всю логику переделать жесть какая
-                await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
-                    .then()
-                    .catch(err => console.log(err));
-                if (this.data.correct_answers.length > 1) {
+                if (this.data.correct_answers.length >= 1) {
                     this.data.correct_answers.splice(this.data.correct_answers.indexOf(answer), 1);
                 }
-                this.answers.splice(this.answers.indexOf(answer), 1, 'правильно');
-
-                alert('Правильно!');
+                if (this.error == false) this.wp = true;
             } else {
                 this.userLifes = this.userLifes - 1;
                 await axios.post('/api/change-lifes/' + this.userLifes)
                     .then()
                     .catch(err => console.log(err));
-                alert('Не правильно :(');
+                this.wp = false;
+                this.error = true;
             }
+            console.log(this.data.correct_answers);
+        },
+
+        handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+        },
+        async submitFile() {
+            let formData = new FormData();
+            formData.append('file', this.file);
+            console.log(formData);
+            await axios.post('/api/upload-file/' + formData)
+                .then()
+                .catch(err => console.log(err));
         },
 
         markDown(what) {
@@ -78,13 +96,27 @@ export default {
             return marked(what);
         },
 
-        async goToLevels() {
-            await this.$router.push({path: '/levels/'});
-            router.go(0);
+        async nextButton() {
+            if (this.wp == true) {
+                if (this.data.correct_answers.length < 1){
+                    await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
+                        .then()
+                        .catch(err => console.log(err));
+                }
+                await this.$router.push({path: '/levels/'});
+                router.go(0);
+            } else {
+                if (this.error == true){
+                    await this.$router.push({path: '/levels/'});
+                    router.go(0);
+                } else {
+                    alert('нет ответа');
+                }
+            }
         },
 
         async gameOver() {
-            await this.$router.push({path: '/levels/'});
+            await this.$router.push({path: '/'});
             router.go(0);
         },
     }

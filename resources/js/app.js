@@ -6,6 +6,16 @@
 
 require('./bootstrap');
 
+import Vue from "vue";
+import VueModalTor from "vue-modaltor/dist/vue-modaltor.common";
+import "vue-modaltor/dist/vue-modaltor.css";
+import Popover from 'vue-js-popover'
+
+Vue.use(Popover);
+Vue.use(VueModalTor, {
+    bgPanel: "#7957d5"  // add custome options
+});
+
 window.Vue = require('vue').default;
 
 /**
@@ -25,7 +35,8 @@ Vue.component('start-game-component', require('./components/StartGameComponent')
 Vue.component('list-of-levels-component', require('./components/ListOfLevelsComponent').default);
 Vue.component('level-component', require('./components/Level/LevelComponent').default);
 Vue.component('question-component', require('./components/Level/QuestionsComponent').default);
-Vue.component('leader-board-component', require('./components/LeaderBoardComponent').default);
+Vue.component('profile-component', require('./components/ProfileComponent').default);
+Vue.component('leaderboard-component', require('./components/LeaderboardComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

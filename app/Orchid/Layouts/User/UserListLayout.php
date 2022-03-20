@@ -27,7 +27,7 @@ class UserListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('name', __('Name'))
+            TD::make('name', __('Название команды'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
@@ -49,12 +49,6 @@ class UserListLayout extends Table
                         ]);
                 }),
 
-            TD::make('updated_at', __('Last edit'))
-                ->sort()
-                ->render(function (User $user) {
-                    return $user->updated_at->toDateTimeString();
-                }),
-
             TD::make('complexity', __('Сложность'))
                 ->sort()
                 ->render(function (User $user) {
@@ -64,12 +58,6 @@ class UserListLayout extends Table
                         case 2: return 'Сложный';
                         default: return 'Не определён';
                     }
-                }),
-
-            TD::make('progress', __('Прогресс'))
-                ->sort()
-                ->render(function (User $user) {
-                    return $user->progress;
                 }),
 
             TD::make('points', __('Очки'))

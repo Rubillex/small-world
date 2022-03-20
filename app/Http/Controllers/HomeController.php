@@ -63,7 +63,40 @@ class HomeController extends Controller {
         return view('register')->with('data', ['page' => 'register']);
     }
 
-    public function leaderBoard(){
-        return view('leaderboard')->with('data', ['page' => 'leaderboard']);
+    /**
+     * Возвращает страничку профиля игрока
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function profile(){
+        $userList = User::all();
+        $currentUser = $userList->firstWhere('id', Auth::id());
+        $currentName = $currentUser->name;
+        $currentPoints = $currentUser->points;
+        $currentLifes = $currentUser->lifes;
+        $userIndex = $userList->sortByDesc('points')->pluck('id')->search(Auth::id());
+
+        $userInTop = ($userIndex + 1) <= 3;
+
+        $userSorted = $userList->sortByDesc('points')->take(3)
+            ->map(function ($item, $key) {
+                return [
+                        'name'   => $item['name'],
+                        'points' => $item['points']
+                ];
+            })
+            ->toArray();
+        $userSorted = array_values($userSorted);
+
+        return view('profile', [
+            'data' => [
+                'usersList'         => $userSorted,
+                'currentUserName'   => $currentName,
+                'currentUserPoints' => $currentPoints,
+                'currentUserIndex'  => $userIndex + 1,
+                'userInTop'         => $userInTop,
+                'currentUserLifes'  => $currentLifes,
+            ],
+        ]);
     }
 }

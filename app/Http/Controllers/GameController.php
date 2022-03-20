@@ -34,6 +34,9 @@ class GameController extends Controller {
         return json_encode(['id' => $game->id]);
     }
 
+    /**
+     * Функция для выхода из профиля
+     */
     public function logOut() {
         Auth::logout();
     }
