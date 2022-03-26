@@ -72,20 +72,20 @@ class HomeController extends Controller {
     public function profile(){
         $userList = User::all();
         $currentUser = $userList->firstWhere('id', Auth::id());
-        if ($currentUser->complexity === '-1') return view('complexity');
+        if ($currentUser->complexity === '-1' || $currentUser->lifes == 0) return view('complexity');
 
         $currentName = $currentUser->name;
         $currentPoints = $currentUser->points;
         $currentLifes = $currentUser->lifes;
-        $userIndex = $userList->sortByDesc('points')->pluck('id')->search(Auth::id());
+        $userIndex = $userList->sortByDesc('score')->pluck('id')->search(Auth::id());
 
         $userInTop = ($userIndex + 1) <= 3;
 
-        $userSorted = $userList->sortByDesc('points')->take(3)
+        $userSorted = $userList->sortByDesc('score')->take(3)
             ->map(function ($item, $key) {
                 return [
                         'name'   => $item['name'],
-                        'points' => $item['points']
+                        'points' => $item['score']
                 ];
             })
             ->toArray();

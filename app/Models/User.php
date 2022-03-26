@@ -24,6 +24,7 @@ class User extends Authenticatable
         'lifes',
         'fio',
         'group',
+        'score'
     ];
 
     /**
@@ -69,6 +70,7 @@ class User extends Authenticatable
         'complexity' => -1,
         'progress'   => -1,
         'points'     => 0,
+        'score' => 0,
     ];
 
     /**
@@ -81,6 +83,7 @@ class User extends Authenticatable
         'name',
         'email',
         'lifes',
+        'score',
         'updated_at',
         'created_at',
     ];
