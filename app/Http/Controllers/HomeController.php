@@ -65,6 +65,26 @@ class HomeController extends Controller {
     }
 
     /**
+     * Возвращает глобальную таблицу лидеров
+     * @return array
+     */
+    public function getLeaderboard(){
+        $userList = User::all();
+
+        $userSorted = $userList->sortByDesc('points')
+            ->map(function ($item, $key) {
+                return [
+                    'name'   => $item['name'],
+                    'points' => $item['points']
+                ];
+            })
+            ->toArray();
+        $userSorted = array_values($userSorted);
+
+        return view('leaderboard')->with('data', ['leaderboard' => $userSorted,]);
+    }
+
+    /**
      * Возвращает страничку профиля игрока
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

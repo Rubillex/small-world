@@ -23,7 +23,9 @@ Route::get('/home',                  [HomeController::class, 'index'])->name('ho
 Route::get('/login',                 [HomeController::class, 'login']);
 Route::get('/register',              [HomeController::class, 'register']);
 Route::get('/game',                  [HomeController::class, 'homePage']);
-Route::get('/profile',            [HomeController::class, 'profile']);
+Route::get('/profile',               [HomeController::class, 'profile']);
+Route::get('/leaderboard',               [HomeController::class, 'getLeaderboard']);
+
 
 Route::post('/api/start-session',          [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
