@@ -26,6 +26,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
+            Menu::make('Перейти на основной сайт')
+                ->route('home')
+                ->icon('globe'),
+
             Menu::make(__('Информация'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -43,6 +47,10 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Вопросы с изображениями')
                 ->icon('eye')
                 ->route('platform.answers'),
+
+//            Menu::make('Advanced Elements')
+//                ->icon('briefcase')
+//                ->route('platform.example.advanced'),
 
 
 //
@@ -70,9 +78,6 @@ class PlatformProvider extends OrchidServiceProvider
 //                ->icon('note')
 //                ->route('platform.example.fields'),
 //
-//            Menu::make('Advanced Elements')
-//                ->icon('briefcase')
-//                ->route('platform.example.advanced'),
 //
 //            Menu::make('Text Editors')
 //                ->icon('list')

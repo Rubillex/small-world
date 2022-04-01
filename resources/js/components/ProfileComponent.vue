@@ -63,27 +63,30 @@
                     </div>
                 </div>
             </div>
-            <vue-modaltor :visible="open">
+            <vue-modaltor
+                :visible="open"
+                :animation-panel="'modal-slide-bottom'"
+                >
                 <template #header>
                     <!--    add your custom header     -->
                     <div class="modal-header-leaderboard">
-                        <div class="modal-title">
+                        <div class="leaderboard-title">
                             Таблица лидеров
                         </div>
                     </div>
                 </template>
                 <template #body>
                     <div class="modal-content-leaderboard">
-                        <div class="content__card__column__right__leader-board-content" v-for="(user, index) in leaderboard" :key="user.name">
-                            <div class="content__card__column__right__leader-board-content__circle">
-                                <div class="content__card__column__right__leader-board-content__circle__text" v-html="index+1">
+                        <div class="leaderboard__content" v-for="(user, index) in leaderboard" :key="user.name">
+                            <div class="leaderboard__circle">
+                                <div class="leaderboard__circle-text" v-html="index+1">
                                 </div>
                             </div>
-                            <div class="content__card__column__right__leader-board-content__card">
+                            <div class="leaderboard__card">
                                 <div></div>
-                                <div class="content__card__column__right__leader-board-content__card__name" v-html="user.name">
+                                <div class="leaderboard__card-name" v-html="user.name">
                                 </div>
-                                <div class="content__card__column__right__leader-board-content__card__points" v-html="user.points">
+                                <div class="leaderboard__card-points" v-html="user.points">
                                 </div>
                             </div>
                         </div>
@@ -105,8 +108,10 @@
 
 <script>
 import router from "../router";
+import PopupComponent from "./PopupComponent";
 export default {
     name: "profileComponent",
+    components: {PopupComponent},
     props: {
         data: Object,
     },
@@ -120,7 +125,8 @@ export default {
             userInTop: '',
             currentUserLifes: '',
             open: false,
-            leaderboard: ''
+            leaderboard: '',
+            showModal: false
         }
     },
     created() {

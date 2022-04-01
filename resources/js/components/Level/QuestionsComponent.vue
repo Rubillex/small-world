@@ -32,7 +32,7 @@
                         <div v-else>
                             <form @submit.prevent="submitFile">
                                 <input type="file" @change="handleFileUpload()"/>
-                                <button>Submit</button>
+                                <button>Подтвердить</button>
                             </form>
                         </div>
                         <button class="ready-button" v-on:click="nextButton()">Готово</button>

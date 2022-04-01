@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -27,7 +30,7 @@ class PlatformScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Get Started';
+        return 'КАЗАНСКИЙ ГОСУДАРСТВЕННЫЙ ЭНЕРГЕТИЧЕСКИЙ УНИВЕРСИТЕТ';
     }
 
     /**
@@ -37,29 +40,12 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'Проект хакатона "EnergyHack 2022"';
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
-    public function commandBar(): iterable
-    {
-        return [
-            Link::make('Website')
-                ->href('http://orchid.software')
-                ->icon('globe-alt'),
 
-            Link::make('Documentation')
-                ->href('https://orchid.software/en/docs')
-                ->icon('docs'),
-
-            Link::make('GitHub')
-                ->href('https://github.com/orchidsoftware/platform')
-                ->icon('social-github'),
-        ];
+    public function goToProfilePage() {
+        return redirect()->route('home');
     }
 
     /**
@@ -70,7 +56,30 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::view('platform::partials.welcome'),
+            Layout::rows([
+
+                Group::make([
+                    Link::make('Таблица лидеров')
+                        ->route('leaderboard')
+                        ->icon('people'),
+
+                    Link::make('Создать тест')
+                        ->route('platform.tests')
+                        ->icon('plus'),
+                ]),
+
+                Group::make([
+
+                    Link::make('Веб-сайт')
+                        ->route('home')
+                        ->icon('home'),
+
+                    Link::make('Проверить тест')
+                        ->route('platform.answers')
+                        ->icon('pencil'),
+                ]),
+
+            ])->title('Панель администратора'),
         ];
     }
 }

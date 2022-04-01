@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pictures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -65,6 +66,19 @@ class HomeController extends Controller {
     }
 
     /**
+     * Возвращает страницу загрузки изображений
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function uploadImage(){
+        if (Auth::id() === 1){
+            return view('upload')->with('data', ['page' => 'upload']);
+        } else {
+            return view('index')->with('data', ['page' => 'index']);
+        }
+    }
+
+    /**
      * Возвращает страничку профиля игрока
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -99,6 +113,44 @@ class HomeController extends Controller {
                 'currentUserIndex'  => $userIndex + 1,
                 'userInTop'         => $userInTop,
                 'currentUserLifes'  => $currentLifes,
+            ],
+        ]);
+    }
+
+    /**
+     * загрузка изображений на сервер
+     */
+    public function uploadImageAPI(Request $request) {
+
+        $path = $request->file('image')->store('images', 'public');
+        return [
+            'path' => $path,
+        ];
+    }
+
+
+    /**
+     * Возвращает таблицу лидеров
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function leaderboard() {
+        $userList = User::all();
+
+        $userSorted = $userList->sortByDesc('points')
+            ->map(function ($item, $key) {
+                return [
+                    'name'   => $item['name'],
+                    'points' => $item['points']
+                ];
+            })
+            ->toArray();
+        $userSorted = array_values($userSorted);
+
+        return view('leaderboard', [
+            'data' => [
+                'leaderboard' => $userSorted,
+
             ],
         ]);
     }

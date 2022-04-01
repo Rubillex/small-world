@@ -11,9 +11,7 @@
             <img v-if="this.data.complexity == 1" class="content__img" src="/images/GG_base.svg" alt="а котека то нет">
             <img v-if="this.data.complexity == 2" class="content__img" src="/images/GG_cool.svg" alt="а котека то нет">
             <img v-if="this.data.complexity == 3" class="content__img" src="/images/GG_cosmo.svg" alt="а котека то нет">
-            <div class="content__try-again" @click="gameOver()">
-                Попробовать снова
-            </div>
+            <button class="content-gameover" @click="gameOver()">Попробовать снова</button>
         </div>
     </div>
 </div>

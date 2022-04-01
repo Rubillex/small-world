@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/',                      [HomeController::class, 'index']);
 Route::get('/home',                  [HomeController::class, 'index'])->name('home');
-Route::get('/login',                 [HomeController::class, 'login']);
-Route::get('/register',              [HomeController::class, 'register']);
 Route::get('/game',                  [HomeController::class, 'homePage']);
-Route::get('/profile',            [HomeController::class, 'profile']);
+Route::get('/profile',               [HomeController::class, 'profile']);
+Route::get('/leaderboard',           [HomeController::class, 'leaderboard'])->name('leaderboard');
+Route::get('/upload-image',          [HomeController::class, 'uploadImage'])->name('uploadImage');
 
 Route::post('/api/start-session',          [GameController::class, 'startSession']);
 Route::post('/api/add-user-to-lobby/{id}', [GameController::class, 'addUserToLobby']);
@@ -43,7 +43,8 @@ Route::post('/api/getlevels',                [TestsController::class, 'getlevels
 Route::post('/api/getlevelData/{levelId}',   [TestsController::class, 'getLevelData']);
 Route::post('/api/test-complited/{levelId}/{points}', [TestsController::class, 'addUserToTestComplited']);
 
-Route::post('api/upload-file/{testId}', [TestsController::class, 'uploadFile']);
+Route::post('/api/upload-file/{testId}', [TestsController::class, 'uploadFile']);
+Route::post('/api/upload-image',                [HomeController::class, 'uploadImageAPI'])->name('uploadImageAPI');
 
 Route::get('/phpInfo', function() {
     return response()->json([

@@ -1,0 +1,12 @@
+@import 'resources/sass/_variables.scss';
+
+.modaltor__overlay {
+    background-image: url("../../img/pattern.svg") !important;
+    background-size: 2% !important;;
+    background-color: $primary-background-color !important;;
+    color: black !important;;
+}
+
+.modaltor__panel{
+    background: #000000 !important;
+}

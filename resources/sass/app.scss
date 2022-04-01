@@ -11,11 +11,13 @@
 @import "partials/chat";
 @import "AuthComponent/auth-component";
 @import "LeaderBoardComponent/leader-board-component";
+@import "LeaderBoardComponent/leaderboard-component";
 @import "ListOfLevelsComponent/list-of-levels-component";
 @import "Navmenu/navmenu";
 @import "LevelComponent/level-component";
 @import "QuestionComponent/question-component";
 @import "gameover";
+@import "Popup/popup";
 
 ::-webkit-scrollbar {
     width: 5px;

@@ -37,6 +37,8 @@ Vue.component('level-component', require('./components/Level/LevelComponent').de
 Vue.component('question-component', require('./components/Level/QuestionsComponent').default);
 Vue.component('profile-component', require('./components/ProfileComponent').default);
 Vue.component('gameover-component', require('./components/GameOverComponent').default);
+Vue.component('leaderboard-component', require('./components/LeaderBoardComponent').default);
+Vue.component('upload-image-component', require('./components/UploadImageComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

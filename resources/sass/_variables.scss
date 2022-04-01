@@ -19,10 +19,13 @@ $cosmo-color: #CB9FFF;
 $primary-background-color: #4C3375;
 $primary-text-color: #FFF;
 
+.modaltor__panel--modal-slide-bottom {
+    background-image: url("../img/pattern.svg");
+}
 
 body {
     font-family: $primary-font-family;
-    background-image: url("../img/pattern.svg");
+    background-image: url("../img/pattern.svg") !important;
     background-size: 2%;
     background-color: $primary-background-color;
     color: black;
