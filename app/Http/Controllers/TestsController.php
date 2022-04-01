@@ -115,10 +115,11 @@ class TestsController extends Controller
     public function addUserToTestComplited($levelId, $points) {
         $test = Test::where('id', $levelId)->first();
         $userId = Auth::id();
-        //Если тест без ручной проверки, то даём баллы
+        // Если тест без ручной проверки, то даём баллы
         if (!$test->needHelp){
             $user = User::find(Auth::id());
             $user->points = $user->points + $user->complexity * $points;
+            if ($user->points > $user->score) $user->score = $user->points;
             $user->save();
         }
         $usersComplited = json_decode($test->userComplited, 1);

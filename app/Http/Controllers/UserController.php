@@ -20,6 +20,10 @@ class UserController extends Controller
     public function changeComplexity($complexity) {
         $user             = User::find(Auth::id());
         $user->complexity = $complexity;
+        if ($user->score < ceil($user->points / 2)) {
+            $user->score = ceil($user->points / 2);
+        }
+
         $user->points = 0;
 
         $lifes = 0;
@@ -60,14 +64,13 @@ class UserController extends Controller
      * Возвращает глобальную таблицу лидеров
      * @return array
      */
-    public function getLeaderboard(){
+    public function getLeaderboard() {
         $userList = User::all();
-
-        $userSorted = $userList->sortByDesc('points')
-            ->map(function ($item, $key) {
+        $userSorted = $userList->sortByDesc('score')
+            ->map(function ($item) {
                 return [
                     'name'   => $item['name'],
-                    'points' => $item['points']
+                    'points' => $item['score']
                 ];
             })
             ->toArray();
