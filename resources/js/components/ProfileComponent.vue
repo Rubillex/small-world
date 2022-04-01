@@ -108,10 +108,8 @@
 
 <script>
 import router from "../router";
-import PopupComponent from "./PopupComponent";
 export default {
     name: "profileComponent",
-    components: {PopupComponent},
     props: {
         data: Object,
     },
