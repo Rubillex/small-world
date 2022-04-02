@@ -6,10 +6,11 @@
 
 require('./bootstrap');
 
+import $ from 'jquery';
 import Vue from "vue";
 import VueModalTor from "vue-modaltor/dist/vue-modaltor.common";
 import "vue-modaltor/dist/vue-modaltor.css";
-import Popover from 'vue-js-popover'
+import Popover from 'vue-js-popover';
 
 Vue.use(Popover);
 Vue.use(VueModalTor, {
@@ -17,6 +18,15 @@ Vue.use(VueModalTor, {
 });
 
 window.Vue = require('vue').default;
+
+$(document).ready(function($) {
+    if (window.history && window.history.pushState) {
+        $(window).on('popstate', function() {
+            location.reload();
+        });
+    }
+});
+
 
 /**
  * The following block of code may be used to automatically register your

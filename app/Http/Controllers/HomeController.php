@@ -137,11 +137,11 @@ class HomeController extends Controller {
     public function leaderboard() {
         $userList = User::all();
 
-        $userSorted = $userList->sortByDesc('points')
+        $userSorted = $userList->sortByDesc('score')
             ->map(function ($item, $key) {
                 return [
                     'name'   => $item['name'],
-                    'points' => $item['points']
+                    'points' => $item['score']
                 ];
             })
             ->toArray();

@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Main Page</title>
+    <title>ENERGY CAT GAME</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
