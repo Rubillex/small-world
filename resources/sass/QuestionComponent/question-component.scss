@@ -6,6 +6,18 @@
         background-color: gray;
     }
 
+    .form-check-input {
+        border-radius: 40%;
+        padding: 24px;
+        width: 0;
+        height: 0;
+
+        &:checked {
+            background-color: $base-color;
+            background-color-color: $base-color;
+        }
+    }
+
     .ready-button {
         background: #FF91AB;
         box-shadow: inset -9px -10px 3px rgba(0, 0, 0, 0.25);
@@ -85,4 +97,26 @@
 display: flex;
     flex-direction: row;
 
+}
+
+.answer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 49px;
+
+    &-radio {
+        margin-right: 49px;
+    }
+    &-checkbox {
+        margin-right: 49px;
+    }
+    &-text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 42px;
+
+        color: #FFFFFF;
+    }
 }

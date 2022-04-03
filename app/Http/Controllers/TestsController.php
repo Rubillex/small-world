@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\UserController;
 
 /**
  * Отвечает за работу с тестами.
@@ -62,8 +63,6 @@ class TestsController extends Controller
      * @param $levelId
      */
     public function goToLevel($levelId){
-        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
-
         $test = $this->getLevelData($levelId);
 
         return view('level', [
@@ -83,8 +82,6 @@ class TestsController extends Controller
      * @param $levelId
      */
     public function goToLevelAnswers($levelId) {
-        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
-
         $test              = $this->getLevelData($levelId);
         $incorrect_answers = json_decode($test['incorrect_answers'], 1);
         $correct_answers   = json_decode($test['correct_answers'], 1);
@@ -116,15 +113,18 @@ class TestsController extends Controller
     /**
      * Присваивает тесту юзера который его выполнил
      */
-    public function addUserToTestComplited($levelId, $points) {
+    public function addUserToTestComplited($levelId, $points, $checkedAnswers) {
         $test = Test::where('id', $levelId)->first();
         $userId = Auth::id();
         // Если тест без ручной проверки, то даём баллы
         if (!$test->needHelp){
-            $user = User::find(Auth::id());
-            $user->points = $user->points + $user->complexity * $points;
-            if ($user->points > $user->score) $user->score = $user->points;
-            $user->save();
+            $answers = array_values(json_decode($checkedAnswers));
+            $result = array_diff($answers,json_decode($test->correct_answers));
+            if (count($result) === 0){
+                $this->changePoints($points);
+            } else {
+                $this->changePoints(0);
+            }
         }
         $usersComplited = json_decode($test->userComplited, 1);
         if ($usersComplited === null) {
@@ -134,11 +134,41 @@ class TestsController extends Controller
             $test->userComplited = json_encode($usersComplited);
         }
         $test->save();
-
         return true;
     }
 
-    public function uploadFile(Request $request, $testId){
+    /**
+     * Изменяет количество очков, если ответ верный или декрементит количество жизней, если ответ не верный
+     *
+     * @param $points
+     */
+    protected function changePoints($points) {
+        $user = User::find(Auth::id());
+        if ($points === 0) {
+            $lifes = $user->lifes - 1;
+            (new UserController)->changeLifes($lifes);
+            return;
+        }
+        switch ($user->complexity){
+            case 1:
+                // Низкий уровень сложности
+                $user->points = $user->points + $points * 1;
+                break;
+            case 2:
+                // Средний уровень сложности
+                $user->points = $user->points + $points * 1.2;
+                break;
+            case 3:
+                // Высокий уровень сложности
+                $user->points = $user->points + $points * 1.5;
+                break;
+        }
+        if ($user->points > $user->score) $user->score = $user->points;
+        $user->save();
+    }
+
+    public function uploadFile(Request $request, $testId) {
+
         $path = $request->file('image')->store('images', 'public');
         $picture = Pictures::create();
         $currentUser = User::find(Auth::id());

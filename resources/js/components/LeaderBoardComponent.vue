@@ -2,18 +2,20 @@
 <div class="page-content leaderboard">
     <nav-menu></nav-menu>
 
-    <span class="leaderboard-title">Таблица лидеров</span>
+    <div class="leaderboard-wrapper">
+        <span class="leaderboard-title">Таблица лидеров</span>
 
-    <div class="leaderboard__content" v-for="(user, index) in this.data.leaderboard" :key="user.name">
-        <div class="leaderboard__circle">
-            <div class="leaderboard__circle-text" v-html="index+1">
+        <div class="leaderboard__content" v-for="(user, index) in this.data.leaderboard" :key="user.name">
+            <div class="leaderboard__circle">
+                <div class="leaderboard__circle-text" v-html="index+1">
+                </div>
             </div>
-        </div>
-        <div class="leaderboard__card">
-            <div></div>
-            <div class="leaderboard__card-name" v-html="user.name">
-            </div>
-            <div class="leaderboard__card-points" v-html="user.points">
+            <div class="leaderboard__card">
+                <div></div>
+                <div class="leaderboard__card-name" v-html="user.name">
+                </div>
+                <div class="leaderboard__card-points" v-html="user.points">
+                </div>
             </div>
         </div>
     </div>
@@ -22,7 +24,6 @@
 </template>
 
 <script>
-import router from "../router";
 import NavMenu from "./partials/Navmenu";
 export default {
     name: "LeaderBoardComponent",
@@ -35,10 +36,6 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             leaderboard: '',
         }
-    },
-
-    methods: {
-
     }
 }
 </script>

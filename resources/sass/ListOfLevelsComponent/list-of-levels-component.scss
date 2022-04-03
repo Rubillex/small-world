@@ -44,7 +44,7 @@
             background-color: #C7CBCE;
             border-radius: 42px;
             width: 900px;
-            height: 300px;
+            min-height: 300px;
             display: flex;
             justify-content: center;
             cursor: pointer;
@@ -52,6 +52,7 @@
 
             &__title {
                 margin-top: 70px;
+                margin-bottom: 70px;
                 font-family: $secondary-font-family;
                 font-size: 34px;
                 line-height: 125%;

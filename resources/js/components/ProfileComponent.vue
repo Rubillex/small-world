@@ -70,7 +70,7 @@
                 <template #header>
                     <!--    add your custom header     -->
                     <div class="modal-header-leaderboard">
-                        <div class="leaderboard-title">
+                        <div class="modal-title">
                             Таблица лидеров
                         </div>
                     </div>
