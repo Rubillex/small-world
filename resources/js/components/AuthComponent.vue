@@ -77,10 +77,14 @@
             </div>
         </div>
         <div class="content__bottom">
-            <button class="content__bottom__button">
+            <button class="content__bottom__button" v-popover:foo.top>
                 Я готов к игре!
             </button>
         </div>
+
+        <popover name="foo" :width="250" delay="200">
+            <div>Сначала зарегистрируйся!</div>
+        </popover>
     </div>
 </template>
 

@@ -10,9 +10,9 @@ import $ from 'jquery';
 import Vue from "vue";
 import VueModalTor from "vue-modaltor/dist/vue-modaltor.common";
 import "vue-modaltor/dist/vue-modaltor.css";
-import Popover from 'vue-js-popover';
+import VPopover from 'vue-js-popover';
 
-Vue.use(Popover);
+Vue.use(VPopover, { tooltip: true });
 Vue.use(VueModalTor, {
     bgPanel: "#7957d5"  // add custome options
 });

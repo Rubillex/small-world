@@ -102,7 +102,11 @@
                     <div class="rules__ending">
                         <div class="rules__ending-wrapper">
                             <p class="rules__ending-text">Всё просто: копи баллы, учись и&nbsp;совершенствуйся!</p>
-                            <button v-on:click="goProfile()" class="rules__ending-button">Я готов к игре</button>
+                            <button v-popover:foo.right v-on:click="goProfile()" class="rules__ending-button">Я готов к игре</button>
+
+                            <popover name="foo" :width="500" :delay="hidepopover ? 5000 : 200">
+                                <div>Сначала выбери сложность!</div>
+                            </popover>
                         </div>
                     </div>
                 </div>
@@ -114,25 +118,23 @@
 <script>
 import NavMenu from "./partials/Navmenu";
 export default {
-
     name: "ComplexetyComponent",
     components: {NavMenu},
 
     data: () => {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            pageData: 0,
-            userName: '',
-            gameId: '',
             userDifficult: '',
-
+            hidepopover: false
         }
+    },
+    created() {
+        this.userDifficult = '-1';
     },
 
     methods: {
         async goProfile() {
             if (this.userDifficult === '') {
-                alert('Cначала выбери сложность....');
                 return
             }
 
@@ -144,8 +146,9 @@ export default {
             await axios.post('/api/change-difficult/' + value)
                 .catch(err => console.log(err));
             this.userDifficult = value;
+            this.hidepopover = true;
             alert('Cложность выбрана!');
-        }
+        },
     }
 }
 </script>

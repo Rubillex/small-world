@@ -62,6 +62,8 @@ class TestsController extends Controller
      * @param $levelId
      */
     public function goToLevel($levelId){
+        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
+
         $test = $this->getLevelData($levelId);
 
         return view('level', [
@@ -81,6 +83,8 @@ class TestsController extends Controller
      * @param $levelId
      */
     public function goToLevelAnswers($levelId) {
+        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
+
         $test              = $this->getLevelData($levelId);
         $incorrect_answers = json_decode($test['incorrect_answers'], 1);
         $correct_answers   = json_decode($test['correct_answers'], 1);
@@ -135,7 +139,6 @@ class TestsController extends Controller
     }
 
     public function uploadFile(Request $request, $testId){
-
         $path = $request->file('image')->store('images', 'public');
         $picture = Pictures::create();
         $currentUser = User::find(Auth::id());
