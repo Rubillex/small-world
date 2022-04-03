@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import router from "../router";
 import NavMenu from "./partials/Navmenu";
 export default {
     name: "LeaderBoardComponent",
@@ -35,10 +34,6 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             leaderboard: '',
         }
-    },
-
-    methods: {
-
     }
 }
 </script>

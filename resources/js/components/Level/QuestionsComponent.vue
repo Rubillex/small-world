@@ -21,11 +21,22 @@
                         <div class="cat-question" v-if="needHelp == false">
                             <img class="question-wrapper__content__img" src="/images/question-cat.svg" alt=".">
                             <div>
-                                <div class="cat-question__button" v-for="answer in answers">
-                                    <button class="question-wrapper__content__button"
-                                            v-on:click="clickAnswer(answer, $event.target)">{{ answer }}
-                                    </button>
-                                    <br>
+                                <div v-if="this.correct_answers.length > 1">
+                                    <div v-for="answer in answers" >
+                                        <label class="answer">
+                                            <input class="answer-checkbox" type="checkbox" v-bind:value="answer" v-model="checked_answers">
+                                            <span class="answer-text">{{ answer }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div v-if="this.correct_answers.length == 1">
+                                    <div v-for="answer in answers" class="answer">
+
+                                        <label class="answer">
+                                            <input class="answer-radio" type="radio" v-bind:value="answer" v-model="checked_answers">
+                                            <span class="answer-text">{{ answer }}</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,34 +91,17 @@ export default {
             wp: false,
             error: false,
             complexity: '',
+            checked_answers: [],
         }
     },
     created() {
         this.userLifes = this.data.userLifes;
         this.answers = this.data.answers;
         this.needHelp = this.data.needHelp;
+        this.correct_answers = this.data.correct_answers;
     },
 
     methods: {
-        async clickAnswer(answer, event) {
-            if (event.classList.contains('checked')) return;
-
-            event.classList.add('checked');
-            if (this.data.correct_answers.includes(answer)) {
-                if (this.data.correct_answers.length >= 1) {
-                    this.data.correct_answers.splice(this.data.correct_answers.indexOf(answer), 1);
-                }
-                if (this.error == false) this.wp = true;
-            } else {
-                this.userLifes = this.userLifes - 1;
-                await axios.post('/api/change-lifes/' + this.userLifes)
-                    .then()
-                    .catch(err => console.log(err));
-                this.wp = false;
-                this.error = true;
-            }
-        },
-
         handleFileUpload() {
             this.file = event.target.files[0];
             console.log(this.file);
@@ -128,29 +122,11 @@ export default {
         },
 
         async nextButton() {
-            if(this.needHelp == true){
-                await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
-                    .then()
-                    .catch(err => console.log(err));
-                await this.$router.push({path: '/levels/'});
-                router.go(0);
-            } else
-            if (this.wp == true) {
-                if (this.data.correct_answers.length < 1){
-                    await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points)
-                        .then()
-                        .catch(err => console.log(err));
-                }
-                await this.$router.push({path: '/levels/'});
-                router.go(0);
-            } else {
-                if (this.error == true){
-                    await this.$router.push({path: '/levels/'});
-                    router.go(0);
-                } else {
-                    alert('нет ответа');
-                }
-            }
+            await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
+                .then()
+                .catch(err => console.log(err));
+            await this.$router.push({path: '/levels/'});
+            router.go(0);
         },
 
         async gameOver() {

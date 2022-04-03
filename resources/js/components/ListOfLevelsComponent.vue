@@ -10,9 +10,6 @@
                         <div class="test-select-list__card-container">
                             <div>
                                 <h3 class="test-select-list__card__title" v-html="item.name"/>
-                                <p class="test-select-list__card__theory">
-                                    Теория
-                                </p>
                                 <br>
                             </div>
                             <img class="test-select-list__card__img" :src="testComplited(item.id) ? '/images/metka_complited.svg' : '/images/metka 1.svg'" alt="#">

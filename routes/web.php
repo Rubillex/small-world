@@ -41,7 +41,7 @@ Route::get('/api/getLeaderboard', [UserController::class, 'getLeaderboard']);
 
 Route::post('/api/getlevels',                [TestsController::class, 'getlevels']);
 Route::post('/api/getlevelData/{levelId}',   [TestsController::class, 'getLevelData']);
-Route::post('/api/test-complited/{levelId}/{points}', [TestsController::class, 'addUserToTestComplited']);
+Route::post('/api/test-complited/{levelId}/{points}/{checkedAnswers}', [TestsController::class, 'addUserToTestComplited']);
 
 Route::post('/api/upload-file/{testId}', [TestsController::class, 'uploadFile']);
 Route::post('/api/upload-image',                [HomeController::class, 'uploadImageAPI'])->name('uploadImageAPI');
