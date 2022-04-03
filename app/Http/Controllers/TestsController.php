@@ -120,11 +120,10 @@ class TestsController extends Controller
         if (!$test->needHelp){
             $answers = array_values(json_decode($checkedAnswers));
             $result = array_diff($answers,json_decode($test->correct_answers));
-                print_r($result);
             if (count($result) === 0){
-                $this->changePoints($levelId, $points);
+                $this->changePoints($points);
             } else {
-                $this->changePoints($levelId, 0);
+                $this->changePoints(0);
             }
         }
         $usersComplited = json_decode($test->userComplited, 1);
@@ -141,10 +140,9 @@ class TestsController extends Controller
     /**
      * Изменяет количество очков, если ответ верный или декрементит количество жизней, если ответ не верный
      *
-     * @param $levelId
      * @param $points
      */
-    protected function changePoints($levelId, $points) {
+    protected function changePoints($points) {
         $user = User::find(Auth::id());
         if ($points === 0) {
             $lifes = $user->lifes - 1;

@@ -22,19 +22,19 @@
                             <img class="question-wrapper__content__img" src="/images/question-cat.svg" alt=".">
                             <div>
                                 <div v-if="this.correct_answers.length > 1">
-                                    <div v-for="answer in answers" >
+                                    <div v-for="answer in answers"  class="form-check">
                                         <label class="answer">
-                                            <input class="answer-checkbox" type="checkbox" v-bind:value="answer" v-model="checked_answers">
-                                            <span class="answer-text">{{ answer }}</span>
+                                            <input class="answer-checkbox form-check-input" type="checkbox" v-bind:value="answer" v-model="checked_answers">
+                                            <span class="answer-text form-check-label">{{ answer }}</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div v-if="this.correct_answers.length == 1">
-                                    <div v-for="answer in answers" class="answer">
+                                    <div v-for="answer in answers" class="answer ">
 
                                         <label class="answer">
-                                            <input class="answer-radio" type="radio" v-bind:value="answer" v-model="checked_answers">
-                                            <span class="answer-text">{{ answer }}</span>
+                                            <input class="answer-radio form-check-input" type="radio" v-bind:value="answer" v-model="checked_answers">
+                                            <span class="answer-text form-check-label">{{ answer }}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -122,6 +122,9 @@ export default {
         },
 
         async nextButton() {
+            if (typeof this.checked_answers === "string") {
+                this.checked_answers = [this.checked_answers];
+            }
             await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
                 .then()
                 .catch(err => console.log(err));
