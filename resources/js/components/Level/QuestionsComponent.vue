@@ -92,6 +92,7 @@ export default {
             error: false,
             complexity: '',
             checked_answers: [],
+            add_points: '',
         }
     },
     created() {
@@ -126,10 +127,22 @@ export default {
                 this.checked_answers = [this.checked_answers];
             }
             await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
-                .then()
+                .then(response => {
+                    console.log(response.data);
+                    if (response.data.result){
+                        this.data.userLifes = response.data.userLifes;
+                        this.data.points = response.data.points;
+                        this.data.add_points = response.data.add_points;
+                        alert(response.data.userLifes + ' ' + response.data.points + ' ' + response.data.add_points);
+                    } else {
+                        this.data.userLifes = response.data.userLifes;
+                        this.data.points = response.data.points;
+                        alert(response.data.userLifes + ' ' + response.data.points);
+                    }
+                })
                 .catch(err => console.log(err));
-            await this.$router.push({path: '/levels/'});
-            router.go(0);
+            // await this.$router.push({path: '/levels/'});
+            // router.go(0);
         },
 
         async gameOver() {

@@ -12,7 +12,7 @@
                 </div>
                 <div class="difficult">
                     <div class="difficult-wrapper">
-                        <button v-on:click="changeDifficult(1)" class="difficult__button start">
+                        <button v-bind:class="{ active: active === 1 }" v-on:click="changeDifficult(1)" class="difficult__button start">
                     <span class="difficult__button-content">
                         <span class="difficult__button-header">Начинающий</span>
                         <span class="difficult__button-text">Этот котик только начинает свой путь в&nbsp;энергетике, поэтому у&nbsp;него есть целых три попытки!</span>
@@ -24,7 +24,7 @@
                     <img class="difficult__cat" src="images/evrika_base.png" alt="кит"/>
                 </span>
                         </button>
-                        <button v-on:click="changeDifficult(2)" class="difficult__button medium">
+                        <button v-bind:class="{ active: active === 2 }" v-on:click="changeDifficult(2)" class="difficult__button medium">
                     <span class="difficult__button-content">
                         <span class="difficult__button-header">Продвинутый</span>
                         <span class="difficult__button-text">Если веришь в&nbsp;свои силы, то&nbsp;тебе сюда.
@@ -36,7 +36,7 @@
                     <img class="difficult__cat" src="images/evrika_cool.png" alt="кит"/>
                     </span>
                         </button>
-                        <button v-on:click="changeDifficult(3)" class="difficult__button hard">
+                        <button v-bind:class="{ active: active === 3 }" v-on:click="changeDifficult(3)" class="difficult__button hard">
                     <span class="difficult__button-content">
                         <span class="difficult__button-header">Эксперт</span>
                         <span class="difficult__button-text">Вау! Игра с&nbsp;экспертом по&nbsp;энергетике&nbsp;&mdash; это вызов всему миру. У&nbsp;тебя нет права на&nbsp;ошибку...</span>
@@ -125,7 +125,8 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             userDifficult: '',
-            hidepopover: false
+            hidepopover: false,
+            active: '',
         }
     },
     created() {
@@ -143,11 +144,11 @@ export default {
         },
 
         async changeDifficult(value) {
+            this.active = value;
             await axios.post('/api/change-difficult/' + value)
                 .catch(err => console.log(err));
             this.userDifficult = value;
             this.hidepopover = true;
-            alert('Cложность выбрана!');
         },
     }
 }

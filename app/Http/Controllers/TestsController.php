@@ -121,9 +121,9 @@ class TestsController extends Controller
             $answers = array_values(json_decode($checkedAnswers));
             $result = array_diff($answers,json_decode($test->correct_answers));
             if (count($result) === 0){
-                $this->changePoints($points);
+                $result = $this->changePoints($points);
             } else {
-                $this->changePoints(0);
+                $result = $this->changePoints(0);
             }
         }
         $usersComplited = json_decode($test->userComplited, 1);
@@ -134,7 +134,7 @@ class TestsController extends Controller
             $test->userComplited = json_encode($usersComplited);
         }
         $test->save();
-        return true;
+        return $result;
     }
 
     /**
@@ -144,27 +144,40 @@ class TestsController extends Controller
      */
     protected function changePoints($points) {
         $user = User::find(Auth::id());
+        $lifes = $user->lifes;
         if ($points === 0) {
             $lifes = $user->lifes - 1;
             (new UserController)->changeLifes($lifes);
-            return;
+            return [
+                'result'    => false,
+                'userLifes' => $lifes,
+                'points'    => $user->points,
+            ];
         }
+        $add_points = 0;
         switch ($user->complexity){
             case 1:
                 // Низкий уровень сложности
-                $user->points = $user->points + $points * 1;
+                $add_points = $points * 1;
                 break;
             case 2:
                 // Средний уровень сложности
-                $user->points = $user->points + $points * 1.2;
+                $add_points = $points * 1.2;
                 break;
             case 3:
                 // Высокий уровень сложности
-                $user->points = $user->points + $points * 1.5;
+                $add_points = $points * 1.5;
                 break;
         }
+        $user->points = $user->points + $add_points;
         if ($user->points > $user->score) $user->score = $user->points;
         $user->save();
+        return [
+            'result'    => true,
+            'userLifes' => $lifes,
+            'points'    => $user->points,
+            'add_points'=> $add_points,
+        ];
     }
 
     public function uploadFile(Request $request, $testId) {
