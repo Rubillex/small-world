@@ -7,8 +7,7 @@
                 <div class="content-header__text-wrapper">
                     <p class="content-header__text">Выбирая себе компаньона помни, что от него напрямую зависит
                         сложность
-                        прохождения игры и количество набранных за правильные ответы баллов. Внимательно ознакомься с <a
-                            href="/home">правилами игры.</a></p>
+                        прохождения игры и количество набранных за правильные ответы баллов. Внимательно ознакомься с <a href="#regulations">правилами игры.</a></p>
                 </div>
                 <div class="difficult">
                     <div class="difficult-wrapper">
@@ -51,7 +50,7 @@
             </div>
 
             <div class="rules">
-                <div class="rules__wrapper">
+                <div class="rules__wrapper" id="regulations">
                     <h1 class="rules__header">Правила игры</h1>
                     <div class="rules__text-wrapper">
                         <p class="rules__text">Твоя главная задача набрать как можно больше баллов. Их&nbsp;можно
@@ -135,8 +134,8 @@ export default {
 
     methods: {
         async goProfile() {
-            if (this.userDifficult === '') {
-                return
+            if (this.userDifficult === '-1') {
+                return;
             }
 
             await this.$router.push({path: '/profile'}).catch(()=>{});

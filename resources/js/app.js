@@ -22,7 +22,15 @@ window.Vue = require('vue').default;
 $(document).ready(function($) {
     if (window.history && window.history.pushState) {
         $(window).on('popstate', function() {
-            location.reload();
+            switch (window.location.pathname) {
+                case "/home":
+                    break;
+                case "/profile":
+                    break;
+                default:
+                    location.reload();
+                    break;
+            }
         });
     }
 });

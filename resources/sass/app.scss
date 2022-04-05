@@ -19,6 +19,10 @@
 @import "gameover";
 @import "Popup/popup";
 
+html{
+    scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
