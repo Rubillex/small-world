@@ -169,7 +169,11 @@ display: flex;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 49px;
+    margin-bottom: 15px;
+
+    &-container {
+        margin-bottom: 40px;
+    }
 
     &-radio {
         margin-right: 49px;

@@ -25,7 +25,7 @@
                             <img class="question-wrapper__content__img" v-if="complexity == 2" src="/images/question_cool.svg" alt=".">
                             <img class="question-wrapper__content__img" v-if="complexity == 3" src="/images/question_cosmo.svg" alt=".">
                             <div>
-                                <div v-if="this.correct_answers.length > 1">
+                                <div class="answer-container" v-if="this.correct_answers.length > 1">
                                     <div v-for="answer in answers"  class="form-check">
                                         <label class="answer">
                                             <input class="answer-checkbox form-check-input" type="checkbox" v-bind:value="answer" v-model="checked_answers">
@@ -33,7 +33,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div v-if="this.correct_answers.length == 1">
+                                <div class="answer-container" v-if="this.correct_answers.length == 1">
                                     <div v-for="answer in answers" class="answer ">
 
                                         <label class="answer">
