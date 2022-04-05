@@ -14,16 +14,27 @@
                 </p>
                 <div class="content__card__column">
                     <div class="content__card__column__left">
-                        <img class="content__card__column__left__img" src="/images/leader_cat.svg" alt="а котека то нет">
+                        <img class="content__card__column__left__img" v-if="complexity == 1" src="/images/leader_cat.svg" alt="а котека то нет">
+                        <img class="content__card__column__left__img" v-if="complexity == 2" src="/images/comp_cool.svg" alt="а котека то нет">
+                        <img class="content__card__column__left__img" v-if="complexity == 3" src="/images/comp_cosmo.svg" alt="а котека то нет">
                         <div class="content__card__column__left__userLifes">
                             <img class="content__card__column__left__userLifes__img"
-                                 src="/images/point_base.png" alt="а хп нет :("
+                                 src="/images/point_base.svg" alt="а хп нет :("
+                                 v-if="complexity == 1"
+                                 v-for="life in this.data.currentUserLifes">
+                            <img class="content__card__column__left__userLifes__img"
+                                 src="/images/point_cool.svg" alt="а хп нет :("
+                                 v-if="complexity == 2"
+                                 v-for="life in this.data.currentUserLifes">
+                            <img class="content__card__column__left__userLifes__img"
+                                 src="/images/point_cosmo.svg" alt="а хп нет :("
+                                 v-if="complexity == 3"
                                  v-for="life in this.data.currentUserLifes">
                         </div>
                     </div>
                     <div class="content__card__column__right">
                         <p class="content__card__column__right__points-title">
-                            Мой счет
+                            Мой текущий счет
                         </p>
                         <p class="content__card__column__right__points-num" v-html="this.data.currentUserPoints"></p>
                         <div class="title-popover">
@@ -124,10 +135,12 @@ export default {
             currentUserLifes: '',
             open: false,
             leaderboard: '',
-            showModal: false
+            showModal: false,
+            complexity: '',
         }
     },
     created() {
+        this.complexity = this.data.complexity;
         console.log(this.data);
     },
     methods: {

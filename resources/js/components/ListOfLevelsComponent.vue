@@ -5,7 +5,9 @@
         <div class="wrapper-container">
             <div class="test-select-list__wrapper">
                 <template v-for="(item, index) in data.levelData">
-                    <div v-on:click="testComplited(item.id) ? '' : goToLevel(item.id)" class="test-select-list__card"
+                    <div v-if="!testComplited(item.id)"
+                        v-on:click="testComplited(item.id) ? '' : goToLevel(item.id)"
+                         class="test-select-list__card"
                          :class="testComplited(item.id) ? 'non-complited' : ''">
                         <div class="test-select-list__card-container">
                             <div>
@@ -16,6 +18,21 @@
                         </div>
                     </div>
                 </template>
+                <span v-if="haveCompletedLevel" class="level-complited">Пройденные уровни</span>
+                <div v-for="(item, index) in data.levelData">
+                    <div v-if="testComplited(item.id)"
+                        v-on:click="testComplited(item.id) ? '' : goToLevel(item.id)"
+                         class="test-select-list__card"
+                         :class="testComplited(item.id) ? 'non-complited' : ''">
+                        <div class="test-select-list__card-container">
+                            <div>
+                                <h3 class="test-select-list__card__title" v-html="item.name"/>
+                                <br>
+                            </div>
+                            <img class="test-select-list__card__img" :src="testComplited(item.id) ? '/images/metka_complited.svg' : '/images/metka 1.svg'" alt="#">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,6 +53,7 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             levelData: [],
+            haveCompletedLevel: false,
         }
     },
 
@@ -51,6 +69,7 @@ export default {
         },
 
         testComplited(testId) {
+            if (this.data.complited[testId] === 'true') this.haveCompletedLevel = true;
             return this.data.complited[testId] === 'true';
         }
     }

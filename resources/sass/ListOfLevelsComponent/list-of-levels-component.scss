@@ -88,6 +88,16 @@
     }
 }
 
+.level-complited {
+    align-self: center;
+    margin-bottom: 30px;
+    color: #FFFFFF;
+    font-size: 70px;
+    line-height: 72px;
+    font-weight: bold;
+    font-family: $secondary-font-family;
+}
+
 .non-complited {
     background-color: #FFD600;
     cursor: auto;

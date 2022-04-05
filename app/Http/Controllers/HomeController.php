@@ -92,6 +92,7 @@ class HomeController extends Controller {
         $currentName = $currentUser->name;
         $currentPoints = $currentUser->points;
         $currentLifes = $currentUser->lifes;
+        $currentComplexity = $currentUser->complexity;
         $userIndex = $userList->sortByDesc('score')->pluck('id')->search(Auth::id());
 
         $userInTop = ($userIndex + 1) <= 3;
@@ -114,6 +115,7 @@ class HomeController extends Controller {
                 'currentUserIndex'  => $userIndex + 1,
                 'userInTop'         => $userInTop,
                 'currentUserLifes'  => $currentLifes,
+                'complexity'        => $currentComplexity,
             ],
         ]);
     }

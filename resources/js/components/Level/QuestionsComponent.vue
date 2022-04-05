@@ -177,13 +177,13 @@ export default {
                         this.points = response.data.points.toFixed(1);
                         switch (response.data.add_points){
                             case 1:
-                                this.data.add_points = '+ 1 балл';
+                                this.add_points = '+ 1 балл';
                                 break;
                             case 1.2:
-                                this.data.add_points = '+ 1.2 балла';
+                                this.add_points = '+ 1.2 балла';
                                 break;
                             case 1.5:
-                                this.data.add_points = '+ 1.5 балла';
+                                this.add_points = '+ 1.5 балла';
                                 break;
                         }
                     } else {
