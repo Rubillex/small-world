@@ -13,13 +13,17 @@
             <div v-if="userLifes > 0" class="life">
                 <div class="life__status">
                     <p>Количество попыток:</p>
-                    <img class="life__status__img" src="/images/point_base.svg" v-for="n in userLifes" alt=".">
+                    <img class="life__status__img" v-if="complexity == 1" src="/images/point_base.svg" v-for="n in userLifes" alt=".">
+                    <img class="life__status__img" v-if="complexity == 2" src="/images/point_cool.svg" v-for="n in userLifes" alt=".">
+                    <img class="life__status__img" v-if="complexity == 3" src="/images/point_cosmo.svg" v-for="n in userLifes" alt=".">
                 </div>
-                <div class="question-wrapper">
+                <div class="question-wrapper" v-if="result === false">
                     <div class="question-wrapper__content">
                         <span v-html="markDown(data.question)"></span>
                         <div class="cat-question" v-if="needHelp == false">
-                            <img class="question-wrapper__content__img" src="/images/question-cat.svg" alt=".">
+                            <img class="question-wrapper__content__img" v-if="complexity == 1" src="/images/question-cat.svg" alt=".">
+                            <img class="question-wrapper__content__img" v-if="complexity == 2" src="/images/question_cool.svg" alt=".">
+                            <img class="question-wrapper__content__img" v-if="complexity == 3" src="/images/question_cosmo.svg" alt=".">
                             <div>
                                 <div v-if="this.correct_answers.length > 1">
                                     <div v-for="answer in answers"  class="form-check">
@@ -47,6 +51,40 @@
                             </form>
                         </div>
                         <button class="ready-button" v-on:click="nextButton()">Готово</button>
+                    </div>
+                </div>
+
+                <div class="question-wrapper-result" v-if="result === true && userLifes > 0">
+                    <div class="image" v-if="complexity == 1">
+                        <img class="result-img"
+                             v-if="answer_result"
+                             src="/images/happy_base.svg" alt="happy_base.svg">
+                        <img class="result-img"
+                             v-else
+                             src="/images/sad_base.svg" alt="sad_base.svg">
+                    </div>
+
+                    <div class="image" v-if="complexity == 2">
+                        <img class="result-img"
+                             v-if="answer_result"
+                             src="/images/happy_cool.svg" alt="happy_cool.svg">
+                        <img class="result-img"
+                             v-else
+                             src="/images/sad_cool.svg" alt="sad_cool.svg">
+                    </div>
+
+                    <img class="result-img"
+                         v-if="complexity == 3"
+                         src="/images/happy_cosmo.svg" alt="happy_cosmo.svg">
+                    <div class="result-card__content">
+                        <span class="result-card__title"> {{ title }} </span>
+                        <div class="result-card__points">
+                            <span class="points-text"> Твои баллы: </span>
+                            <span class="points-points"> {{ points }} </span>
+                        </div>
+                        <span class="result-card__add-points" v-if="answer_result">
+                            {{ add_points }} </span>
+                        <button class="result-gameover" v-else @click="refresh()">Попробовать снова</button>
                     </div>
                 </div>
 
@@ -88,11 +126,12 @@ export default {
             question: '',
             userLifes: '',
             file: '',
-            wp: false,
-            error: false,
             complexity: '',
             checked_answers: [],
             add_points: '',
+            result: false,
+            title: '',
+            answer_result: false,
         }
     },
     created() {
@@ -100,6 +139,7 @@ export default {
         this.answers = this.data.answers;
         this.needHelp = this.data.needHelp;
         this.correct_answers = this.data.correct_answers;
+        this.complexity = this.data.complexity;
     },
 
     methods: {
@@ -129,15 +169,31 @@ export default {
             await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
                 .then(response => {
                     console.log(response.data);
+                    this.result = true;
                     if (response.data.result){
-                        this.data.userLifes = response.data.userLifes;
-                        this.data.points = response.data.points;
-                        this.data.add_points = response.data.add_points;
-                        alert(response.data.userLifes + ' ' + response.data.points + ' ' + response.data.add_points);
+                        this.answer_result = true;
+                        this.title = 'ОТВЕТ ВЕРНЫЙ!';
+                        this.userLifes = response.data.userLifes;
+                        this.points = response.data.points.toFixed(1);
+                        switch (response.data.add_points){
+                            case 1:
+                                this.data.add_points = '+ 1 балл';
+                                break;
+                            case 1.2:
+                                this.data.add_points = '+ 1.2 балла';
+                                break;
+                            case 1.5:
+                                this.data.add_points = '+ 1.5 балла';
+                                break;
+                        }
                     } else {
-                        this.data.userLifes = response.data.userLifes;
-                        this.data.points = response.data.points;
-                        alert(response.data.userLifes + ' ' + response.data.points);
+                        this.answer_result = false;
+                        this.title = 'ОТВЕТ НЕВЕРНЫЙ!';
+                        this.userLifes = response.data.userLifes;
+                        if(this.userLifes <= 0){
+                            location.reload();
+                        }
+                        this.points = response.data.points.toFixed(1);
                     }
                 })
                 .catch(err => console.log(err));
@@ -150,6 +206,10 @@ export default {
                 .catch(err => console.log(err));
             await this.$router.push({path: '/'});
             router.go(0);
+        },
+
+        refresh() {
+            location.reload();
         },
 
         async goToLevels() {
