@@ -204,7 +204,7 @@ export default {
         async gameOver() {
             await axios.post('/api/change-difficult/-1')
                 .catch(err => console.log(err));
-            await this.$router.push({path: '/'});
+            await this.$router.push({path: '/home'});
             router.go(0);
         },
 

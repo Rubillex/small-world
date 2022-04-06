@@ -45,11 +45,11 @@
                         </div>
                         <div class="content__card__column__right__leader-board">
                             <div class="content__card__column__right__leader-board-content" v-for="(user, index) in this.data.usersList" :key="user.name">
-                                <div class="content__card__column__right__leader-board-content__circle">
+                                <div v-if="user.id != 1" class="content__card__column__right__leader-board-content__circle">
                                     <div class="content__card__column__right__leader-board-content__circle__text" v-html="index+1">
                                     </div>
                                 </div>
-                                <div class="content__card__column__right__leader-board-content__card">
+                                <div v-if="user.id != 1" class="content__card__column__right__leader-board-content__card">
                                     <div></div>
                                     <div class="content__card__column__right__leader-board-content__card__name" v-html="user.name">
                                     </div>
@@ -89,11 +89,11 @@
                 <template #body>
                     <div class="modal-content-leaderboard">
                         <div class="leaderboard__content" v-for="(user, index) in leaderboard" :key="user.name">
-                            <div class="leaderboard__circle">
+                            <div v-if="user.id != 1" class="leaderboard__circle">
                                 <div class="leaderboard__circle-text" v-html="index+1">
                                 </div>
                             </div>
-                            <div class="leaderboard__card">
+                            <div v-if="user.id != 1" class="leaderboard__card">
                                 <div></div>
                                 <div class="leaderboard__card-name" v-html="user.name">
                                 </div>

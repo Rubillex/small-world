@@ -6,11 +6,11 @@
         <span class="leaderboard-title">Таблица лидеров</span>
 
         <div class="leaderboard__content" v-for="(user, index) in this.data.leaderboard" :key="user.name">
-            <div class="leaderboard__circle">
+            <div v-if="user.id != 1" class="leaderboard__circle">
                 <div class="leaderboard__circle-text" v-html="index+1">
                 </div>
             </div>
-            <div class="leaderboard__card">
+            <div v-if="user.id != 1" class="leaderboard__card">
                 <div></div>
                 <div class="leaderboard__card-name" v-html="user.name">
                 </div>

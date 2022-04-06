@@ -70,7 +70,8 @@ class UserController extends Controller
             ->map(function ($item) {
                 return [
                     'name'   => $item['name'],
-                    'points' => $item['score']
+                    'points' => $item['score'],
+                    'id'     => $item['id']
                 ];
             })
             ->toArray();

@@ -101,7 +101,8 @@ class HomeController extends Controller {
             ->map(function ($item, $key) {
                 return [
                         'name'   => $item['name'],
-                        'points' => $item['score']
+                        'points' => $item['score'],
+                        'id'     => $item['id']
                 ];
             })
             ->toArray();
@@ -144,7 +145,8 @@ class HomeController extends Controller {
             ->map(function ($item, $key) {
                 return [
                     'name'   => $item['name'],
-                    'points' => $item['score']
+                    'points' => $item['score'],
+                    'id'     => $item['id']
                 ];
             })
             ->toArray();
