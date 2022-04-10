@@ -158,15 +158,15 @@ class TestsController extends Controller
         switch ($user->complexity){
             case 1:
                 // Низкий уровень сложности
-                $add_points = $points * 1;
+                $add_points = $points * config('app.complexity_1');
                 break;
             case 2:
                 // Средний уровень сложности
-                $add_points = $points * 1.2;
+                $add_points = $points * config('app.complexity_2');
                 break;
             case 3:
                 // Высокий уровень сложности
-                $add_points = $points * 1.5;
+                $add_points = $points * config('app.complexity_3');
                 break;
         }
         $user->points = $user->points + $add_points;

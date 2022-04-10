@@ -85,6 +85,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function profile(){
+        if (!Auth::check()) return view('index')->with('data', ['page' => 'index']);
         $userList = User::all();
         $currentUser = $userList->firstWhere('id', Auth::id());
         if ($currentUser->complexity === '-1' || $currentUser->lifes == 0) return view('complexity');

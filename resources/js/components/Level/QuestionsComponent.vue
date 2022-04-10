@@ -50,7 +50,10 @@
                                 <button>Подтвердить</button>
                             </form>
                         </div>
-                        <button class="ready-button" v-on:click="nextButton()">Готово</button>
+                        <button class="ready-button" v-on:click="nextButton()" v-popover:foo.top>Готово</button>
+                        <popover v-if="checked_answers.length == 0" name="foo" :width="200" delay="200">
+                            <div class="popover-text">Ответ не выбран!</div>
+                        </popover>
                     </div>
                 </div>
 
@@ -91,8 +94,6 @@
                 <button class="question-page__button" v-on:click="goToLevels()">Назад к уровням</button>
             </div>
             <div v-else class="no-lifes">
-<!--                GG-->
-<!--                <button v-on:click="gameOver()">Гейм Овер</button>-->
                 <game-over-component :data="data"></game-over-component>
             </div>
             </div>
@@ -166,6 +167,7 @@ export default {
             if (typeof this.checked_answers === "string") {
                 this.checked_answers = [this.checked_answers];
             }
+            if (this.checked_answers.length == 0) return;
             await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
                 .then(response => {
                     console.log(response.data);
@@ -179,11 +181,8 @@ export default {
                             case 1:
                                 this.add_points = '+ 1 балл';
                                 break;
-                            case 1.2:
-                                this.add_points = '+ 1.2 балла';
-                                break;
-                            case 1.5:
-                                this.add_points = '+ 1.5 балла';
+                            default:
+                                this.add_points = '+' + response.data.add_points + ' балла';
                                 break;
                         }
                     } else {
@@ -197,8 +196,6 @@ export default {
                     }
                 })
                 .catch(err => console.log(err));
-            // await this.$router.push({path: '/levels/'});
-            // router.go(0);
         },
 
         async gameOver() {

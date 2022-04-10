@@ -154,7 +154,7 @@
                 &__points-title {
                     color: #000000;
                     font-size: 60px;
-                    line-height: 30px;
+                    line-height: 45px;
                     font-weight: bold;
                     font-family: $secondary-font-family;
                 }
@@ -210,6 +210,7 @@
 }
 
 .popover-text {
+    text-align:center;
     font-style: normal;
     font-weight: 700;
     font-size: 19px;

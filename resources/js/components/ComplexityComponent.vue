@@ -82,14 +82,14 @@
                                         <img class="rules__life" src="images/life_cool.png" alt="жызнь"/>
                                         <img class="rules__life" src="images/life_cool.png" alt="жызнь"/>
                                     </div>
-                                    <p class="rules__modificator">x 2</p>
+                                    <p class="rules__modificator">x 1.2</p>
                                     <p class="rules__modificator-label">(продвинутый)</p>
                                 </div>
                                 <div class="rules__life-item">
                                     <div class="rules__life-wrapper">
                                         <img class="rules__life" src="images/life_cosmo.png" alt="жызнь"/>
                                     </div>
-                                    <p class="rules__modificator">x 3</p>
+                                    <p class="rules__modificator">x 1.5</p>
                                     <p class="rules__modificator-label">(эксперт)</p>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                     </div>
                     <p class="rules__text">Таким образом, пример получения баллов за&nbsp;один и&nbsp;тот&nbsp;же
                         вопрос для разных уровней сложности может выглядеть так: стоимость вопроса&nbsp;&mdash; 5&nbsp;баллов,
-                        уровень сложности&nbsp;&mdash; средний, итого баллов&nbsp;&mdash; 5*2 = 10.</p>
+                        уровень сложности&nbsp;&mdash; средний, итого баллов&nbsp;&mdash; 5*1.2 = 6.</p>
                     <div class="rules__ending">
                         <div class="rules__ending-wrapper">
                             <p class="rules__ending-text">Всё просто: копи баллы, учись и&nbsp;совершенствуйся!</p>
