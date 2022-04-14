@@ -152,7 +152,6 @@ export default {
             await axios.get('/api/getLeaderboard/')
                 .then(response => this.leaderboard = response.data.leaderboard)
                 .catch();
-            console.log(this.leaderboard);
             this.open = true;
         },
         async logout() {
