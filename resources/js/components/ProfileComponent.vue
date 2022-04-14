@@ -1,14 +1,7 @@
 <template>
     <div class="page-content">
+        <nav-menu/>
         <div class="content">
-            <div class="content__top">
-                <div class="content__top-button" @click="goToLevels()">
-                    К выбору уровней
-                </div>
-                <div class="content__top-button" @click="logout()">
-                    Выйти
-                </div>
-            </div>
             <div class="content__card">
                 <p class="content__card__name" v-html="this.data.currentUserName">
                 </p>
@@ -119,8 +112,10 @@
 
 <script>
 import router from "../router";
+import NavMenu from "./partials/Navmenu";
 export default {
     name: "profileComponent",
+    components: { NavMenu },
     props: {
         data: Object,
     },
