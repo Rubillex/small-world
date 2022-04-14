@@ -31,7 +31,7 @@ export default {
             formData.set('image', this.file);
             console.log(this.data.levelId);
             await axios.post('/api/upload-image', formData)
-                .then(response => alert('http://194.58.97.130/storage/' + response.data.path))
+                .then(response => alert('http://185.46.8.127/storage/' + response.data.path))
                 .catch(err => console.log(err));
         },
     }
