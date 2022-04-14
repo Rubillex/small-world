@@ -141,7 +141,6 @@ export default {
     },
     created() {
         this.complexity = this.data.complexity;
-        console.log(this.data);
     },
     methods: {
         async goToLevels(){
@@ -152,14 +151,14 @@ export default {
         async openPopup() {
             await axios.get('/api/getLeaderboard/')
                 .then(response => this.leaderboard = response.data.leaderboard)
-                .catch(err => console.log(err));
+                .catch();
             console.log(this.leaderboard);
             this.open = true;
         },
         async logout() {
             await axios.post('/api/logout')
                 .then()
-                .catch(err => console.log(err));
+                .catch();
             await this.$router.push({path: '/'}).catch(()=>{});
             window.location.reload(true);
         }

@@ -145,7 +145,7 @@ export default {
         async changeDifficult(value) {
             this.active = value;
             await axios.post('/api/change-difficult/' + value)
-                .catch(err => console.log(err));
+                .catch();
             this.userDifficult = value;
             this.hidepopover = true;
         },

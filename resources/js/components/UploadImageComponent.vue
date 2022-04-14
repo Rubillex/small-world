@@ -23,13 +23,10 @@ export default {
     methods: {
         handleFileUpload() {
             this.file = event.target.files[0];
-            console.log(this.file);
         },
         async submitFile() {
             let formData = new FormData;
-            console.log(this.file);
             formData.set('image', this.file);
-            console.log(this.data.levelId);
             await axios.post('/api/upload-image', formData)
                 .then(response => alert('http://185.46.8.127/storage/' + response.data.path))
                 .catch(err => console.log(err));

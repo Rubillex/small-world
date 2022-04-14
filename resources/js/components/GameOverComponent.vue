@@ -33,12 +33,11 @@ export default {
         }
     },
     created() {
-        console.log(this.data);
     },
     methods: {
         async gameOver() {
             await axios.post('/api/change-difficult/-1')
-                .catch(err => console.log(err));
+                .catch();
             await this.$router.push({path: '/'});
             router.go(0);
         },

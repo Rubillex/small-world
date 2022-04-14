@@ -146,20 +146,16 @@ export default {
     methods: {
         handleFileUpload() {
             this.file = event.target.files[0];
-            console.log(this.file);
         },
         async submitFile() {
             let formData = new FormData;
-            console.log(this.file);
             formData.set('image', this.file);
-            console.log(this.data.levelId);
             await axios.post('/api/upload-file/' + this.data.levelId, formData)
                 .then()
-                .catch(err => console.log(err));
+                .catch();
         },
 
         markDown(what) {
-            console.log(what);
             return marked(what);
         },
 
@@ -170,7 +166,6 @@ export default {
             if (this.checked_answers.length == 0) return;
             await axios.post('/api/test-complited/' + this.data.levelId + '/' + this.data.points + '/' + JSON.stringify(this.checked_answers))
                 .then(response => {
-                    console.log(response.data);
                     this.result = true;
                     if (response.data.result){
                         this.answer_result = true;
@@ -195,12 +190,12 @@ export default {
                         this.points = response.data.points.toFixed(1);
                     }
                 })
-                .catch(err => console.log(err));
+                .catch();
         },
 
         async gameOver() {
             await axios.post('/api/change-difficult/-1')
-                .catch(err => console.log(err));
+                .catch();
             await this.$router.push({path: '/home'});
             router.go(0);
         },

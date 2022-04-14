@@ -60,7 +60,7 @@ export default {
         async logout() {
             await axios.post('/api/logout')
                 .then()
-                .catch(err => console.log(err));
+                .catch();
             await this.$router.push({path: '/'}).catch(() => {
             });
             router.go(0);
