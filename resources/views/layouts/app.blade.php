@@ -21,6 +21,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/point_cool.svg" type="image/x-icon">
 </head>
 <body>
 <main id="app">
