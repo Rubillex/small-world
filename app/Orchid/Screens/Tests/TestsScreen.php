@@ -80,6 +80,7 @@ class TestsScreen extends Screen
                 if ($line['correct'] === '1') $correct[] = $line['answers']; else $incorrect[] = $line['answers'];
             }
         }
+
         // Отправляем тест в БД
         Test::create([
             'name'              => $request->name,
@@ -90,6 +91,16 @@ class TestsScreen extends Screen
             'points'            => $request->points,
             'needHelp'          => $help,
         ]);
+        Toast::info('Добавили тест!');
+    }
+
+    /**
+     * Изменение теста в БД
+     */
+    public function editTest(Request $request, Test $test): void {
+        // Отправляем тест в БД
+        Test::find($request->input('test.id'))->update($request->test);
+        Toast::info('Тест изменен...');
     }
 
 
@@ -101,13 +112,12 @@ class TestsScreen extends Screen
     {
         $test = Test::find($id);
         $test->delete();
-
     }
 
-    public function changeTest($id): iterable
+    public function asyncGetTest(Test $test): array
     {
         return [
-//            Layout::modal('editTest', EditTestScreen::class)
+            'test' => Test::find($test->id),
         ];
     }
 
@@ -123,8 +133,10 @@ class TestsScreen extends Screen
                 Input::make('name')->required()->title('Название'),
                 SimpleMDE::make('brefing')
                     ->title('Брифинг')
+                    ->required()
                     ->popover('Заполнять как текст, будет отображен в начале уровня'),
                 SimpleMDE::make('question')
+                    ->required()
                     ->title('Вопрос'),
                 CheckBox::make('needHelp')->title('Ответ в виде файла')->sendTrueOrFalse(),
                 Matrix::make('matrix')
@@ -142,6 +154,22 @@ class TestsScreen extends Screen
                 ->applyButton('Создать')
                 ->closeButton('Закрыть')
                 ->size(Modal::SIZE_LG),
+
+            Layout::modal('editTest', Layout::rows([
+                Input::make('test.id')->type('hidden'),
+                Input::make('test.name')->required()->title('Название'),
+                SimpleMDE::make('test.brefing')
+                    ->title('Брифинг')
+                    ->popover('Заполнять как текст, будет отображен в начале уровня'),
+                SimpleMDE::make('test.question')
+                    ->title('Вопрос'),
+                CheckBox::make('test.needHelp')->title('Ответ в виде файла')->sendTrueOrFalse()->disabled(),
+                Input::make('test.points')->required()->title('Количество очков за тест'),
+            ]))->title('Редактируем тест')
+                ->applyButton('Изменить')
+                ->closeButton('Закрыть')
+                ->size(Modal::SIZE_LG)
+                ->async('asyncGetTest'),
 
             Layout::table('tests', [
                 TD::make('id', 'ID'),
@@ -167,10 +195,15 @@ class TestsScreen extends Screen
                                     ->method('deleteTest', [
                                         'id' => $test->id,
                                     ]),
+                                ModalToggle::make('Редактировать')
+                                    ->modal('editTest')
+                                    ->icon('wrench')
+                                    ->method('editTest')
+                                ->asyncParameters([
+                                    'test' => $test->id,
+                                ])
                             ]);
                     }),
-
-//                TD::make('created_at', 'Когда создан'),
             ]),
         ];
     }
