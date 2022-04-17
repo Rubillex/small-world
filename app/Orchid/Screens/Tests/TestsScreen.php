@@ -99,7 +99,30 @@ class TestsScreen extends Screen
      */
     public function editTest(Request $request, Test $test): void {
         // Отправляем тест в БД
-        Test::find($request->input('test.id'))->update($request->test);
+
+        $help = $request->test['needHelp'] === '1';
+        if ($help) {
+            // Если ручная проверка, то мы не собираем правильные и неправильные ответы
+            $correct[]   = [];
+            $incorrect[] = [];
+        } else {
+            //матрица ответов
+            $matrix = $request->test['matrix'];
+            //проверяем, если правильный, то в массив с правильными
+            foreach ($matrix as $line) {
+                if ($line['correct'] === '1') $correct[] = $line['answers']; else $incorrect[] = $line['answers'];
+            }
+        }
+        $updateTest = [
+            'name'              => $request->test['name'],
+            'brefing'           => $request->test['brefing'],
+            'question'          => $request->test['question'],
+            'incorrect_answers' => json_encode($incorrect),
+            'correct_answers'   => json_encode($correct),
+            'points'            => $request->test['points'],
+            'needHelp'          => $request->test['needHelp'],
+        ];
+        Test::find($request->input('test.id'))->update($updateTest);
         Toast::info('Тест изменен...');
     }
 
@@ -164,6 +187,16 @@ class TestsScreen extends Screen
                 SimpleMDE::make('test.question')
                     ->title('Вопрос'),
                 CheckBox::make('test.needHelp')->title('Ответ в виде файла')->sendTrueOrFalse()->disabled(),
+                Matrix::make('test.matrix')
+                    ->columns([
+                        'Ответ' => 'answers',
+                        'Правильный' => 'correct',
+                    ])
+                    ->required()
+                    ->fields([
+                        'answers' => Input::make(),
+                        'correct' => CheckBox::make()->sendTrueOrFalse(),
+                    ]),
                 Input::make('test.points')->required()->title('Количество очков за тест'),
             ]))->title('Редактируем тест')
                 ->applyButton('Изменить')
