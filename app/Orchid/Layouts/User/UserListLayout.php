@@ -53,9 +53,9 @@ class UserListLayout extends Table
                 ->sort()
                 ->render(function (User $user) {
                     switch ($user->complexity) {
-                        case 0: return 'Лёгкий';
-                        case 1: return 'Средний';
-                        case 2: return 'Сложный';
+                        case 1: return 'Лёгкий';
+                        case 2: return 'Средний';
+                        case 3: return 'Сложный';
                         default: return 'Не определён';
                     }
                 }),

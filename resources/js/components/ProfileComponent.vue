@@ -27,7 +27,7 @@
                     </div>
                     <div class="content__card__column__right">
                         <p class="content__card__column__right__points-title">
-                            Мой текущий счет
+                            Мои текущие очки
                         </p>
                         <p class="content__card__column__right__points-num" v-html="this.data.currentUserPoints"></p>
                         <div class="title-popover">

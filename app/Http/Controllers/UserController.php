@@ -21,7 +21,8 @@ class UserController extends Controller
         $user             = User::find(Auth::id());
         $user->complexity = $complexity;
 
-        if($user->points !== 0) $user->points = ceil($user->points / 2);
+        $user->points = 0;
+        if($user->score !== 0) $user->score = ceil($user->score / 2);
 
         $lifes = 0;
         switch ($complexity) {

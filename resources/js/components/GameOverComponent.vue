@@ -11,6 +11,11 @@
             <img v-if="this.data.complexity == 1" class="content__img" src="/images/GG_base.svg" alt="а котека то нет">
             <img v-if="this.data.complexity == 2" class="content__img" src="/images/GG_cool.svg" alt="а котека то нет">
             <img v-if="this.data.complexity == 3" class="content__img" src="/images/GG_cosmo.svg" alt="а котека то нет">
+
+            <div class="content__leaderboard" @click="goToLeaderboard()">
+                Перейти к таблице лидеров
+            </div>
+
             <button class="content-gameover" @click="gameOver()">Попробовать снова</button>
         </div>
     </div>
@@ -41,6 +46,10 @@ export default {
             await this.$router.push({path: '/'});
             router.go(0);
         },
+        async goToLeaderboard() {
+            await this.$router.push({path: '/leaderboard'});
+            router.go(0);
+        }
     }
 }
 </script>

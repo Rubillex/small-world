@@ -26,6 +26,18 @@
         color: #FFFFFF;
     }
 
+    &__leaderboard {
+        margin: 15px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+        text-decoration: underline;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+
     &__img {
         width: 20%;
         align-self: center;
