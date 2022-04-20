@@ -63,7 +63,7 @@ class PlatformScreen extends Screen
                         ->route('leaderboard')
                         ->icon('people'),
 
-                    Link::make('Создать тест')
+                    Link::make('Тесты')
                         ->route('platform.tests')
                         ->icon('plus'),
                 ]),
@@ -77,6 +77,14 @@ class PlatformScreen extends Screen
                     Link::make('Проверить тест')
                         ->route('platform.answers')
                         ->icon('pencil'),
+                ]),
+
+                Group::make([
+
+                    Link::make('Загрузить изображение')
+                        ->route('uploadImage')
+                        ->icon('doc'),
+
                 ]),
 
             ])->title('Панель администратора'),
